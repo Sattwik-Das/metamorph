@@ -1,0 +1,4 @@
+venv/
+clickit.db
+__pycache__/
+.env

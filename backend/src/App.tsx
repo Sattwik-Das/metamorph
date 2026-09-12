@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Home,
   Bot,
@@ -388,13 +388,30 @@ function ApiPage() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const INTEGRATIONS = [
-    { id: 'elevenlabs', name: 'ElevenLabs API', role: 'Voice Synthesis & TTS', icon: 'E', color: 'bg-indigo-500', mockKey: 'sk-elv-8f92kd01mc4x' },
-    { id: 'swift', name: 'Swift App', role: 'macOS Native Integration', icon: 'S', color: 'bg-orange-500', mockKey: 'sk-swf-3m29kd01mc4x' },
-    { id: 'gemini', name: 'Gemini API', role: 'Multimodal AI Reasoning', icon: 'G', color: 'bg-blue-500', mockKey: 'sk-gmn-1p44kd01mc4x' },
-    { id: 'sarvam', name: 'Sarvam API', role: 'Indic Voice AI', icon: 'S', color: 'bg-emerald-500', mockKey: 'sk-srv-7x82kd01mc4x' },
-    { id: 'google', name: 'Google API', role: 'Voice Speech & Understanding', icon: 'G', color: 'bg-red-500', mockKey: 'sk-ggl-9a11kd01mc4x' }
-  ];
+  const [integrations, setIntegrations] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/integrations')
+      .then(res => res.json())
+      .then(data => {
+        // Need to add color/icon properties based on ID for the UI
+        const mappedData = data.map((api: any) => ({
+          ...api,
+          icon: api.name.charAt(0),
+          color: api.id === 'elevenlabs' ? 'bg-indigo-500' : 
+                 api.id === 'swift' ? 'bg-orange-500' :
+                 api.id === 'gemini' ? 'bg-blue-500' :
+                 api.id === 'sarvam' ? 'bg-emerald-500' : 'bg-red-500'
+        }));
+        setIntegrations(mappedData);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to fetch integrations', err);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div className="p-8 max-w-4xl mx-auto h-full flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -436,17 +453,21 @@ function ApiPage() {
       <div className="flex items-center justify-between mb-4 mt-2">
         <h2 className="text-lg font-medium text-white">Connected Integrations</h2>
         <span className="text-xs font-medium text-gray-400 bg-white/5 px-2.5 py-1 rounded-full border border-white/10">
-          5 Active
+          {integrations.filter(i => i.isActive).length} Active
         </span>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-8">
-        {INTEGRATIONS.map((api) => (
-          <ApiIntegrationCard 
-            key={api.id}
-            api={api}
-          />
-        ))}
+        {loading ? (
+          <div className="col-span-1 md:col-span-2 text-center text-gray-500 py-8">Loading integrations...</div>
+        ) : (
+          integrations.map((api) => (
+            <ApiIntegrationCard 
+              key={api.id}
+              api={api}
+            />
+          ))
+        )}
       </div>
     </div>
   );
@@ -531,6 +552,19 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('clickit_is_logged_in') === 'true');
   const [profileName, setProfileName] = useState(() => localStorage.getItem('clickit_profile_name') || '');
   const [profileColor, setProfileColor] = useState(() => localStorage.getItem('clickit_profile_color') || 'bg-blue-600');
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetch('http://localhost:8000/api/user/profile')
+        .then(res => res.json())
+        .then(data => {
+          if (data.fullName) setProfileName(data.fullName);
+          if (data.avatarUrl) setAvatarUrl(data.avatarUrl);
+        })
+        .catch(err => console.error("Failed to fetch profile", err));
+    }
+  }, [isLoggedIn]);
   
   const [activeTab, setActiveTab] = useState('home');
 
@@ -624,8 +658,12 @@ export default function App() {
             onClick={() => setActiveTab('settings')}
             className="flex items-center gap-3 p-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition cursor-pointer"
           >
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold shadow-inner ${profileColor}`}>
-              {profileName.charAt(0).toUpperCase() || 'U'}
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold shadow-inner ${avatarUrl ? '' : profileColor} overflow-hidden`}>
+              {avatarUrl ? (
+                <img src={avatarUrl} alt={profileName} className="w-full h-full object-cover" />
+              ) : (
+                profileName.charAt(0).toUpperCase() || 'U'
+              )}
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-white truncate">{profileName || 'User'}</p>
