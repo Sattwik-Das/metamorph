@@ -74,13 +74,7 @@ export function Hero() {
                       <img src="/images/apps/apple.svg" alt="Apple" className="h-6 md:h-7 w-auto object-contain hover:scale-110 transition-transform duration-300 hover:opacity-100 opacity-70" />
                       <img src="/images/apps2/chrome.svg" alt="Chrome" className="h-6 md:h-7 w-auto object-contain hover:scale-110 transition-transform duration-300 hover:opacity-100 opacity-70" />
                       <img src="/images/apps2/figma.svg" alt="Figma" className="h-6 md:h-7 w-auto object-contain hover:scale-110 transition-transform duration-300 hover:opacity-100 opacity-70" />
-                      <img src="/images/apps2/slack.svg" alt="Slack" className="h-6 md:h-7 w-auto object-contain hover:scale-110 transition-transform duration-300 hover:opacity-100 opacity-70" />
                       <img src="/images/apps2/vscode.svg" alt="VS Code" className="h-6 md:h-7 w-auto object-contain hover:scale-110 transition-transform duration-300 hover:opacity-100 opacity-70" />
-                      <img src="/images/apps2/whatsapp.svg" alt="WhatsApp" className="h-6 md:h-7 w-auto object-contain hover:scale-110 transition-transform duration-300 hover:opacity-100 opacity-70" />
-                      <img src="/images/apps2/youtube.svg" alt="YouTube" className="h-6 md:h-7 w-auto object-contain hover:scale-110 transition-transform duration-300 hover:opacity-100 opacity-70" />
-                      <img src="/images/apps2/gmail.svg" alt="Gmail" className="h-6 md:h-7 w-auto object-contain hover:scale-110 transition-transform duration-300 hover:opacity-100 opacity-70" />
-                      <img src="/images/apps2/spotify.svg" alt="Spotify" className="h-6 md:h-7 w-auto object-contain hover:scale-110 transition-transform duration-300 hover:opacity-100 opacity-70" />
-                      <img src="/images/apps2/notion.png" alt="Notion" className="h-6 md:h-7 w-auto object-contain hover:scale-110 transition-transform duration-300 hover:opacity-100 opacity-70" />
                     </div>
                   </div>
 

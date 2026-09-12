@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export function SectionInteractiveDemo() {
   const ref = useRef<HTMLDivElement>(null);
@@ -22,27 +22,20 @@ export function SectionInteractiveDemo() {
   const cursorX = useSpring(mouseX, { stiffness: 300, damping: 25, mass: 0.5 });
   const cursorY = useSpring(mouseY, { stiffness: 300, damping: 25, mass: 0.5 });
 
-  const [isHovered, setIsHovered] = useState(false);
+  // Automated animation
+  useEffect(() => {
+    let time = 0;
+    const interval = setInterval(() => {
+      time += 0.02;
+      // Smooth complex movement pattern
+      const x = 500 + Math.sin(time) * 350 + Math.cos(time * 0.5) * 100;
+      const y = 300 + Math.sin(time * 1.5) * 200 + Math.cos(time * 0.8) * 50;
+      mouseX.set(x);
+      mouseY.set(y);
+    }, 16); // 60fps
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    setIsHovered(true);
-    // Optional: snap the initial position without springing so it appears right under cursor
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    mouseX.set(x);
-    mouseY.set(y);
-  }
+    return () => clearInterval(interval);
+  }, [mouseX, mouseY]);
 
   return (
     <div ref={ref} className="relative w-full flex flex-col items-center justify-center py-24 z-10 bg-paper">
@@ -75,33 +68,39 @@ export function SectionInteractiveDemo() {
         {/* Pure Black Screen inside */}
         <div 
           ref={containerRef}
-          onMouseMove={handleMouseMove}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={() => setIsHovered(false)}
           className="relative size-full bg-black cursor-none"
         >
           <motion.div
-            className="absolute top-0 left-0 pointer-events-none z-50 flex items-start gap-4 transition-opacity duration-300"
-            style={{ x: cursorX, y: cursorY, opacity: isHovered ? 1 : 0 }}
+            className="absolute top-0 left-0 pointer-events-none z-50 flex items-start"
+            style={{ x: cursorX, y: cursorY }}
           >
-            {/* Triangle Blue Pointer */}
-            <svg 
-              width="28" 
-              height="40" 
-              viewBox="0 0 24 36" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-              className="drop-shadow-[0_8px_16px_rgba(0,0,0,0.4)] origin-top-left -rotate-6"
+            {/* Standard macOS-style cursor */}
+            <svg
+              className="w-5 h-5 drop-shadow-md text-white fill-current stroke-black stroke-[1.5px]"
+              viewBox="0 0 24 24"
+              style={{ transform: 'translate(-5px, -5px)' }}
             >
-              <path 
-                d="M11.2727 34.5802L1.83407 1.45524C1.39134 -0.0984803 3.19502 -1.14486 4.41724 -0.0450518L32.2217 24.9754C33.3916 26.0282 32.7844 27.9575 31.2292 28.1278L19.4678 29.4149C18.675 29.5017 17.9714 30.0125 17.6206 30.7513L12.9205 40.6496C12.2472 42.0678 10.1558 41.7774 9.94315 40.2442L8.53675 30.1065C8.42398 29.2936 7.82869 28.6189 7.04285 28.4116L1.83407 1.45524" 
-                fill="#3b82f6" 
-                stroke="white"
-                strokeWidth="1.5"
-                strokeLinejoin="round"
-                className="scale-50 origin-top-left"
-              />
+              <path d="M4 2v20l6-6h10z" />
             </svg>
+
+            {/* Triangle Blue Pointer (Clickit Companion) */}
+            <div className="absolute top-6 left-6 flex items-center gap-2">
+              <svg 
+                className="w-4 h-4 text-blue-500 drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]" 
+                viewBox="0 0 24 24" 
+                fill="currentColor"
+                style={{ transform: 'rotate(-45deg)' }}
+              >
+                <path d="M24 22L0 22L12 0L24 22Z" />
+              </svg>
+              
+              {/* Optional Response Bubble next to it */}
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-3 py-1.5 flex items-center gap-2 drop-shadow-xl">
+                <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></div>
+                <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse delay-75"></div>
+                <div className="w-1.5 h-1.5 rounded-full bg-blue-300 animate-pulse delay-150"></div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </motion.div>
