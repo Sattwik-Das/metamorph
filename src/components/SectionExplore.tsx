@@ -1,0 +1,2456 @@
+import { motion } from 'framer-motion';
+
+export function SectionExplore() {
+  return (
+    <>
+<motion.section className="mx-auto mt-50 flex w-full max-w-[1300px] flex-col items-center gap-7.5 self-center md:mt-75 md:gap-10 lg:mt-50 xl:mt-75 xl:gap-10 2xl:max-w-[1500px]" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true, margin: "-100px" }}>
+            <h2 className="text-center font-cosmos-oracle text-[38px] text-primary leading-none tracking-[-1.52px] max-md:max-w-[420px]">
+              <span className="inline-flex">
+                <span
+                  className="inline-block"
+                  style={{} as React.CSSProperties}
+                >
+                  Inspiration&#xa0;
+                </span>
+              </span>
+              <span className="inline-flex">
+                <span
+                  className="inline-block"
+                  style={{} as React.CSSProperties}
+                >
+                  for&#xa0;
+                </span>
+              </span>
+              <span className="inline-flex">
+                <span
+                  className="inline-block"
+                  style={{} as React.CSSProperties}
+                >
+                  the&#xa0;
+                </span>
+              </span>
+              <span className="inline-flex">
+                <span
+                  className="inline-block"
+                  style={{} as React.CSSProperties}
+                >
+                  world&#x2019;s&#xa0;
+                </span>
+              </span>
+              <span className="inline-flex">
+                <span
+                  className="inline-block"
+                  style={{} as React.CSSProperties}
+                >
+                  top&#xa0;
+                </span>
+              </span>
+              <span className="inline-flex">
+                <span
+                  className="inline-block"
+                  style={{} as React.CSSProperties}
+                >
+                  creative&#xa0;
+                </span>
+              </span>
+              <span className="inline-flex">
+                <span
+                  className="inline-block"
+                  style={{} as React.CSSProperties}
+                >
+                  teams.
+                </span>
+              </span>
+            </h2>
+            <div className="relative w-full overflow-hidden">
+              <div className="hidden flex-col gap-5 lg:flex">
+                <div style={{} as React.CSSProperties}>
+                  <div className="flex gap-5" aria-hidden="true">
+                    <div
+                      className="flex shrink-0 gap-5"
+                      style={{} as React.CSSProperties}
+                    >
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/b8892b9c83e75c405aa91441cfd875a86e137c60-83x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/307beb34748e14fe2c5842bbad7f6edd21f18285-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3925ff5d4cd3607efc9006fe25660c31d663f9db-58x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f84e9919ca1786bf5edbf67be265f85e299dc441-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/57fa0add0e564521a68b3d622e659c7e6c540ede-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f5ca8bb672ea57b6efc258c1603a184fe96dd572-117x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/2716d2c3db51f55a5bbb8aca959ff12f95a64d33-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/abe1e74efdcdde8e72a75d32e871253cba8c4cf8-98x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/22d16a3974775baefbab74c94e441e9083db23b3-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/711e61bde2b77fc3aab430ccc97c8debb7d417d3-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a8bf8a0bf7a965505b25363969215a7222c75763-115x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/78611ae8be2b042f6167ec601387f2aec6ddb0d7-103x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/b8892b9c83e75c405aa91441cfd875a86e137c60-83x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/307beb34748e14fe2c5842bbad7f6edd21f18285-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3925ff5d4cd3607efc9006fe25660c31d663f9db-58x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f84e9919ca1786bf5edbf67be265f85e299dc441-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/57fa0add0e564521a68b3d622e659c7e6c540ede-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f5ca8bb672ea57b6efc258c1603a184fe96dd572-117x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/2716d2c3db51f55a5bbb8aca959ff12f95a64d33-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/abe1e74efdcdde8e72a75d32e871253cba8c4cf8-98x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/22d16a3974775baefbab74c94e441e9083db23b3-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/711e61bde2b77fc3aab430ccc97c8debb7d417d3-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a8bf8a0bf7a965505b25363969215a7222c75763-115x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/78611ae8be2b042f6167ec601387f2aec6ddb0d7-103x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className="flex shrink-0 gap-5"
+                      style={{} as React.CSSProperties}
+                    >
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/b8892b9c83e75c405aa91441cfd875a86e137c60-83x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/307beb34748e14fe2c5842bbad7f6edd21f18285-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3925ff5d4cd3607efc9006fe25660c31d663f9db-58x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f84e9919ca1786bf5edbf67be265f85e299dc441-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/57fa0add0e564521a68b3d622e659c7e6c540ede-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f5ca8bb672ea57b6efc258c1603a184fe96dd572-117x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/2716d2c3db51f55a5bbb8aca959ff12f95a64d33-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/abe1e74efdcdde8e72a75d32e871253cba8c4cf8-98x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/22d16a3974775baefbab74c94e441e9083db23b3-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/711e61bde2b77fc3aab430ccc97c8debb7d417d3-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a8bf8a0bf7a965505b25363969215a7222c75763-115x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/78611ae8be2b042f6167ec601387f2aec6ddb0d7-103x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/b8892b9c83e75c405aa91441cfd875a86e137c60-83x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/307beb34748e14fe2c5842bbad7f6edd21f18285-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3925ff5d4cd3607efc9006fe25660c31d663f9db-58x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f84e9919ca1786bf5edbf67be265f85e299dc441-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/57fa0add0e564521a68b3d622e659c7e6c540ede-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f5ca8bb672ea57b6efc258c1603a184fe96dd572-117x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/2716d2c3db51f55a5bbb8aca959ff12f95a64d33-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/abe1e74efdcdde8e72a75d32e871253cba8c4cf8-98x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/22d16a3974775baefbab74c94e441e9083db23b3-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/711e61bde2b77fc3aab430ccc97c8debb7d417d3-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a8bf8a0bf7a965505b25363969215a7222c75763-115x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/78611ae8be2b042f6167ec601387f2aec6ddb0d7-103x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style={{} as React.CSSProperties}>
+                  <div className="flex gap-5" aria-hidden="true">
+                    <div
+                      className="flex shrink-0 gap-5"
+                      style={{} as React.CSSProperties}
+                    >
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a2cedb263964c48bf9178b38bfc451956a4dce2a-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/603e28e5a3211bd1b75bf72cd07702b7b79f344f-149x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/e4324d82334e6c88e150f5fd632bf7c6e3f58a54-52x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/037e7d1ba78115c119b08e998077db6c7e76d46d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/eb3ba7e8f51be868596560af6e40cfc527c855db-97x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/48fe64aa89aa520112881bbcb7f6fc9bae5da77f-182x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/9bc5d68b1ec0ec633259afac7e87cafcb834d5af-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/770121764fade41ec1dd6e5095d95e0c7b27541e-168x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/c3bea3c193e7dc5ac662f39b5072231410c995c2-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/dffcf05eed6848dd890926b54ac3f1cb0692d8eb-141x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3855593238cfbb0191bdba6b18e964de990b95d7-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a89c09118ad38584fddff8e840226c3332bae91d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a2cedb263964c48bf9178b38bfc451956a4dce2a-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/603e28e5a3211bd1b75bf72cd07702b7b79f344f-149x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/e4324d82334e6c88e150f5fd632bf7c6e3f58a54-52x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/037e7d1ba78115c119b08e998077db6c7e76d46d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/eb3ba7e8f51be868596560af6e40cfc527c855db-97x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/48fe64aa89aa520112881bbcb7f6fc9bae5da77f-182x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/9bc5d68b1ec0ec633259afac7e87cafcb834d5af-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/770121764fade41ec1dd6e5095d95e0c7b27541e-168x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/c3bea3c193e7dc5ac662f39b5072231410c995c2-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/dffcf05eed6848dd890926b54ac3f1cb0692d8eb-141x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3855593238cfbb0191bdba6b18e964de990b95d7-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a89c09118ad38584fddff8e840226c3332bae91d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className="flex shrink-0 gap-5"
+                      style={{} as React.CSSProperties}
+                    >
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a2cedb263964c48bf9178b38bfc451956a4dce2a-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/603e28e5a3211bd1b75bf72cd07702b7b79f344f-149x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/e4324d82334e6c88e150f5fd632bf7c6e3f58a54-52x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/037e7d1ba78115c119b08e998077db6c7e76d46d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/eb3ba7e8f51be868596560af6e40cfc527c855db-97x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/48fe64aa89aa520112881bbcb7f6fc9bae5da77f-182x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/9bc5d68b1ec0ec633259afac7e87cafcb834d5af-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/770121764fade41ec1dd6e5095d95e0c7b27541e-168x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/c3bea3c193e7dc5ac662f39b5072231410c995c2-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/dffcf05eed6848dd890926b54ac3f1cb0692d8eb-141x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3855593238cfbb0191bdba6b18e964de990b95d7-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a89c09118ad38584fddff8e840226c3332bae91d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a2cedb263964c48bf9178b38bfc451956a4dce2a-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/603e28e5a3211bd1b75bf72cd07702b7b79f344f-149x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/e4324d82334e6c88e150f5fd632bf7c6e3f58a54-52x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/037e7d1ba78115c119b08e998077db6c7e76d46d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/eb3ba7e8f51be868596560af6e40cfc527c855db-97x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/48fe64aa89aa520112881bbcb7f6fc9bae5da77f-182x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/9bc5d68b1ec0ec633259afac7e87cafcb834d5af-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/770121764fade41ec1dd6e5095d95e0c7b27541e-168x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/c3bea3c193e7dc5ac662f39b5072231410c995c2-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/dffcf05eed6848dd890926b54ac3f1cb0692d8eb-141x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3855593238cfbb0191bdba6b18e964de990b95d7-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a89c09118ad38584fddff8e840226c3332bae91d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3 lg:hidden">
+                <div style={{} as React.CSSProperties}>
+                  <div className="flex gap-5" aria-hidden="true">
+                    <div
+                      className="flex shrink-0 gap-5"
+                      style={{} as React.CSSProperties}
+                    >
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/b8892b9c83e75c405aa91441cfd875a86e137c60-83x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/307beb34748e14fe2c5842bbad7f6edd21f18285-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3925ff5d4cd3607efc9006fe25660c31d663f9db-58x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f84e9919ca1786bf5edbf67be265f85e299dc441-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/57fa0add0e564521a68b3d622e659c7e6c540ede-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f5ca8bb672ea57b6efc258c1603a184fe96dd572-117x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/2716d2c3db51f55a5bbb8aca959ff12f95a64d33-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/abe1e74efdcdde8e72a75d32e871253cba8c4cf8-98x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/b8892b9c83e75c405aa91441cfd875a86e137c60-83x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/307beb34748e14fe2c5842bbad7f6edd21f18285-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3925ff5d4cd3607efc9006fe25660c31d663f9db-58x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f84e9919ca1786bf5edbf67be265f85e299dc441-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/57fa0add0e564521a68b3d622e659c7e6c540ede-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f5ca8bb672ea57b6efc258c1603a184fe96dd572-117x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/2716d2c3db51f55a5bbb8aca959ff12f95a64d33-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/abe1e74efdcdde8e72a75d32e871253cba8c4cf8-98x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className="flex shrink-0 gap-5"
+                      style={{} as React.CSSProperties}
+                    >
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/b8892b9c83e75c405aa91441cfd875a86e137c60-83x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/307beb34748e14fe2c5842bbad7f6edd21f18285-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3925ff5d4cd3607efc9006fe25660c31d663f9db-58x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f84e9919ca1786bf5edbf67be265f85e299dc441-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/57fa0add0e564521a68b3d622e659c7e6c540ede-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f5ca8bb672ea57b6efc258c1603a184fe96dd572-117x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/2716d2c3db51f55a5bbb8aca959ff12f95a64d33-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/abe1e74efdcdde8e72a75d32e871253cba8c4cf8-98x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/b8892b9c83e75c405aa91441cfd875a86e137c60-83x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/307beb34748e14fe2c5842bbad7f6edd21f18285-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3925ff5d4cd3607efc9006fe25660c31d663f9db-58x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f84e9919ca1786bf5edbf67be265f85e299dc441-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/57fa0add0e564521a68b3d622e659c7e6c540ede-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/f5ca8bb672ea57b6efc258c1603a184fe96dd572-117x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/2716d2c3db51f55a5bbb8aca959ff12f95a64d33-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/abe1e74efdcdde8e72a75d32e871253cba8c4cf8-98x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style={{} as React.CSSProperties}>
+                  <div className="flex gap-5" aria-hidden="true">
+                    <div
+                      className="flex shrink-0 gap-5"
+                      style={{} as React.CSSProperties}
+                    >
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/22d16a3974775baefbab74c94e441e9083db23b3-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/711e61bde2b77fc3aab430ccc97c8debb7d417d3-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a8bf8a0bf7a965505b25363969215a7222c75763-115x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/78611ae8be2b042f6167ec601387f2aec6ddb0d7-103x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a2cedb263964c48bf9178b38bfc451956a4dce2a-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/603e28e5a3211bd1b75bf72cd07702b7b79f344f-149x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/e4324d82334e6c88e150f5fd632bf7c6e3f58a54-52x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/037e7d1ba78115c119b08e998077db6c7e76d46d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/22d16a3974775baefbab74c94e441e9083db23b3-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/711e61bde2b77fc3aab430ccc97c8debb7d417d3-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a8bf8a0bf7a965505b25363969215a7222c75763-115x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/78611ae8be2b042f6167ec601387f2aec6ddb0d7-103x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a2cedb263964c48bf9178b38bfc451956a4dce2a-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/603e28e5a3211bd1b75bf72cd07702b7b79f344f-149x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/e4324d82334e6c88e150f5fd632bf7c6e3f58a54-52x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/037e7d1ba78115c119b08e998077db6c7e76d46d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className="flex shrink-0 gap-5"
+                      style={{} as React.CSSProperties}
+                    >
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/22d16a3974775baefbab74c94e441e9083db23b3-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/711e61bde2b77fc3aab430ccc97c8debb7d417d3-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a8bf8a0bf7a965505b25363969215a7222c75763-115x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/78611ae8be2b042f6167ec601387f2aec6ddb0d7-103x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a2cedb263964c48bf9178b38bfc451956a4dce2a-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/603e28e5a3211bd1b75bf72cd07702b7b79f344f-149x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/e4324d82334e6c88e150f5fd632bf7c6e3f58a54-52x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/037e7d1ba78115c119b08e998077db6c7e76d46d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/22d16a3974775baefbab74c94e441e9083db23b3-113x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/711e61bde2b77fc3aab430ccc97c8debb7d417d3-129x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a8bf8a0bf7a965505b25363969215a7222c75763-115x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/78611ae8be2b042f6167ec601387f2aec6ddb0d7-103x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a2cedb263964c48bf9178b38bfc451956a4dce2a-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/603e28e5a3211bd1b75bf72cd07702b7b79f344f-149x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/e4324d82334e6c88e150f5fd632bf7c6e3f58a54-52x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/037e7d1ba78115c119b08e998077db6c7e76d46d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style={{} as React.CSSProperties}>
+                  <div className="flex gap-5" aria-hidden="true">
+                    <div
+                      className="flex shrink-0 gap-5"
+                      style={{} as React.CSSProperties}
+                    >
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/eb3ba7e8f51be868596560af6e40cfc527c855db-97x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/48fe64aa89aa520112881bbcb7f6fc9bae5da77f-182x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/9bc5d68b1ec0ec633259afac7e87cafcb834d5af-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/770121764fade41ec1dd6e5095d95e0c7b27541e-168x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/c3bea3c193e7dc5ac662f39b5072231410c995c2-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/dffcf05eed6848dd890926b54ac3f1cb0692d8eb-141x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3855593238cfbb0191bdba6b18e964de990b95d7-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a89c09118ad38584fddff8e840226c3332bae91d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/eb3ba7e8f51be868596560af6e40cfc527c855db-97x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/48fe64aa89aa520112881bbcb7f6fc9bae5da77f-182x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/9bc5d68b1ec0ec633259afac7e87cafcb834d5af-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/770121764fade41ec1dd6e5095d95e0c7b27541e-168x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/c3bea3c193e7dc5ac662f39b5072231410c995c2-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/dffcf05eed6848dd890926b54ac3f1cb0692d8eb-141x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3855593238cfbb0191bdba6b18e964de990b95d7-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a89c09118ad38584fddff8e840226c3332bae91d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className="flex shrink-0 gap-5"
+                      style={{} as React.CSSProperties}
+                    >
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/eb3ba7e8f51be868596560af6e40cfc527c855db-97x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/48fe64aa89aa520112881bbcb7f6fc9bae5da77f-182x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/9bc5d68b1ec0ec633259afac7e87cafcb834d5af-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/770121764fade41ec1dd6e5095d95e0c7b27541e-168x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/c3bea3c193e7dc5ac662f39b5072231410c995c2-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/dffcf05eed6848dd890926b54ac3f1cb0692d8eb-141x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3855593238cfbb0191bdba6b18e964de990b95d7-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a89c09118ad38584fddff8e840226c3332bae91d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/eb3ba7e8f51be868596560af6e40cfc527c855db-97x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/48fe64aa89aa520112881bbcb7f6fc9bae5da77f-182x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/9bc5d68b1ec0ec633259afac7e87cafcb834d5af-106x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/770121764fade41ec1dd6e5095d95e0c7b27541e-168x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/c3bea3c193e7dc5ac662f39b5072231410c995c2-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/dffcf05eed6848dd890926b54ac3f1cb0692d8eb-141x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/3855593238cfbb0191bdba6b18e964de990b95d7-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div
+                        className="flex h-[60px] shrink-0 items-center justify-center rounded-[16px] bg-white"
+                        style={{} as React.CSSProperties}
+                      >
+                        <img
+                          className="h-full w-full object-contain"
+                          alt=""
+                          src="https://cdn.sanity.io/images/ca81n2nu/production/a89c09118ad38584fddff8e840226c3332bae91d-146x60.svg"
+                          decoding="async"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="pointer-events-none absolute inset-y-0 left-0 z-10 w-[100px] backdrop-blur-[1px] lg:w-[550px]"
+                style={{} as React.CSSProperties}
+              />
+              <div
+                className="pointer-events-none absolute inset-y-0 right-0 z-10 w-[100px] backdrop-blur-[1px] lg:w-[550px]"
+                style={{} as React.CSSProperties}
+              />
+            </div>
+          </motion.section>
+    </>
+  );
+}
