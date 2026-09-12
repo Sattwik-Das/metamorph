@@ -78,17 +78,17 @@ export function SectionInteractiveDemo() {
             <svg 
               width="32" 
               height="32" 
-              viewBox="0 0 32 32" 
+              viewBox="0 0 24 24" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
-              className="drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] z-50 relative"
-              style={{ transform: 'translate(-6px, -4px)' }}
+              className="drop-shadow-[0_3px_8px_rgba(0,0,0,0.5)] z-50 relative"
+              style={{ transform: 'translate(-2px, -2px)' }}
             >
               <path 
-                d="M8.5 4.5L25 16.5L16.5 18L12.5 27.5L8.5 4.5Z" 
+                d="M3 2L10.5 24.5L13.5 16L22 13L3 2Z" 
                 fill="black" 
                 stroke="white" 
-                strokeWidth="2.5" 
+                strokeWidth="1.5" 
                 strokeLinejoin="round"
               />
             </svg>
