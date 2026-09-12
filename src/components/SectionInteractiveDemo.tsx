@@ -75,12 +75,22 @@ export function SectionInteractiveDemo() {
             style={{ x: cursorX, y: cursorY }}
           >
             {/* Standard macOS-style cursor */}
-            <svg
-              className="w-5 h-5 drop-shadow-md text-white fill-current stroke-black stroke-[1.5px]"
-              viewBox="0 0 24 24"
-              style={{ transform: 'translate(-5px, -5px)' }}
+            <svg 
+              width="32" 
+              height="32" 
+              viewBox="0 0 32 32" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+              className="drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] z-50 relative"
+              style={{ transform: 'translate(-6px, -4px)' }}
             >
-              <path d="M4 2v20l6-6h10z" />
+              <path 
+                d="M8.5 4.5L25 16.5L16.5 18L12.5 27.5L8.5 4.5Z" 
+                fill="black" 
+                stroke="white" 
+                strokeWidth="2.5" 
+                strokeLinejoin="round"
+              />
             </svg>
 
             {/* Triangle Blue Pointer (Clickit Companion) */}
