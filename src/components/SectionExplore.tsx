@@ -4,62 +4,15 @@ export function SectionExplore() {
   return (
     <>
 <motion.section className="mx-auto mt-50 flex w-full max-w-[1300px] flex-col items-center gap-7.5 self-center md:mt-75 md:gap-10 lg:mt-50 xl:mt-75 xl:gap-10 2xl:max-w-[1500px]" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true, margin: "-100px" }}>
-            <h2 className="text-center font-cosmos-oracle text-[38px] text-primary leading-none tracking-[-1.52px] max-md:max-w-[420px]">
+            <h2 className="text-center font-clicky-oracle text-[38px] text-primary leading-none tracking-[-1.52px] max-md:max-w-[420px]">
               <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  Inspiration&#xa0;
-                </span>
+                <span className="inline-block" style={{} as React.CSSProperties}>Explore&#xa0;</span>
               </span>
               <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  for&#xa0;
-                </span>
+                <span className="inline-block" style={{} as React.CSSProperties}>the&#xa0;</span>
               </span>
               <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  the&#xa0;
-                </span>
-              </span>
-              <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  world&#x2019;s&#xa0;
-                </span>
-              </span>
-              <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  top&#xa0;
-                </span>
-              </span>
-              <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  creative&#xa0;
-                </span>
-              </span>
-              <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  teams.
-                </span>
+                <span className="inline-block" style={{} as React.CSSProperties}>features.</span>
               </span>
             </h2>
             <div className="relative w-full overflow-hidden">

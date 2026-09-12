@@ -27,8 +27,8 @@
     }
   },
   "font": {
-    "cosmosoracle": {
-      "$value": "cosmosOracle",
+    "clickyoracle": {
+      "$value": "clickyOracle",
       "$type": "fontFamily",
       "$description": "Single custom face used for everything. Weight 350 is the signature — hero and display copy use this whisper-weight instead of the conventional 700, creating editorial calm. Weight 400 for body, weight 500 reserved for buttons and labels. Negative tracking scales with size: tightest (-0.05em) on the 74px display, opening to normal at 14px. The low line-heights on large sizes (0.80–1.10) hug the baseline tightly so headlines read as deliberate blocks, not airy paragraphs."
     }
@@ -36,7 +36,7 @@
   "typography": {
     "sm": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "14px",
         "fontWeight": 500,
         "lineHeight": 1.29
@@ -46,7 +46,7 @@
     },
     "sm-2": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "14px",
         "fontWeight": 400,
         "lineHeight": 1.29
@@ -56,7 +56,7 @@
     },
     "base": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "15px",
         "fontWeight": 500,
         "lineHeight": 1.2
@@ -66,7 +66,7 @@
     },
     "base-2": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "16px",
         "fontWeight": 400,
         "lineHeight": 1.5
@@ -76,7 +76,7 @@
     },
     "base-3": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "16px",
         "fontWeight": 500,
         "lineHeight": 1.25
@@ -86,7 +86,7 @@
     },
     "base-4": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "16px",
         "fontWeight": 400,
         "lineHeight": 1.25
@@ -96,7 +96,7 @@
     },
     "base-5": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "16px",
         "fontWeight": 400,
         "lineHeight": 1
@@ -106,7 +106,7 @@
     },
     "lg": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "18px",
         "fontWeight": 400,
         "lineHeight": 1.5
@@ -116,7 +116,7 @@
     },
     "2xl": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "24px",
         "fontWeight": 400,
         "lineHeight": 0.8
@@ -126,7 +126,7 @@
     },
     "2xl-2": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "26px",
         "fontWeight": 400,
         "lineHeight": 1.2
@@ -136,7 +136,7 @@
     },
     "2xl-3": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "26px",
         "fontWeight": 400,
         "lineHeight": 1
@@ -146,7 +146,7 @@
     },
     "3xl": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "33px",
         "fontWeight": 400,
         "lineHeight": 1.06
@@ -156,7 +156,7 @@
     },
     "4xl": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "38px",
         "fontWeight": 400,
         "lineHeight": 1
@@ -166,7 +166,7 @@
     },
     "5xl": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "58px",
         "fontWeight": 400,
         "lineHeight": 1
@@ -176,7 +176,7 @@
     },
     "5xl-2": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "66px",
         "fontWeight": 400,
         "lineHeight": 1.08
@@ -186,7 +186,7 @@
     },
     "5xl-3": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "66px",
         "fontWeight": 400,
         "lineHeight": 1.1
@@ -196,7 +196,7 @@
     },
     "5xl-4": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "66px",
         "fontWeight": 400,
         "lineHeight": 1
@@ -206,7 +206,7 @@
     },
     "5xl-5": {
       "$value": {
-        "fontFamily": "cosmosOracle",
+        "fontFamily": "clickyOracle",
         "fontSize": "74px",
         "fontWeight": 350,
         "lineHeight": 1
@@ -303,8 +303,8 @@
   },
   "$extensions": {
     "com.refero.extraction": {
-      "url": "https://cosmos.so",
-      "siteName": "Cosmos",
+      "url": "https://clicky.so",
+      "siteName": "Clickit",
       "extractedAt": "2026-06-03T17:19:29.348Z",
       "variant": "extended"
     }

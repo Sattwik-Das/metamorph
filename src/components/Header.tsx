@@ -14,7 +14,7 @@ export function Header() {
           />
           <div className="pointer-events-auto relative flex min-w-0 items-center gap-5">
             <a
-              data-testid="topnav-cosmos-logo"
+              data-testid="topnav-clicky-logo"
               className="hidden h-8 shrink-0 items-center md:flex"
               style={{} as React.CSSProperties}
               href="/"

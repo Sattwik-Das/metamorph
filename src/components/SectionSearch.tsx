@@ -4,46 +4,15 @@ export function SectionSearch() {
   return (
     <>
 <motion.section className="mt-50 flex flex-col items-center lg:mt-30 lg:px-4 xl:mt-50" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true, margin: "-100px" }}>
-            <h2 className="max-w-72 text-center font-cosmos-oracle text-[36px] text-primary leading-[1.1] tracking-[-1.44px] lg:max-w-[898px] lg:text-[66px] lg:tracking-[-2.64px]">
+            <h2 className="max-w-72 text-center font-clicky-oracle text-[36px] text-primary leading-[1.1] tracking-[-1.44px] lg:max-w-[898px] lg:text-[66px] lg:tracking-[-2.64px]">
               <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  Search&#xa0;
-                </span>
+                <span className="inline-block" style={{} as React.CSSProperties}>Ask&#xa0;</span>
               </span>
               <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  the&#xa0;
-                </span>
+                <span className="inline-block" style={{} as React.CSSProperties}>anything,&#xa0;</span>
               </span>
               <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  way&#xa0;
-                </span>
-              </span>
-              <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  you&#xa0;
-                </span>
-              </span>
-              <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  think.
-                </span>
+                <span className="inline-block" style={{} as React.CSSProperties}>instantly.</span>
               </span>
             </h2>
             <div className="mt-[30px] flex w-full flex-col items-center justify-center gap-[40px] px-4 lg:mt-15 lg:flex-row lg:gap-[30px] lg:px-0">
@@ -120,7 +89,7 @@ export function SectionSearch() {
                     <div className="size-[38px] shrink-0 rounded-full bg-black/20" />
                     <div className="h-[35px] w-[140px] overflow-hidden">
                       <span
-                        className="block whitespace-nowrap font-cosmos-oracle text-[33px] text-white uppercase leading-[35px]"
+                        className="block whitespace-nowrap font-clicky-oracle text-[33px] text-white uppercase leading-[35px]"
                         style={{} as React.CSSProperties}
                       >
                         #bc361b
@@ -128,8 +97,8 @@ export function SectionSearch() {
                     </div>
                   </div>
                 </div>
-                <p className="text-center font-cosmos-oracle text-[24px] text-primary leading-[0.8] tracking-[-0.96px]">
-                  By color
+                <p className="text-center font-clicky-oracle text-[24px] text-primary leading-[0.8] tracking-[-0.96px]">
+                  Voice powered
                 </p>
               </div>
               <div
@@ -250,8 +219,8 @@ export function SectionSearch() {
                     </div>
                   </div>
                 </div>
-                <p className="text-center font-cosmos-oracle text-[24px] text-primary leading-[0.8] tracking-[-0.96px]">
-                  by visual similarity
+                <p className="text-center font-clicky-oracle text-[24px] text-primary leading-[0.8] tracking-[-0.96px]">
+                  Screen aware
                 </p>
               </div>
               <div
@@ -360,8 +329,8 @@ export function SectionSearch() {
                     </div>
                   </div>
                 </div>
-                <p className="text-center font-cosmos-oracle text-[24px] text-primary leading-[0.8] tracking-[-0.96px]">
-                  and without AI.
+                <p className="text-center font-clicky-oracle text-[24px] text-primary leading-[0.8] tracking-[-0.96px]">
+                  Real-time responses
                 </p>
               </div>
             </div>

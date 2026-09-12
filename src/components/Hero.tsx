@@ -59,9 +59,9 @@ export function Hero() {
                     />
                   </svg>
                   <h1 className="text-pretty text-center font-[350] text-[74px] text-primary leading-none tracking-[-3.7px]">
-                    Your space
+                    Your AI companion
                     <br />
-                    for inspiration
+                    for macOS
                   </h1>
                   <div className="mt-2.5">
                     <div className="flex gap-2">
@@ -86,7 +86,7 @@ export function Hero() {
                         type="button"
                         className="relative cursor-pointer select-none items-center justify-center gap-x-1 rounded-full transition-all disabled:cursor-default border border-primary bg-transparent text-primary hover:border-hover hover:bg-hover-tertiary disabled:text-quaternary disabled:hover:border-primary disabled:hover:bg-transparent h-14 px-6 py-4 font-medium text-body-large hidden lg:flex"
                       >
-                        <div className="contents">Get the app</div>
+                        <div className="contents">Download for macOS</div>
                       </button>
                     </div>
                   </div>

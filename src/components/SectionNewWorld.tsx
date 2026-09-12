@@ -17,52 +17,22 @@ export function SectionNewWorld() {
 <motion.section className="relative z-1 mt-50 flex flex-col items-center px-4 lg:mt-30" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true, margin: "-100px" }}>
             <h2 className="max-w-[942px] text-center text-[36px] text-primary leading-[1.08] tracking-[-1.44px] lg:text-[66px] lg:tracking-[-2.64px]">
               <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  Every&#xa0;
-                </span>
+                <span className="inline-block" style={{} as React.CSSProperties}>A&#xa0;</span>
               </span>
               <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  search&#xa0;
-                </span>
+                <span className="inline-block" style={{} as React.CSSProperties}>new&#xa0;</span>
               </span>
               <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  opens&#xa0;
-                </span>
+                <span className="inline-block" style={{} as React.CSSProperties}>era&#xa0;</span>
               </span>
               <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  a&#xa0;
-                </span>
+                <span className="inline-block" style={{} as React.CSSProperties}>of&#xa0;</span>
               </span>
               <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  new&#xa0;
-                </span>
+                <span className="inline-block" style={{} as React.CSSProperties}>voice&#xa0;</span>
               </span>
               <span className="inline-flex">
-                <span
-                  className="inline-block"
-                  style={{} as React.CSSProperties}
-                >
-                  world.
-                </span>
+                <span className="inline-block" style={{} as React.CSSProperties}>interaction.</span>
               </span>
             </h2>
             <div
@@ -194,76 +164,34 @@ export function SectionNewWorld() {
             <div className="mt-[30px] max-w-[520px] text-center text-heading-medium text-secondary leading-[1.2] lg:mt-[54px] lg:text-heading-large">
               <p>
                 <span className="inline-flex">
-                  <span
-                    className="inline-block"
-                    style={{} as React.CSSProperties}
-                  >
-                    Your&#xa0;
-                  </span>
+                  <span className="inline-block" style={{} as React.CSSProperties}>Hold&#xa0;</span>
                 </span>
                 <span className="inline-flex">
-                  <span
-                    className="inline-block"
-                    style={{} as React.CSSProperties}
-                  >
-                    collections,&#xa0;
-                  </span>
+                  <span className="inline-block" style={{} as React.CSSProperties}>Ctrl+Option&#xa0;</span>
                 </span>
                 <span className="inline-flex">
-                  <span
-                    className="inline-block"
-                    style={{} as React.CSSProperties}
-                  >
-                    your&#xa0;
-                  </span>
+                  <span className="inline-block" style={{} as React.CSSProperties}>to&#xa0;</span>
                 </span>
                 <span className="inline-flex">
-                  <span
-                    className="inline-block"
-                    style={{} as React.CSSProperties}
-                  >
-                    references,&#xa0;
-                  </span>
+                  <span className="inline-block" style={{} as React.CSSProperties}>speak.&#xa0;</span>
                 </span>
                 <span className="inline-flex">
-                  <span
-                    className="inline-block"
-                    style={{} as React.CSSProperties}
-                  >
-                    your&#xa0;
-                  </span>
+                  <span className="inline-block" style={{} as React.CSSProperties}>Clickit&#xa0;</span>
                 </span>
                 <span className="inline-flex">
-                  <span
-                    className="inline-block"
-                    style={{} as React.CSSProperties}
-                  >
-                    taste.&#xa0;
-                  </span>
+                  <span className="inline-block" style={{} as React.CSSProperties}>instantly&#xa0;</span>
                 </span>
                 <span className="inline-flex">
-                  <span
-                    className="inline-block"
-                    style={{} as React.CSSProperties}
-                  >
-                    Connected,&#xa0;
-                  </span>
+                  <span className="inline-block" style={{} as React.CSSProperties}>captures&#xa0;</span>
                 </span>
                 <span className="inline-flex">
-                  <span
-                    className="inline-block"
-                    style={{} as React.CSSProperties}
-                  >
-                    searchable,&#xa0;
-                  </span>
+                  <span className="inline-block" style={{} as React.CSSProperties}>your&#xa0;</span>
                 </span>
                 <span className="inline-flex">
-                  <span
-                    className="inline-block"
-                    style={{} as React.CSSProperties}
-                  >
-                    yours.
-                  </span>
+                  <span className="inline-block" style={{} as React.CSSProperties}>screen&#xa0;</span>
+                </span>
+                <span className="inline-flex">
+                  <span className="inline-block" style={{} as React.CSSProperties}>context.</span>
                 </span>
               </p>
             </div>

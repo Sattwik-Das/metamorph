@@ -5,7 +5,8 @@ import { SectionNewWorld } from './components/SectionNewWorld';
 import { SectionSearch } from './components/SectionSearch';
 import { SectionKnow } from './components/SectionKnow';
 import { SectionExplore } from './components/SectionExplore';
-import { SectionGetCosmos } from './components/SectionGetCosmos';
+import { SectionGetClicky } from './components/SectionGetClicky';
+import { SectionPricing } from './components/SectionPricing';
 import { Footer } from './components/Footer';
 import './live.css';
 
@@ -24,6 +25,7 @@ export default function App() {
           <SectionSearch />
           <SectionKnow />
           <SectionExplore />
+          <SectionPricing />
           <div className="relative mt-50 overflow-hidden bg-paper lg:mt-75">
             <div
               className="pointer-events-none absolute inset-x-0 top-0 h-[350px] lg:h-[573px]"
@@ -39,7 +41,7 @@ export default function App() {
               style={{} as React.CSSProperties}
             />
             <div className="mx-auto max-w-[1300px]">
-              <SectionGetCosmos />
+              <SectionGetClicky />
               <Footer />
             </div>
           </div>
