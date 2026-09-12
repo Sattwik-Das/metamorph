@@ -1,23 +1,17 @@
 Update: April 27, 2026.
 
-Hi there! I'm Farza, the guy that made Clicky.
+Hi there! I'm Soyuz, the developer of Clickit.
 
-The existing codebase remains open source. Tinker with it, make it yours, start a company out of it, do whatever you want I don't mind. But, for all the new stuff I'm hacking on, gonna keep it private. To get the latest Clicky, you can go [here](https://www.heyclicky.com/).
-
-I also tweeted about this [here](https://x.com/FarzaTV/status/2043402737828962489).
+The existing codebase remains open source. Tinker with it, make it yours, start a company out of it, do whatever you want I don't mind. But, for all the new stuff I'm hacking on, gonna keep it private. To get the latest Clickit, you can go [here](https://www.clickit.com/).
 
 Go crazy with this repo!! It's an MIT license.
 
-# Hi, this is Clicky.
+# Hi, this is Clickit.
 It's an AI teacher that lives as a buddy next to your cursor. It can see your screen, talk to you, and even point at stuff. Kinda like having a real teacher next to you.
 
-Download it [here](https://www.clicky.so/) for free.
+![Clickit — an ai buddy that lives on your mac](clicky-demo.gif)
 
-Here's the [original tweet](https://x.com/FarzaTV/status/2041314633978659092) that kinda blew up for a demo for more context.
-
-![Clicky — an ai buddy that lives on your mac](clicky-demo.gif)
-
-This is the open-source version of Clicky for those that want to hack on it, build their own features, or just see how it works under the hood.
+This is the open-source version of Clickit for those that want to hack on it, build their own features, or just see how it works under the hood.
 
 ## Get started with Claude Code
 
@@ -28,9 +22,9 @@ Once you get Claude running, paste this:
 ```
 Hi Claude.
 
-Clone https://github.com/farzaa/clicky.git into my current directory.
+Clone the repository into your current directory.
 
-Then read the CLAUDE.md. I want to get Clicky running locally on my Mac.
+Then read the CLAUDE.md. I want to get Clickit running locally on my Mac.
 
 Help me set up everything — the Cloudflare Worker with my own API keys, the proxy URLs, and getting it building in Xcode. Walk me through it.
 ```
@@ -99,14 +93,14 @@ ELEVENLABS_API_KEY=...
 ELEVENLABS_VOICE_ID=...
 ```
 
-Then update the proxy URLs in the Swift code to point to `http://localhost:8787` instead of the deployed Worker URL while developing. Grep for `clicky-proxy` to find them all.
+Then update the proxy URLs in the Swift code to point to `http://localhost:8000` instead of the deployed Worker URL while developing. Grep for `workerBaseURL` to find them all.
 
 ### 3. Update the proxy URLs in the app
 
 The app has the Worker URL hardcoded in a few places. Search for `your-worker-name.your-subdomain.workers.dev` and replace it with your Worker URL:
 
 ```bash
-grep -r "clicky-proxy" leanring-buddy/
+grep -r "workerBaseURL" leanring-buddy/
 ```
 
 You'll find it in:
@@ -159,4 +153,4 @@ CLAUDE.md                # Full architecture doc (agents read this)
 
 PRs welcome. If you're using Claude Code, it already knows the codebase — just tell it what you want to build and point it at `CLAUDE.md`.
 
-Got feedback? DM me on X [@farzatv](https://x.com/farzatv).
+Got feedback? Feel free to open an issue or contribute.
