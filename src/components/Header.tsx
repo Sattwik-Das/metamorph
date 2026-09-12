@@ -20,7 +20,7 @@ export function Header() {
               href="/"
             >
               <div className="flex items-center gap-2">
-                <img src="/logos/logo-image.png" alt="Logo Icon" className="h-8 w-auto object-contain" />
+                <img src="/logos/logo-image.png" alt="Logo Icon" className="h-8 w-auto object-contain brightness-0" />
                 <img src="/logos/logotext.png" alt="Logo Text" className="h-5 w-auto object-contain hidden lg:block grayscale brightness-0 opacity-90" />
               </div>
             </a>

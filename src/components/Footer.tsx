@@ -150,10 +150,8 @@ export function Footer() {
                     </div>
                   </div>
                 </div>
-                <div className="w-full overflow-hidden">
-                  <h1 className="relative mx-auto w-full text-center font-clicky-oracle text-[32px] md:text-[48px] leading-none tracking-[-0.02em] text-primary mt-12 mb-8">
-                    Clickit
-                  </h1>
+                <div className="w-full flex justify-center overflow-hidden mt-12 mb-8 md:mt-20 md:mb-12">
+                  <img src="/logos/logotext.png" alt="Clickit" className="w-[80vw] max-w-[900px] h-auto object-contain brightness-0 opacity-90" />
                 </div>
               </footer>
     </>
