@@ -1,13 +1,18 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 export function SectionPricing() {
+  const [isYearly, setIsYearly] = useState(false);
+
   const plans = [
     {
       name: "free",
       desc: "see what the fuss is about.",
       subdesc: "best for trying it out",
-      price: "$0",
-      priceSub: "free forever, no card needed",
+      priceMonthly: "$0",
+      priceYearly: "$0",
+      priceSubMonthly: "free forever, no card needed",
+      priceSubYearly: "free forever, no card needed",
       buttonText: "start free",
       popular: false,
       features: [
@@ -20,8 +25,10 @@ export function SectionPricing() {
       name: "pro",
       desc: "talk as much as you want.",
       subdesc: "best for everyday use",
-      price: "$20",
-      priceSub: "per month, billed monthly",
+      priceMonthly: "$20",
+      priceYearly: "$16",
+      priceSubMonthly: "per month, billed monthly",
+      priceSubYearly: "per month, billed $192 yearly",
       buttonText: "get pro",
       popular: true,
       features: [
@@ -34,8 +41,10 @@ export function SectionPricing() {
       name: "max",
       desc: "all the hands you need.",
       subdesc: "best for power users",
-      price: "$100",
-      priceSub: "per month, billed monthly",
+      priceMonthly: "$100",
+      priceYearly: "$80",
+      priceSubMonthly: "per month, billed monthly",
+      priceSubYearly: "per month, billed $960 yearly",
       buttonText: "get max",
       popular: false,
       features: [
@@ -48,7 +57,7 @@ export function SectionPricing() {
 
   return (
     <motion.section 
-      className="relative w-full overflow-hidden bg-gradient-to-b from-[#3b82f6] to-[#93c5fd] py-20 px-4 md:px-8"
+      className="relative w-full overflow-hidden bg-gradient-to-b from-[#3b82f6] to-[#93c5fd] py-20 px-4 md:px-8 mt-32 md:mt-40 lg:mt-48"
       initial={{ opacity: 0, y: 40 }} 
       whileInView={{ opacity: 1, y: 0 }} 
       transition={{ duration: 0.8, ease: "easeOut" }} 
@@ -58,13 +67,28 @@ export function SectionPricing() {
 
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col items-center">
         
+        {/* Section Heading */}
+        <div className="flex flex-col items-center mb-6">
+          <h2 className="text-4xl md:text-[56px] leading-none font-bold text-white mb-4 text-center tracking-tight font-clicky-oracle drop-shadow-sm">
+            Simple, transparent pricing.
+          </h2>
+          <p className="text-white/90 text-lg md:text-xl text-center max-w-lg font-medium drop-shadow-sm">
+            Choose the perfect plan for you. No hidden fees.
+          </p>
+        </div>
         {/* Toggle */}
-        <div className="flex items-center gap-1 p-1 bg-white/20 backdrop-blur-md rounded-full mb-12 shadow-inner border border-white/30">
-          <button className="px-6 py-2 bg-white text-[#3b82f6] rounded-full font-medium shadow-sm transition-all text-sm md:text-base">
+        <div className="flex items-center gap-1 p-1 bg-white/20 backdrop-blur-md rounded-full mb-12 shadow-inner border border-white/30 relative">
+          <button 
+            onClick={() => setIsYearly(false)}
+            className={`px-6 py-2 rounded-full font-medium transition-all text-sm md:text-base relative z-10 ${!isYearly ? 'bg-white text-[#3b82f6] shadow-sm' : 'text-white/90 hover:text-white'}`}
+          >
             monthly
           </button>
-          <button className="px-6 py-2 text-white/90 font-medium transition-all hover:text-white text-sm md:text-base">
-            yearly -20%
+          <button 
+            onClick={() => setIsYearly(true)}
+            className={`px-6 py-2 rounded-full font-medium transition-all text-sm md:text-base relative z-10 ${isYearly ? 'bg-white text-[#3b82f6] shadow-sm' : 'text-white/90 hover:text-white'}`}
+          >
+            yearly <span className={isYearly ? "text-[#3b82f6]/70" : "text-white/70"}>-20%</span>
           </button>
         </div>
 
@@ -81,7 +105,7 @@ export function SectionPricing() {
                 </div>
               )}
 
-              <div className="flex flex-col h-full bg-white/60 backdrop-blur-xl rounded-[1.5rem] overflow-hidden border border-white/40 shadow-2xl relative">
+              <div className="flex flex-col h-full bg-white/60 backdrop-blur-xl rounded-[2rem] overflow-hidden border border-white/40 shadow-2xl relative">
                 
                 {/* macOS Window Header */}
                 <div className="h-8 bg-gradient-to-b from-white/80 to-white/40 border-b border-white/30 flex items-center px-4 gap-2">
@@ -96,9 +120,14 @@ export function SectionPricing() {
                   <p className="text-gray-500 text-xs mb-8">{p.subdesc}</p>
                   
                   <div className="border-t border-gray-300/50 pt-8 mb-4">
-                    <span className="text-[64px] text-gray-900 leading-none tracking-tight font-medium">{p.price}</span>
+                    <span className="text-[64px] text-gray-900 leading-none tracking-tight font-medium">
+                      {isYearly ? p.priceYearly : p.priceMonthly}
+                    </span>
+                    <span className="text-gray-500 font-medium text-xl ml-1">/mo</span>
                   </div>
-                  <p className="text-gray-700 text-sm mb-6 h-5">{p.priceSub}</p>
+                  <p className="text-gray-700 text-sm mb-6 h-5">
+                    {isYearly ? p.priceSubYearly : p.priceSubMonthly}
+                  </p>
                   
                   <button className={`w-3/4 mx-auto py-3 rounded-full font-medium text-[18px] transition-all mb-10 shadow-md ${
                     p.popular 
@@ -129,7 +158,7 @@ export function SectionPricing() {
 
         {/* Maker Discount Terminal Window */}
         <div className="mt-20 w-full max-w-[800px] relative z-10 pb-10">
-          <div className="bg-[#1e1e1e] rounded-[1.5rem] overflow-hidden shadow-2xl border border-gray-800 relative">
+          <div className="bg-[#1e1e1e] rounded-[2rem] overflow-hidden shadow-2xl border border-gray-800 relative">
             {/* Terminal Header */}
             <div className="h-8 bg-[#2d2d2d] flex items-center px-4 gap-2 border-b border-black/50">
               <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>

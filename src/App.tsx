@@ -1,12 +1,12 @@
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { SectionFilm } from './components/SectionFilm';
+import { SectionInteractiveDemo } from './components/SectionInteractiveDemo';
 import { SectionNewWorld } from './components/SectionNewWorld';
 import { SectionSearch } from './components/SectionSearch';
 import { SectionKnow } from './components/SectionKnow';
-import { SectionExplore } from './components/SectionExplore';
 import { SectionGetClicky } from './components/SectionGetClicky';
 import { SectionPricing } from './components/SectionPricing';
+import { SectionFAQ } from './components/SectionFAQ';
 import { Footer } from './components/Footer';
 import './live.css';
 
@@ -18,15 +18,15 @@ export default function App() {
         <div data-landing={true}>
           <div className="relative">
             <Hero />
-            <SectionFilm />
+            <SectionInteractiveDemo />
           </div>
         </div>
           <SectionNewWorld />
           <SectionSearch />
           <SectionKnow />
-          <SectionExplore />
           <SectionPricing />
-          <div className="relative mt-50 overflow-hidden bg-paper lg:mt-75">
+          <SectionFAQ />
+          <div className="relative mt-32 md:mt-48 lg:mt-64 overflow-hidden bg-paper">
             <div
               className="pointer-events-none absolute inset-x-0 top-0 h-[350px] lg:h-[573px]"
               style={{} as React.CSSProperties}

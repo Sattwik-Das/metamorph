@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 export function SectionSearch() {
   return (
     <>
-<motion.section className="mt-50 flex flex-col items-center lg:mt-30 lg:px-4 xl:mt-50" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true, margin: "-100px" }}>
+<motion.section className="mt-32 md:mt-40 lg:mt-48 flex flex-col items-center lg:px-4" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true, margin: "-100px" }}>
             <h2 className="max-w-72 text-center font-clicky-oracle text-[36px] text-primary leading-[1.1] tracking-[-1.44px] lg:max-w-[898px] lg:text-[66px] lg:tracking-[-2.64px]">
               <span className="inline-flex">
                 <span className="inline-block" style={{} as React.CSSProperties}>Ask&#xa0;</span>

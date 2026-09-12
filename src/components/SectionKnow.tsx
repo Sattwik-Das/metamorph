@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 export function SectionKnow() {
   return (
     <>
-<motion.section className="mx-auto mt-50 flex w-full max-w-[1300px] flex-col items-center gap-5 px-4 lg:mt-30 lg:flex-row lg:justify-center lg:gap-12 lg:px-0 xl:mt-50 xl:gap-[30px]" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true, margin: "-100px" }}>
+<motion.section className="mx-auto mt-32 md:mt-40 lg:mt-48 flex w-full max-w-[1300px] flex-col items-center gap-5 px-4 lg:flex-row lg:justify-center lg:gap-12 lg:px-0 xl:gap-[30px]" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true, margin: "-100px" }}>
             <div className="flex w-full flex-1 justify-end">
               <h2 className="flex-1 text-center font-clicky-oracle text-[36px] text-primary leading-none tracking-[-1.44px] max-lg:mx-auto lg:max-w-[372px] lg:text-right lg:text-[66px] lg:tracking-[-2.64px]">
                 <span className="inline-flex">

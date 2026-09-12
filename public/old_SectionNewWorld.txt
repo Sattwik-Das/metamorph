@@ -14,7 +14,7 @@ export function SectionNewWorld() {
 
   return (
     <>
-<motion.section className="relative z-1 mt-32 md:mt-40 lg:mt-48 flex flex-col items-center px-4" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true, margin: "-100px" }}>
+<motion.section className="relative z-1 mt-50 flex flex-col items-center px-4 lg:mt-30" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true, margin: "-100px" }}>
             <h2 className="max-w-[942px] text-center text-[36px] text-primary leading-[1.08] tracking-[-1.44px] lg:text-[66px] lg:tracking-[-2.64px]">
               <span className="inline-flex">
                 <span className="inline-block" style={{} as React.CSSProperties}>A&#xa0;</span>
@@ -44,7 +44,7 @@ export function SectionNewWorld() {
                 style={{} as React.CSSProperties}
               />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative h-[540px] w-full scale-[0.6] md:scale-[0.85] lg:scale-100">
+                <div className="relative h-[540px] w-full scale-[0.85] lg:scale-100">
                   <div
                     className="absolute inset-0"
                     style={{} as React.CSSProperties}
