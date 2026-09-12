@@ -5,7 +5,7 @@ export function Header() {
     <>
 <header
           data-testid="topnav"
-          className="sticky top-0 z-sticky flex h-(--layout-header-outer-height) w-full items-center justify-between gap-4 md:gap-18 px-4 py-6 text-primary motion-reduce:animate-none md:px-(--nav-padding-horizontal) pointer-events-none"
+          className="sticky top-0 z-sticky flex h-(--layout-header-outer-height) w-full items-center justify-between gap-4 md:gap-18 px-4 py-4 md:py-6 text-primary motion-reduce:animate-none md:px-(--nav-padding-horizontal) pointer-events-none backdrop-blur-xl bg-[#f7f5f3]/70 border-b border-black/5"
         >
           <div
             aria-hidden="true"
@@ -19,9 +19,9 @@ export function Header() {
               style={{} as React.CSSProperties}
               href="/"
             >
-              <div className="flex items-center gap-2">
-                <img src="/logos/logo-image.png" alt="Logo Icon" className="h-6 md:h-8 w-auto object-contain brightness-0" />
-                <img src="/logos/logotext.png" alt="Logo Text" className="h-4 md:h-5 w-auto object-contain hidden lg:block grayscale brightness-0 opacity-90" />
+              <div className="flex items-center gap-3">
+                <img src="/logos/logo-image.png" alt="Logo Icon" className="h-8 md:h-12 w-auto object-contain" />
+                <img src="/logos/logotext.png" alt="Logo Text" className="h-5 md:h-7 w-auto object-contain hidden lg:block" />
               </div>
             </a>
 
