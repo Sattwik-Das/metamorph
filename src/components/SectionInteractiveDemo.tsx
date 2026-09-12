@@ -41,26 +41,7 @@ export function SectionInteractiveDemo() {
     <div ref={ref} className="relative w-full flex flex-col items-center justify-center py-24 z-10 bg-paper">
       
       {/* Restored the exact original header UI */}
-      <button
-        type="button"
-        className="pointer-events-auto mb-7 flex cursor-pointer items-center gap-2"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          className="size-6 text-secondary"
-        >
-          <path
-            fill="currentColor"
-            d="M8 17.221V6.779a.931.931 0 0 1 1.456-.77l7.657 5.222a.93.93 0 0 1 0 1.538L9.456 17.99A.931.931 0 0 1 8 17.221"
-          />
-        </svg>
-        <p className="text-pretty text-body font-medium text-secondary">
-          Watch our new film (ft. Odessa A&#x2019;zion)
-        </p>
-      </button>
-      
+
       <motion.div
         style={{ scale, opacity }}
         className="group/film pointer-events-auto overflow-hidden rounded-xl shadow-large w-[80%] max-w-[1000px] aspect-video"
