@@ -186,13 +186,102 @@ function UpgradePage() {
   );
 }
 
-function SettingsPage() {
+function SettingsPage({
+  profileName,
+  profileColor,
+  onUpdateProfile
+}: {
+  profileName: string;
+  profileColor: string;
+  onUpdateProfile: (name: string, color: string) => void;
+}) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editName, setEditName] = useState(profileName);
+  const [editColor, setEditColor] = useState(profileColor);
+
+  const COLORS = ['bg-blue-600', 'bg-purple-600', 'bg-emerald-600', 'bg-rose-600', 'bg-amber-600'];
+
+  const handleSave = () => {
+    if (editName.trim()) {
+      onUpdateProfile(editName, editColor);
+      setIsEditing(false);
+    }
+  };
+
   return (
     <div className="p-8 max-w-3xl mx-auto h-full flex flex-col">
       <h1 className="text-3xl font-semibold mb-8 text-white">Settings</h1>
       
       <div className="space-y-6 flex-1">
         
+        {/* Profile Section */}
+        <div className="space-y-2">
+          <h3 className="text-sm font-semibold text-gray-400">Profile</h3>
+          <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden p-6 relative">
+            {!isEditing ? (
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-inner ${profileColor}`}>
+                    {profileName.charAt(0).toUpperCase() || 'U'}
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-semibold text-white">{profileName || 'User'}</h2>
+                    <p className="text-sm text-gray-400">Clickit Pro Member</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setIsEditing(true)}
+                  className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded-lg transition"
+                >
+                  Edit Profile
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-4 animate-in fade-in duration-300">
+                <div>
+                  <label className="block text-xs font-medium text-gray-400 mb-1">Display Name</label>
+                  <input 
+                    type="text" 
+                    value={editName}
+                    onChange={(e) => setEditName(e.target.value)}
+                    className="w-full bg-[#141414] border border-white/10 rounded-lg py-2.5 px-3 text-sm text-white focus:outline-none focus:border-[#007AFF]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-400 mb-2">Profile Color</label>
+                  <div className="flex items-center gap-3">
+                    {COLORS.map(c => (
+                      <button
+                        key={c}
+                        onClick={() => setEditColor(c)}
+                        className={`w-8 h-8 rounded-full ${c} ${editColor === c ? 'ring-2 ring-white ring-offset-2 ring-offset-[#141414]' : 'opacity-70 hover:opacity-100'} transition`}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div className="flex gap-2 pt-2">
+                  <button 
+                    onClick={handleSave}
+                    className="px-4 py-2 bg-[#007AFF] hover:bg-[#0066CC] text-white text-sm font-medium rounded-lg transition"
+                  >
+                    Save Changes
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setIsEditing(false);
+                      setEditName(profileName);
+                      setEditColor(profileColor);
+                    }}
+                    className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white text-sm font-medium rounded-lg transition"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
         {/* Section */}
         <div className="space-y-2">
           <h3 className="text-sm font-semibold text-gray-400">Account</h3>
@@ -250,10 +339,47 @@ function SettingsPage() {
   );
 }
 
+// ---------------------------------------------------------
+// Helper Components
+// ---------------------------------------------------------
+
+function ApiIntegrationCard({ api }: { api: any }) {
+  return (
+    <div className="bg-white/5 border border-white/10 rounded-xl p-5 flex flex-col gap-5 transition-colors">
+      <div className="flex items-start justify-between">
+        <div className="flex items-center gap-4">
+          <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-inner ${api.color}`}>
+            {api.icon}
+          </div>
+          <div>
+            <h3 className="text-sm font-medium text-white">{api.name}</h3>
+            <p className="text-xs text-gray-400">{api.role}</p>
+          </div>
+        </div>
+        
+        <div className="flex items-center gap-1.5 bg-[#34C759]/10 text-[#34C759] px-2.5 py-1 rounded-full border border-[#34C759]/20">
+          <div className="w-1.5 h-1.5 rounded-full bg-[#34C759]"></div>
+          <span className="text-[10px] font-bold uppercase tracking-wider">Connected</span>
+        </div>
+      </div>
+
+      <div className="pt-1">
+        <label className="block text-[10px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">API Key</label>
+        <input 
+          type="password"
+          value={api.mockKey}
+          readOnly
+          className="w-full bg-[#141414] border border-white/10 rounded-xl py-3 px-4 text-xs font-mono text-gray-400 focus:outline-none select-all"
+        />
+      </div>
+    </div>
+  );
+}
+
 function ApiPage() {
   const [showToken, setShowToken] = useState(false);
   const [copied, setCopied] = useState(false);
-  
+
   const mockToken = "clk_test_9f82kd01mc4x9zlaQ72vPmnO94yrtB21";
 
   const handleCopy = () => {
@@ -261,6 +387,14 @@ function ApiPage() {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const INTEGRATIONS = [
+    { id: 'elevenlabs', name: 'ElevenLabs API', role: 'Voice Synthesis & TTS', icon: 'E', color: 'bg-indigo-500', mockKey: 'sk-elv-8f92kd01mc4x' },
+    { id: 'swift', name: 'Swift App', role: 'macOS Native Integration', icon: 'S', color: 'bg-orange-500', mockKey: 'sk-swf-3m29kd01mc4x' },
+    { id: 'gemini', name: 'Gemini API', role: 'Multimodal AI Reasoning', icon: 'G', color: 'bg-blue-500', mockKey: 'sk-gmn-1p44kd01mc4x' },
+    { id: 'sarvam', name: 'Sarvam API', role: 'Indic Voice AI', icon: 'S', color: 'bg-emerald-500', mockKey: 'sk-srv-7x82kd01mc4x' },
+    { id: 'google', name: 'Google API', role: 'Voice Speech & Understanding', icon: 'G', color: 'bg-red-500', mockKey: 'sk-ggl-9a11kd01mc4x' }
+  ];
 
   return (
     <div className="p-8 max-w-4xl mx-auto h-full flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -306,31 +440,84 @@ function ApiPage() {
         </span>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {[
-          { name: 'ElevenLabs API', role: 'Voice Synthesis & TTS', icon: 'E', color: 'bg-indigo-500' },
-          { name: 'Swift App', role: 'macOS Native Integration', icon: 'S', color: 'bg-orange-500' },
-          { name: 'Gemini API', role: 'Multimodal AI Reasoning', icon: 'G', color: 'bg-blue-500' },
-          { name: 'Sarvam API', role: 'Indic Voice AI', icon: 'S', color: 'bg-emerald-500' },
-          { name: 'Google API', role: 'Voice Speech & Understanding', icon: 'G', color: 'bg-red-500' }
-        ].map((api, idx) => (
-          <div key={idx} className="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center justify-between hover:bg-white/10 transition-colors">
-            <div className="flex items-center gap-4">
-              {/* Logo Placeholder - User can replace this div with an <img /> later */}
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-inner ${api.color}`}>
-                {api.icon}
-              </div>
-              <div>
-                <h3 className="text-sm font-medium text-white">{api.name}</h3>
-                <p className="text-xs text-gray-400">{api.role}</p>
-              </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-8">
+        {INTEGRATIONS.map((api) => (
+          <ApiIntegrationCard 
+            key={api.id}
+            api={api}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------
+// Onboarding / Login Page
+// ---------------------------------------------------------
+
+function LoginPage({ onLogin }: { onLogin: (name: string, color: string) => void }) {
+  const [name, setName] = useState('');
+  const [color, setColor] = useState('bg-blue-600');
+  
+  const COLORS = ['bg-blue-600', 'bg-purple-600', 'bg-emerald-600', 'bg-rose-600', 'bg-amber-600'];
+
+  const handleComplete = () => {
+    if (name.trim().length === 0) return;
+    onLogin(name, color);
+  };
+
+  return (
+    <div className="flex h-screen w-full bg-[#0A0A0A] overflow-hidden text-white select-none rounded-2xl border border-white/10 relative" style={{ WebkitAppRegion: 'drag' } as any}>
+      {/* Background decorations */}
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#007AFF] rounded-full mix-blend-screen filter blur-[120px] opacity-20"></div>
+      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-indigo-500 rounded-full mix-blend-screen filter blur-[120px] opacity-20"></div>
+
+      <div className="flex flex-col flex-1 items-center justify-center relative z-10 p-8" style={{ WebkitAppRegion: 'no-drag' } as any}>
+        
+        {/* Login Container */}
+        <div className="w-full max-w-sm bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500 delay-150">
+          <div className="flex flex-col items-center mb-8">
+            <img src="/logos/logo-image.png" alt="Clickit" className="h-12 w-auto brightness-0 invert mb-4" />
+            <h1 className="text-2xl font-bold tracking-tight text-white mb-2">Welcome to Clickit</h1>
+            <p className="text-sm text-gray-400 text-center">Customize your profile to get started.</p>
+          </div>
+
+          <div className="space-y-4 mb-8">
+            <div>
+              <label className="block text-xs font-medium text-gray-400 mb-1.5 ml-1">Your Name</label>
+              <input 
+                type="text" 
+                placeholder="e.g. Satoshi"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full bg-[#141414] border border-white/10 rounded-xl py-3 px-4 text-sm text-white focus:outline-none focus:border-[#007AFF] transition-colors"
+                onKeyDown={(e) => e.key === 'Enter' && handleComplete()}
+              />
             </div>
-            <div className="flex items-center gap-1.5 bg-[#34C759]/10 text-[#34C759] px-2 py-1 rounded-full border border-[#34C759]/20">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#34C759]"></div>
-              <span className="text-[10px] font-bold uppercase tracking-wider">Connected</span>
+
+            <div>
+              <label className="block text-xs font-medium text-gray-400 mb-2 ml-1">Profile Color</label>
+              <div className="flex items-center justify-between px-2">
+                {COLORS.map(c => (
+                  <button
+                    key={c}
+                    onClick={() => setColor(c)}
+                    className={`w-8 h-8 rounded-full ${c} ${color === c ? 'ring-2 ring-white ring-offset-2 ring-offset-[#141414]' : 'opacity-70 hover:opacity-100'} transition shadow-inner`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        ))}
+
+          <button 
+            onClick={handleComplete}
+            disabled={name.trim().length === 0}
+            className="w-full bg-[#007AFF] hover:bg-[#0066CC] disabled:bg-white/10 disabled:text-gray-500 disabled:cursor-not-allowed text-white rounded-xl py-3.5 font-medium transition-colors shadow-[0_0_20px_rgba(0,122,255,0.3)] flex items-center justify-center gap-2"
+          >
+            Complete Onboarding
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -341,7 +528,31 @@ function ApiPage() {
 // ---------------------------------------------------------
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('clickit_is_logged_in') === 'true');
+  const [profileName, setProfileName] = useState(() => localStorage.getItem('clickit_profile_name') || '');
+  const [profileColor, setProfileColor] = useState(() => localStorage.getItem('clickit_profile_color') || 'bg-blue-600');
+  
   const [activeTab, setActiveTab] = useState('home');
+
+  const handleLogin = (name: string, color: string) => {
+    localStorage.setItem('clickit_is_logged_in', 'true');
+    localStorage.setItem('clickit_profile_name', name);
+    localStorage.setItem('clickit_profile_color', color);
+    setProfileName(name);
+    setProfileColor(color);
+    setIsLoggedIn(true);
+  };
+
+  const handleUpdateProfile = (name: string, color: string) => {
+    localStorage.setItem('clickit_profile_name', name);
+    localStorage.setItem('clickit_profile_color', color);
+    setProfileName(name);
+    setProfileColor(color);
+  };
+
+  if (!isLoggedIn) {
+    return <LoginPage onLogin={handleLogin} />;
+  }
 
   return (
     <div className="flex h-screen w-full bg-[#0A0A0A] overflow-hidden text-white select-none rounded-2xl border border-white/10">
@@ -406,6 +617,22 @@ export default function App() {
             onClick={() => setActiveTab('help')} 
           />
         </div>
+
+        {/* User Profile Badge at bottom of Sidebar */}
+        <div className="px-4 mt-auto" style={{ WebkitAppRegion: 'no-drag' } as any}>
+          <div 
+            onClick={() => setActiveTab('settings')}
+            className="flex items-center gap-3 p-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition cursor-pointer"
+          >
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold shadow-inner ${profileColor}`}>
+              {profileName.charAt(0).toUpperCase() || 'U'}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-white truncate">{profileName || 'User'}</p>
+              <p className="text-xs text-gray-400 truncate">Free Plan</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Main Content Area */}
@@ -415,7 +642,13 @@ export default function App() {
         <div className="h-10 w-full absolute top-0 left-0 z-50 pointer-events-none" style={{ WebkitAppRegion: 'drag' } as any}></div>
 
         <div className="h-full pt-10">
-          {activeTab === 'settings' && <SettingsPage />}
+          {activeTab === 'settings' && (
+            <SettingsPage 
+              profileName={profileName} 
+              profileColor={profileColor} 
+              onUpdateProfile={handleUpdateProfile} 
+            />
+          )}
           {activeTab === 'upgrade' && <UpgradePage />}
           {activeTab === 'api' && <ApiPage />}
           {activeTab === 'undock' && (
