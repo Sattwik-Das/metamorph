@@ -26,7 +26,7 @@ export default function App() {
           <SectionKnow />
           <SectionPricing />
           <SectionFAQ />
-          <div className="relative mt-32 md:mt-48 lg:mt-64 overflow-hidden bg-paper">
+          <div className="relative overflow-hidden bg-paper">
             <div
               className="pointer-events-none absolute inset-x-0 top-0 h-[350px] lg:h-[573px]"
               style={{} as React.CSSProperties}

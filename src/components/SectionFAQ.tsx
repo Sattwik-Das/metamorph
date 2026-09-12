@@ -36,7 +36,7 @@ export function SectionFAQ() {
   };
 
   return (
-    <section className="relative z-10 mx-auto w-full max-w-[900px] px-4 pt-32 pb-24 lg:pt-48 lg:pb-32 bg-paper">
+    <section className="relative z-10 mx-auto w-full max-w-[900px] px-4 pt-40 pb-24 lg:pt-52 lg:pb-32 bg-paper">
       <div className="flex flex-col items-center mb-12 md:mb-16">
         <h2 className="text-center font-clicky-oracle text-[40px] md:text-[56px] text-primary leading-none tracking-[-1.52px]">
           Frequently Asked Questions

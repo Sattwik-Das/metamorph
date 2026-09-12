@@ -15,24 +15,28 @@ export function SectionInteractiveDemo() {
   const opacity = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
 
   // Motion values for interactive mouse position
-  const mouseX = useMotionValue(500);
-  const mouseY = useMotionValue(300);
+  const mouseX = useMotionValue(200);
+  const mouseY = useMotionValue(150);
 
-  // Smooth springs for the cursor (trailing effect)
-  const cursorX = useSpring(mouseX, { stiffness: 300, damping: 25, mass: 0.5 });
-  const cursorY = useSpring(mouseY, { stiffness: 300, damping: 25, mass: 0.5 });
+  // Softer spring = slower, lazier trailing cursor
+  const cursorX = useSpring(mouseX, { stiffness: 60, damping: 18, mass: 1 });
+  const cursorY = useSpring(mouseY, { stiffness: 60, damping: 18, mass: 1 });
 
-  // Automated animation
+  // Automated animation — clamped inside container bounds
   useEffect(() => {
     let time = 0;
     const interval = setInterval(() => {
-      time += 0.02;
-      // Smooth complex movement pattern
-      const x = 500 + Math.sin(time) * 350 + Math.cos(time * 0.5) * 100;
-      const y = 300 + Math.sin(time * 1.5) * 200 + Math.cos(time * 0.8) * 50;
-      mouseX.set(x);
-      mouseY.set(y);
-    }, 16); // 60fps
+      time += 0.008;
+      const el = containerRef.current;
+      const W = el ? el.clientWidth - 40 : 760;
+      const H = el ? el.clientHeight - 40 : 390;
+      const cx = W / 2;
+      const cy = H / 2;
+      const x = cx + Math.sin(time) * (cx * 0.75) + Math.cos(time * 0.4) * (cx * 0.2);
+      const y = cy + Math.sin(time * 0.7) * (cy * 0.7) + Math.cos(time * 0.3) * (cy * 0.2);
+      mouseX.set(Math.max(10, Math.min(W, x)));
+      mouseY.set(Math.max(10, Math.min(H, y)));
+    }, 16);
 
     return () => clearInterval(interval);
   }, [mouseX, mouseY]);
@@ -49,26 +53,28 @@ export function SectionInteractiveDemo() {
         {/* Pure Black Screen inside */}
         <div 
           ref={containerRef}
-          className="relative size-full bg-black cursor-none"
+          className="relative size-full bg-black"
         >
           <motion.div
             className="absolute top-0 left-0 pointer-events-none z-50 flex items-start"
             style={{ x: cursorX, y: cursorY }}
           >
-            {/* Standard macOS-style cursor */}
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="28" 
-              height="28" 
-              viewBox="0 0 24 24" 
-              fill="black" 
-              stroke="white" 
-              strokeWidth="1.5" 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              className="drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)] z-50 relative"
+            {/* Standard OS arrow pointer cursor */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              viewBox="0 0 32 32"
+              className="drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)] z-50 relative"
             >
-              <path d="M2.47 2.06 11.83 21.36c.33.67 1.34.6 1.58-.11l2.55-7.53 7.53-2.55c.71-.24.78-1.25.11-1.58L4.3 2.23c-.6-.3-1.28.25-1.12.89z"/>
+              <polygon
+                points="4,2 4,26 9.5,20.5 14,28 17,26.5 12.5,19 20,19"
+                fill="white"
+                stroke="black"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+              />
             </svg>
 
             {/* Triangle Blue Pointer (Clickit Companion) */}

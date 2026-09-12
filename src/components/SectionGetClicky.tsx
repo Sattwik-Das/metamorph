@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 export function SectionGetClicky() {
   return (
     <>
-<motion.section className="relative -mb-20 flex h-[350px] flex-col items-center justify-center gap-6 px-4 md:mb-0 lg:h-[573px] lg:px-0" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true, margin: "-100px" }}>
+<motion.section className="relative -mb-20 flex h-[220px] flex-col items-center justify-center gap-6 px-4 md:mb-0 lg:h-[320px] lg:px-0" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true, margin: "-100px" }}>
                 <p className="relative z-10 text-center text-heading-medium text-primary lg:text-heading-large">
                   <span className="inline-flex">
                     <span className="inline-block" style={{} as React.CSSProperties}>Work&#xa0;</span>
