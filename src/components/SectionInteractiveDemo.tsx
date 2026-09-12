@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 
 export function SectionInteractiveDemo() {
   const ref = useRef<HTMLDivElement>(null);
