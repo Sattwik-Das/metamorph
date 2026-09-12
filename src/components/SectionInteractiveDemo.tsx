@@ -76,21 +76,18 @@ export function SectionInteractiveDemo() {
           >
             {/* Standard macOS-style cursor */}
             <svg 
-              width="32" 
-              height="32" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="28" 
+              height="28" 
               viewBox="0 0 24 24" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-              className="drop-shadow-[0_3px_8px_rgba(0,0,0,0.5)] z-50 relative"
-              style={{ transform: 'translate(-2px, -2px)' }}
+              fill="black" 
+              stroke="white" 
+              strokeWidth="1.5" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              className="drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)] z-50 relative"
             >
-              <path 
-                d="M3 2L10.5 24.5L13.5 16L22 13L3 2Z" 
-                fill="black" 
-                stroke="white" 
-                strokeWidth="1.5" 
-                strokeLinejoin="round"
-              />
+              <path d="M2.47 2.06 11.83 21.36c.33.67 1.34.6 1.58-.11l2.55-7.53 7.53-2.55c.71-.24.78-1.25.11-1.58L4.3 2.23c-.6-.3-1.28.25-1.12.89z"/>
             </svg>
 
             {/* Triangle Blue Pointer (Clickit Companion) */}
