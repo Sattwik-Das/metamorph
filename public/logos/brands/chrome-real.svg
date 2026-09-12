@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Red segment -->
+  <path d="M50 50 L50 15 A35 35 0 0 1 80.3 32.5 Z" fill="#EA4335"/>
+  <!-- Green segment -->
+  <path d="M50 50 L80.3 32.5 A35 35 0 0 1 80.3 67.5 Z" fill="#34A853"/>
+  <!-- Blue segment -->
+  <path d="M50 50 L80.3 67.5 A35 35 0 0 1 19.7 67.5 Z" fill="#4285F4"/>
+  <!-- Yellow segment -->
+  <path d="M50 50 L19.7 67.5 A35 35 0 0 1 19.7 32.5 Z" fill="#FBBC05"/>
+  <!-- Red top segment -->
+  <path d="M50 50 L19.7 32.5 A35 35 0 0 1 50 15 Z" fill="#EA4335"/>
+  <!-- White inner ring -->
+  <circle cx="50" cy="50" r="23" fill="white"/>
+  <!-- Blue center -->
+  <circle cx="50" cy="50" r="16" fill="#4285F4"/>
+  <!-- White highlight -->
+  <circle cx="50" cy="50" r="10" fill="white" opacity="0.15"/>
+</svg>

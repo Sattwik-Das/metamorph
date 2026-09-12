@@ -65,12 +65,12 @@ export function SectionSearch() {
                         <picture className="contents">
                           <source
                             type="image/avif"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/503c057fa2b78012af824220976153651323efca-764x1644.png?w=256&amp;q=75&amp;auto=format 256w, https://cdn.sanity.io/images/ca81n2nu/production/503c057fa2b78012af824220976153651323efca-764x1644.png?w=384&amp;q=75&amp;auto=format 384w, https://cdn.sanity.io/images/ca81n2nu/production/503c057fa2b78012af824220976153651323efca-764x1644.png?w=640&amp;q=75&amp;auto=format 640w, https://cdn.sanity.io/images/ca81n2nu/production/503c057fa2b78012af824220976153651323efca-764x1644.png?w=828&amp;q=75&amp;auto=format 828w"
+                            srcSet="/images/503c057fa2b78012af824220976153651323efca-764x1644_256.png 256w, /images/503c057fa2b78012af824220976153651323efca-764x1644_384.png 384w, /images/503c057fa2b78012af824220976153651323efca-764x1644_640.png 640w, /images/503c057fa2b78012af824220976153651323efca-764x1644_828.png 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                           <source
                             type="image/webp"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/503c057fa2b78012af824220976153651323efca-764x1644.png?w=256&amp;fm=webp&amp;q=75 256w, https://cdn.sanity.io/images/ca81n2nu/production/503c057fa2b78012af824220976153651323efca-764x1644.png?w=384&amp;fm=webp&amp;q=75 384w, https://cdn.sanity.io/images/ca81n2nu/production/503c057fa2b78012af824220976153651323efca-764x1644.png?w=640&amp;fm=webp&amp;q=75 640w, https://cdn.sanity.io/images/ca81n2nu/production/503c057fa2b78012af824220976153651323efca-764x1644.png?w=828&amp;fm=webp&amp;q=75 828w"
+                            srcSet="/images/503c057fa2b78012af824220976153651323efca-764x1644_256.webp 256w, /images/503c057fa2b78012af824220976153651323efca-764x1644_384.webp 384w, /images/503c057fa2b78012af824220976153651323efca-764x1644_640.webp 640w, /images/503c057fa2b78012af824220976153651323efca-764x1644_828.webp 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                           <img
@@ -80,8 +80,8 @@ export function SectionSearch() {
                             decoding="async"
                             loading="lazy"
                             alt=""
-                            src="https://cdn.sanity.io/images/ca81n2nu/production/503c057fa2b78012af824220976153651323efca-764x1644.png?w=828&amp;fm=jpg&amp;q=75"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/503c057fa2b78012af824220976153651323efca-764x1644.png?w=256&amp;fm=jpg&amp;q=75 256w, https://cdn.sanity.io/images/ca81n2nu/production/503c057fa2b78012af824220976153651323efca-764x1644.png?w=384&amp;fm=jpg&amp;q=75 384w, https://cdn.sanity.io/images/ca81n2nu/production/503c057fa2b78012af824220976153651323efca-764x1644.png?w=640&amp;fm=jpg&amp;q=75 640w, https://cdn.sanity.io/images/ca81n2nu/production/503c057fa2b78012af824220976153651323efca-764x1644.png?w=828&amp;fm=jpg&amp;q=75 828w"
+                            src="/images/503c057fa2b78012af824220976153651323efca-764x1644_828.jpg"
+                            srcSet="/images/503c057fa2b78012af824220976153651323efca-764x1644_256.jpg 256w, /images/503c057fa2b78012af824220976153651323efca-764x1644_384.jpg 384w, /images/503c057fa2b78012af824220976153651323efca-764x1644_640.jpg 640w, /images/503c057fa2b78012af824220976153651323efca-764x1644_828.jpg 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                         </picture>
@@ -93,12 +93,12 @@ export function SectionSearch() {
                         <picture className="contents">
                           <source
                             type="image/avif"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272.png?w=256&amp;q=75&amp;auto=format 256w, https://cdn.sanity.io/images/ca81n2nu/production/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272.png?w=384&amp;q=75&amp;auto=format 384w, https://cdn.sanity.io/images/ca81n2nu/production/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272.png?w=640&amp;q=75&amp;auto=format 640w, https://cdn.sanity.io/images/ca81n2nu/production/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272.png?w=828&amp;q=75&amp;auto=format 828w"
+                            srcSet="/images/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272_256.png 256w, /images/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272_384.png 384w, /images/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272_640.png 640w, /images/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272_828.png 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                           <source
                             type="image/webp"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272.png?w=256&amp;fm=webp&amp;q=75 256w, https://cdn.sanity.io/images/ca81n2nu/production/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272.png?w=384&amp;fm=webp&amp;q=75 384w, https://cdn.sanity.io/images/ca81n2nu/production/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272.png?w=640&amp;fm=webp&amp;q=75 640w, https://cdn.sanity.io/images/ca81n2nu/production/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272.png?w=828&amp;fm=webp&amp;q=75 828w"
+                            srcSet="/images/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272_256.webp 256w, /images/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272_384.webp 384w, /images/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272_640.webp 640w, /images/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272_828.webp 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                           <img
@@ -108,8 +108,8 @@ export function SectionSearch() {
                             decoding="async"
                             loading="lazy"
                             alt=""
-                            src="https://cdn.sanity.io/images/ca81n2nu/production/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272.png?w=828&amp;fm=jpg&amp;q=75"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272.png?w=256&amp;fm=jpg&amp;q=75 256w, https://cdn.sanity.io/images/ca81n2nu/production/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272.png?w=384&amp;fm=jpg&amp;q=75 384w, https://cdn.sanity.io/images/ca81n2nu/production/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272.png?w=640&amp;fm=jpg&amp;q=75 640w, https://cdn.sanity.io/images/ca81n2nu/production/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272.png?w=828&amp;fm=jpg&amp;q=75 828w"
+                            src="/images/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272_828.jpg"
+                            srcSet="/images/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272_256.jpg 256w, /images/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272_384.jpg 384w, /images/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272_640.jpg 640w, /images/8f5934850f4844c6be14461b7e5f320edf17e9a4-692x1272_828.jpg 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                         </picture>
@@ -150,12 +150,12 @@ export function SectionSearch() {
                         <picture className="contents">
                           <source
                             type="image/avif"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720.png?w=256&amp;q=75&amp;auto=format 256w, https://cdn.sanity.io/images/ca81n2nu/production/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720.png?w=384&amp;q=75&amp;auto=format 384w, https://cdn.sanity.io/images/ca81n2nu/production/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720.png?w=640&amp;q=75&amp;auto=format 640w, https://cdn.sanity.io/images/ca81n2nu/production/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720.png?w=828&amp;q=75&amp;auto=format 828w"
+                            srcSet="/images/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720_256.png 256w, /images/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720_384.png 384w, /images/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720_640.png 640w, /images/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720_828.png 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                           <source
                             type="image/webp"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720.png?w=256&amp;fm=webp&amp;q=75 256w, https://cdn.sanity.io/images/ca81n2nu/production/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720.png?w=384&amp;fm=webp&amp;q=75 384w, https://cdn.sanity.io/images/ca81n2nu/production/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720.png?w=640&amp;fm=webp&amp;q=75 640w, https://cdn.sanity.io/images/ca81n2nu/production/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720.png?w=828&amp;fm=webp&amp;q=75 828w"
+                            srcSet="/images/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720_256.webp 256w, /images/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720_384.webp 384w, /images/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720_640.webp 640w, /images/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720_828.webp 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                           <img
@@ -163,8 +163,8 @@ export function SectionSearch() {
                             decoding="async"
                             loading="lazy"
                             alt=""
-                            src="https://cdn.sanity.io/images/ca81n2nu/production/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720.png?w=828&amp;fm=jpg&amp;q=75"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720.png?w=256&amp;fm=jpg&amp;q=75 256w, https://cdn.sanity.io/images/ca81n2nu/production/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720.png?w=384&amp;fm=jpg&amp;q=75 384w, https://cdn.sanity.io/images/ca81n2nu/production/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720.png?w=640&amp;fm=jpg&amp;q=75 640w, https://cdn.sanity.io/images/ca81n2nu/production/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720.png?w=828&amp;fm=jpg&amp;q=75 828w"
+                            src="/images/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720_828.jpg"
+                            srcSet="/images/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720_256.jpg 256w, /images/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720_384.jpg 384w, /images/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720_640.jpg 640w, /images/f10cbd2c6ea56eac0c3bb67bc4af5f46c85d8b8b-892x720_828.jpg 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                         </picture>
@@ -176,12 +176,12 @@ export function SectionSearch() {
                         <picture className="contents">
                           <source
                             type="image/avif"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/cc559a567335ab21050449cb02abc0396098914f-512x948.png?w=256&amp;q=75&amp;auto=format 256w, https://cdn.sanity.io/images/ca81n2nu/production/cc559a567335ab21050449cb02abc0396098914f-512x948.png?w=384&amp;q=75&amp;auto=format 384w, https://cdn.sanity.io/images/ca81n2nu/production/cc559a567335ab21050449cb02abc0396098914f-512x948.png?w=640&amp;q=75&amp;auto=format 640w, https://cdn.sanity.io/images/ca81n2nu/production/cc559a567335ab21050449cb02abc0396098914f-512x948.png?w=828&amp;q=75&amp;auto=format 828w"
+                            srcSet="/images/cc559a567335ab21050449cb02abc0396098914f-512x948_256.png 256w, /images/cc559a567335ab21050449cb02abc0396098914f-512x948_384.png 384w, /images/cc559a567335ab21050449cb02abc0396098914f-512x948_640.png 640w, /images/cc559a567335ab21050449cb02abc0396098914f-512x948_828.png 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                           <source
                             type="image/webp"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/cc559a567335ab21050449cb02abc0396098914f-512x948.png?w=256&amp;fm=webp&amp;q=75 256w, https://cdn.sanity.io/images/ca81n2nu/production/cc559a567335ab21050449cb02abc0396098914f-512x948.png?w=384&amp;fm=webp&amp;q=75 384w, https://cdn.sanity.io/images/ca81n2nu/production/cc559a567335ab21050449cb02abc0396098914f-512x948.png?w=640&amp;fm=webp&amp;q=75 640w, https://cdn.sanity.io/images/ca81n2nu/production/cc559a567335ab21050449cb02abc0396098914f-512x948.png?w=828&amp;fm=webp&amp;q=75 828w"
+                            srcSet="/images/cc559a567335ab21050449cb02abc0396098914f-512x948_256.webp 256w, /images/cc559a567335ab21050449cb02abc0396098914f-512x948_384.webp 384w, /images/cc559a567335ab21050449cb02abc0396098914f-512x948_640.webp 640w, /images/cc559a567335ab21050449cb02abc0396098914f-512x948_828.webp 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                           <img
@@ -189,8 +189,8 @@ export function SectionSearch() {
                             decoding="async"
                             loading="lazy"
                             alt=""
-                            src="https://cdn.sanity.io/images/ca81n2nu/production/cc559a567335ab21050449cb02abc0396098914f-512x948.png?w=828&amp;fm=jpg&amp;q=75"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/cc559a567335ab21050449cb02abc0396098914f-512x948.png?w=256&amp;fm=jpg&amp;q=75 256w, https://cdn.sanity.io/images/ca81n2nu/production/cc559a567335ab21050449cb02abc0396098914f-512x948.png?w=384&amp;fm=jpg&amp;q=75 384w, https://cdn.sanity.io/images/ca81n2nu/production/cc559a567335ab21050449cb02abc0396098914f-512x948.png?w=640&amp;fm=jpg&amp;q=75 640w, https://cdn.sanity.io/images/ca81n2nu/production/cc559a567335ab21050449cb02abc0396098914f-512x948.png?w=828&amp;fm=jpg&amp;q=75 828w"
+                            src="/images/cc559a567335ab21050449cb02abc0396098914f-512x948_828.jpg"
+                            srcSet="/images/cc559a567335ab21050449cb02abc0396098914f-512x948_256.jpg 256w, /images/cc559a567335ab21050449cb02abc0396098914f-512x948_384.jpg 384w, /images/cc559a567335ab21050449cb02abc0396098914f-512x948_640.jpg 640w, /images/cc559a567335ab21050449cb02abc0396098914f-512x948_828.jpg 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                         </picture>
@@ -202,12 +202,12 @@ export function SectionSearch() {
                         <picture className="contents">
                           <source
                             type="image/avif"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/94edc31a29bbceb45c81e29287fb87b834801830-748x820.png?w=256&amp;q=75&amp;auto=format 256w, https://cdn.sanity.io/images/ca81n2nu/production/94edc31a29bbceb45c81e29287fb87b834801830-748x820.png?w=384&amp;q=75&amp;auto=format 384w, https://cdn.sanity.io/images/ca81n2nu/production/94edc31a29bbceb45c81e29287fb87b834801830-748x820.png?w=640&amp;q=75&amp;auto=format 640w, https://cdn.sanity.io/images/ca81n2nu/production/94edc31a29bbceb45c81e29287fb87b834801830-748x820.png?w=828&amp;q=75&amp;auto=format 828w"
+                            srcSet="/images/94edc31a29bbceb45c81e29287fb87b834801830-748x820_256.png 256w, /images/94edc31a29bbceb45c81e29287fb87b834801830-748x820_384.png 384w, /images/94edc31a29bbceb45c81e29287fb87b834801830-748x820_640.png 640w, /images/94edc31a29bbceb45c81e29287fb87b834801830-748x820_828.png 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                           <source
                             type="image/webp"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/94edc31a29bbceb45c81e29287fb87b834801830-748x820.png?w=256&amp;fm=webp&amp;q=75 256w, https://cdn.sanity.io/images/ca81n2nu/production/94edc31a29bbceb45c81e29287fb87b834801830-748x820.png?w=384&amp;fm=webp&amp;q=75 384w, https://cdn.sanity.io/images/ca81n2nu/production/94edc31a29bbceb45c81e29287fb87b834801830-748x820.png?w=640&amp;fm=webp&amp;q=75 640w, https://cdn.sanity.io/images/ca81n2nu/production/94edc31a29bbceb45c81e29287fb87b834801830-748x820.png?w=828&amp;fm=webp&amp;q=75 828w"
+                            srcSet="/images/94edc31a29bbceb45c81e29287fb87b834801830-748x820_256.webp 256w, /images/94edc31a29bbceb45c81e29287fb87b834801830-748x820_384.webp 384w, /images/94edc31a29bbceb45c81e29287fb87b834801830-748x820_640.webp 640w, /images/94edc31a29bbceb45c81e29287fb87b834801830-748x820_828.webp 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                           <img
@@ -215,8 +215,8 @@ export function SectionSearch() {
                             decoding="async"
                             loading="lazy"
                             alt=""
-                            src="https://cdn.sanity.io/images/ca81n2nu/production/94edc31a29bbceb45c81e29287fb87b834801830-748x820.png?w=828&amp;fm=jpg&amp;q=75"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/94edc31a29bbceb45c81e29287fb87b834801830-748x820.png?w=256&amp;fm=jpg&amp;q=75 256w, https://cdn.sanity.io/images/ca81n2nu/production/94edc31a29bbceb45c81e29287fb87b834801830-748x820.png?w=384&amp;fm=jpg&amp;q=75 384w, https://cdn.sanity.io/images/ca81n2nu/production/94edc31a29bbceb45c81e29287fb87b834801830-748x820.png?w=640&amp;fm=jpg&amp;q=75 640w, https://cdn.sanity.io/images/ca81n2nu/production/94edc31a29bbceb45c81e29287fb87b834801830-748x820.png?w=828&amp;fm=jpg&amp;q=75 828w"
+                            src="/images/94edc31a29bbceb45c81e29287fb87b834801830-748x820_828.jpg"
+                            srcSet="/images/94edc31a29bbceb45c81e29287fb87b834801830-748x820_256.jpg 256w, /images/94edc31a29bbceb45c81e29287fb87b834801830-748x820_384.jpg 384w, /images/94edc31a29bbceb45c81e29287fb87b834801830-748x820_640.jpg 640w, /images/94edc31a29bbceb45c81e29287fb87b834801830-748x820_828.jpg 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                         </picture>
@@ -228,12 +228,12 @@ export function SectionSearch() {
                         <picture className="contents">
                           <source
                             type="image/avif"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056.png?w=256&amp;q=75&amp;auto=format 256w, https://cdn.sanity.io/images/ca81n2nu/production/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056.png?w=384&amp;q=75&amp;auto=format 384w, https://cdn.sanity.io/images/ca81n2nu/production/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056.png?w=640&amp;q=75&amp;auto=format 640w, https://cdn.sanity.io/images/ca81n2nu/production/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056.png?w=828&amp;q=75&amp;auto=format 828w"
+                            srcSet="/images/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056_256.png 256w, /images/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056_384.png 384w, /images/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056_640.png 640w, /images/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056_828.png 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                           <source
                             type="image/webp"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056.png?w=256&amp;fm=webp&amp;q=75 256w, https://cdn.sanity.io/images/ca81n2nu/production/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056.png?w=384&amp;fm=webp&amp;q=75 384w, https://cdn.sanity.io/images/ca81n2nu/production/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056.png?w=640&amp;fm=webp&amp;q=75 640w, https://cdn.sanity.io/images/ca81n2nu/production/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056.png?w=828&amp;fm=webp&amp;q=75 828w"
+                            srcSet="/images/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056_256.webp 256w, /images/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056_384.webp 384w, /images/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056_640.webp 640w, /images/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056_828.webp 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                           <img
@@ -241,8 +241,8 @@ export function SectionSearch() {
                             decoding="async"
                             loading="lazy"
                             alt=""
-                            src="https://cdn.sanity.io/images/ca81n2nu/production/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056.png?w=828&amp;fm=jpg&amp;q=75"
-                            srcSet="https://cdn.sanity.io/images/ca81n2nu/production/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056.png?w=256&amp;fm=jpg&amp;q=75 256w, https://cdn.sanity.io/images/ca81n2nu/production/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056.png?w=384&amp;fm=jpg&amp;q=75 384w, https://cdn.sanity.io/images/ca81n2nu/production/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056.png?w=640&amp;fm=jpg&amp;q=75 640w, https://cdn.sanity.io/images/ca81n2nu/production/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056.png?w=828&amp;fm=jpg&amp;q=75 828w"
+                            src="/images/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056_828.jpg"
+                            srcSet="/images/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056_256.jpg 256w, /images/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056_384.jpg 384w, /images/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056_640.jpg 640w, /images/39c94d292621915bf40a76e1c84fca7f62f29906-628x1056_828.jpg 828w"
                             sizes="(min-width: 1024px) 340px, 300px"
                           />
                         </picture>
@@ -263,12 +263,12 @@ export function SectionSearch() {
                     <picture className="contents">
                       <source
                         type="image/avif"
-                        srcSet="https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=256&amp;q=75&amp;auto=format 256w, https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=384&amp;q=75&amp;auto=format 384w, https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=640&amp;q=75&amp;auto=format 640w, https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=828&amp;q=75&amp;auto=format 828w, https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=1080&amp;q=75&amp;auto=format 1080w"
+                        srcSet="/images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_256.png 256w, /images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_384.png 384w, /images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_640.png 640w, /images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_828.png 828w, /images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_1080.png 1080w"
                         sizes="(min-width: 1024px) 512px, 100vw"
                       />
                       <source
                         type="image/webp"
-                        srcSet="https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=256&amp;fm=webp&amp;q=75 256w, https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=384&amp;fm=webp&amp;q=75 384w, https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=640&amp;fm=webp&amp;q=75 640w, https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=828&amp;fm=webp&amp;q=75 828w, https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=1080&amp;fm=webp&amp;q=75 1080w"
+                        srcSet="/images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_256.webp 256w, /images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_384.webp 384w, /images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_640.webp 640w, /images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_828.webp 828w, /images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_1080.webp 1080w"
                         sizes="(min-width: 1024px) 512px, 100vw"
                       />
                       <img
@@ -278,8 +278,8 @@ export function SectionSearch() {
                         decoding="async"
                         loading="lazy"
                         alt=""
-                        src="https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=1080&amp;fm=jpg&amp;q=75"
-                        srcSet="https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=256&amp;fm=jpg&amp;q=75 256w, https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=384&amp;fm=jpg&amp;q=75 384w, https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=640&amp;fm=jpg&amp;q=75 640w, https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=828&amp;fm=jpg&amp;q=75 828w, https://cdn.sanity.io/images/ca81n2nu/production/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080.png?w=1080&amp;fm=jpg&amp;q=75 1080w"
+                        src="/images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_1080.jpg"
+                        srcSet="/images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_256.jpg 256w, /images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_384.jpg 384w, /images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_640.jpg 640w, /images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_828.jpg 828w, /images/f4c96e1a6cb9852333a5ee6c30bb63f90799b346-1600x2080_1080.jpg 1080w"
                         sizes="(min-width: 1024px) 512px, 100vw"
                       />
                     </picture>

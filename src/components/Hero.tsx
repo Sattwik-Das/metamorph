@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { HeroPolaroids } from './HeroPolaroids';
 
 export function Hero() {
   return (
@@ -16,10 +17,7 @@ export function Hero() {
                     className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[30%]"
                     style={{} as React.CSSProperties}
                   />
-                  <div
-                    className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                    style={{} as React.CSSProperties}
-                  />
+                  <HeroPolaroids />
                 </div>
               </div>
               <div style={{} as React.CSSProperties}>
