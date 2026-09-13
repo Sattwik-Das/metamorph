@@ -1,156 +1,89 @@
-Update: April 27, 2026.
+# Clickit - The AI Sidekick for macOS
 
-Hi there! I'm Soyuz, the developer of Clickit.
+Clickit is a zero-friction, native macOS AI companion that lives in your menu bar. Using a global push-to-talk hotkey, Clickit can see your screen, transcribe your voice commands in real-time, and chat with state-of-the-art AI models like Claude 3.5 Sonnet to help you work smarter and faster.
 
-The existing codebase remains open source. Tinker with it, make it yours, start a company out of it, do whatever you want I don't mind. But, for all the new stuff I'm hacking on, gonna keep it private. To get the latest Clickit, you can go [here](https://www.clickit.com/).
+It doesn't just tell you the answer—it points it out. When Claude references UI elements on your screen, Clickit's "Magical Cursor" overlay will physically point to them on your actual desktop.
 
-Go crazy with this repo!! It's an MIT license.
+## ✨ Features
 
-# Hi, this is Clickit.
-It's an AI teacher that lives as a buddy next to your cursor. It can see your screen, talk to you, and even point at stuff. Kinda like having a real teacher next to you.
+- **Push-to-Talk AI**: Use `Ctrl + Option` from anywhere in macOS to talk to your companion.
+- **Spatially-Aware Vision**: Automatically captures the context of your active screen to "see what you see".
+- **Magical Cursor**: A custom transparent overlay cursor that physically points to UI elements, buttons, and assets mentioned in the AI's response.
+- **Lightning Fast STT & TTS**: Powered by AssemblyAI's streaming real-time transcription and ElevenLabs' ultra-low latency voice models.
+- **Native macOS Experience**: Built in Swift and AppKit. Runs completely out of the way in your status bar.
+- **Secure Architecture**: All external API calls are proxied through a Cloudflare Worker, meaning no sensitive API keys are stored in the app bundle.
 
-![Clickit — an ai buddy that lives on your mac](clicky-demo.gif)
+## 🛠 Tech Stack
 
-This is the open-source version of Clickit for those that want to hack on it, build their own features, or just see how it works under the hood.
+### Client Applications
+- **macOS Native Companion App (`leanring-buddy`)**
+  - **Swift & SwiftUI**: The core language and UI framework.
+  - **AppKit**: Manages the borderless floating menu-bar panel and the full-screen transparent cursor overlay.
+  - **ScreenCaptureKit**: Apple's modern framework for capturing multi-monitor screenshots for AI visual context.
+  - **AVFoundation**: Powers the push-to-talk voice capture pipeline.
+  - **CoreGraphics**: Uses `CGEvent` taps to create a reliable system-wide global shortcut monitor.
+- **Web Landing Page (`metamorph`)**
+  - **React & Vite**: Frontend framework and build tool.
+  - **Tailwind CSS & Framer Motion**: Styling, layout, and choreographed scroll animations.
+  - **Vercel**: For seamless production deployment.
 
-## Get started with Claude Code
+### Backend & Infrastructure
+- **Python & FastAPI**: A lightweight local backend proxy.
+- **Cloudflare Workers**: Acts as a secure edge proxy layer. All external API requests route through the worker, keeping API keys out of the client.
 
-The fastest way to get this running is with [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
+### AI Models & External APIs
+- **Anthropic Claude API (Sonnet 3.5)**: The core "brain" and vision engine. Analyzes screen context and streams back responses with spatial coordinates to drive the Magical Cursor.
+- **Google Gemini API (Gemini 1.5 Flash)**: Used via the Python backend as a blazing-fast multimodal fallback.
+- **AssemblyAI Real-Time API (`u3-rt-pro`)**: Powers ultra-low latency, streaming speech-to-text via WebSockets.
+- **ElevenLabs API (`eleven_flash_v2_5`)**: Provides the natural, conversational Text-to-Speech voice for the companion's spoken responses.
 
-Once you get Claude running, paste this:
+## 🚀 Getting Started
 
-```
-Hi Claude.
-
-Clone the repository into your current directory.
-
-Then read the CLAUDE.md. I want to get Clickit running locally on my Mac.
-
-Help me set up everything — the Cloudflare Worker with my own API keys, the proxy URLs, and getting it building in Xcode. Walk me through it.
-```
-
-That's it. It'll clone the repo, read the docs, and walk you through the whole setup. Once you're running you can just keep talking to it — build features, fix bugs, whatever. Go crazy.
-
-## Manual setup
-
-If you want to do it yourself, here's the deal.
-
-### Prerequisites
-
-- macOS 14.2+ (for ScreenCaptureKit)
-- Xcode 15+
-- Node.js 18+ (for the Cloudflare Worker)
-- A [Cloudflare](https://cloudflare.com) account (free tier works)
-- API keys for: [Anthropic](https://console.anthropic.com), [AssemblyAI](https://www.assemblyai.com), [ElevenLabs](https://elevenlabs.io)
-
-### 1. Set up the Cloudflare Worker
-
-The Worker is a tiny proxy that holds your API keys. The app talks to the Worker, the Worker talks to the APIs. This way your keys never ship in the app binary.
+### 1. Set up the Cloudflare Worker Proxy
+The app uses a Cloudflare Worker proxy so API keys are never shipped in the client.
 
 ```bash
 cd worker
 npm install
 ```
 
-Now add your secrets. Wrangler will prompt you to paste each one:
-
+Add your API secrets using Wrangler:
 ```bash
 npx wrangler secret put ANTHROPIC_API_KEY
 npx wrangler secret put ASSEMBLYAI_API_KEY
 npx wrangler secret put ELEVENLABS_API_KEY
 ```
 
-For the ElevenLabs voice ID, open `wrangler.toml` and set it there (it's not sensitive):
-
+Set your ElevenLabs Voice ID in `wrangler.toml`:
 ```toml
 [vars]
 ELEVENLABS_VOICE_ID = "your-voice-id-here"
 ```
 
-Deploy it:
-
+Deploy the worker:
 ```bash
 npx wrangler deploy
 ```
 
-It'll give you a URL like `https://your-worker-name.your-subdomain.workers.dev`. Copy that.
+### 2. Update Proxy URLs
+Copy your deployed Worker URL (e.g., `https://your-worker.your-subdomain.workers.dev`) and replace the hardcoded `workerBaseURL` references in the Swift project:
+- `CompanionManager.swift`
+- `AssemblyAIStreamingTranscriptionProvider.swift`
 
-### 2. Run the Worker locally (for development)
-
-If you want to test changes to the Worker without deploying:
-
-```bash
-cd worker
-npx wrangler dev
-```
-
-This starts a local server (usually `http://localhost:8787`) that behaves exactly like the deployed Worker. You'll need to create a `.dev.vars` file in the `worker/` directory with your keys:
-
-```
-ANTHROPIC_API_KEY=sk-ant-...
-ASSEMBLYAI_API_KEY=...
-ELEVENLABS_API_KEY=...
-ELEVENLABS_VOICE_ID=...
-```
-
-Then update the proxy URLs in the Swift code to point to `http://localhost:8000` instead of the deployed Worker URL while developing. Grep for `workerBaseURL` to find them all.
-
-### 3. Update the proxy URLs in the app
-
-The app has the Worker URL hardcoded in a few places. Search for `your-worker-name.your-subdomain.workers.dev` and replace it with your Worker URL:
-
-```bash
-grep -r "workerBaseURL" leanring-buddy/
-```
-
-You'll find it in:
-- `CompanionManager.swift` — Claude chat + ElevenLabs TTS
-- `AssemblyAIStreamingTranscriptionProvider.swift` — AssemblyAI token endpoint
-
-### 4. Open in Xcode and run
-
+### 3. Build the macOS App
+Open the project in Xcode:
 ```bash
 open leanring-buddy.xcodeproj
 ```
+1. Select the `leanring-buddy` scheme.
+2. Set your Apple Developer signing team under **Signing & Capabilities**.
+3. Press **Cmd + R** to build and run.
 
-In Xcode:
-1. Select the `leanring-buddy` scheme (yes, the typo is intentional, long story)
-2. Set your signing team under Signing & Capabilities
-3. Hit **Cmd + R** to build and run
+### 4. Grant Permissions
+On first launch, Clickit will ask for the following macOS permissions:
+- **Microphone**: To capture push-to-talk audio.
+- **Accessibility**: To register the global `Ctrl + Option` keyboard shortcut.
+- **Screen Recording**: To capture screen context via ScreenCaptureKit.
 
-The app will appear in your menu bar (not the dock). Click the icon to open the panel, grant the permissions it asks for, and you're good.
-
-### Permissions the app needs
-
-- **Microphone** — for push-to-talk voice capture
-- **Accessibility** — for the global keyboard shortcut (Control + Option)
-- **Screen Recording** — for taking screenshots when you use the hotkey
-- **Screen Content** — for ScreenCaptureKit access
-
-## Architecture
-
-If you want the full technical breakdown, read `CLAUDE.md`. But here's the short version:
-
-**Menu bar app** (no dock icon) with two `NSPanel` windows — one for the control panel dropdown, one for the full-screen transparent cursor overlay. Push-to-talk streams audio over a websocket to AssemblyAI, sends the transcript + screenshot to Claude via streaming SSE, and plays the response through ElevenLabs TTS. Claude can embed `[POINT:x,y:label:screenN]` tags in its responses to make the cursor fly to specific UI elements across multiple monitors. All three APIs are proxied through a Cloudflare Worker.
-
-## Project structure
-
-```
-leanring-buddy/          # Swift source (yes, the typo stays)
-  CompanionManager.swift    # Central state machine
-  CompanionPanelView.swift  # Menu bar panel UI
-  ClaudeAPI.swift           # Claude streaming client
-  ElevenLabsTTSClient.swift # Text-to-speech playback
-  OverlayWindow.swift       # Blue cursor overlay
-  AssemblyAI*.swift         # Real-time transcription
-  BuddyDictation*.swift     # Push-to-talk pipeline
-worker/                  # Cloudflare Worker proxy
-  src/index.ts              # Three routes: /chat, /tts, /transcribe-token
-CLAUDE.md                # Full architecture doc (agents read this)
-```
-
-## Contributing
-
-PRs welcome. If you're using Claude Code, it already knows the codebase — just tell it what you want to build and point it at `CLAUDE.md`.
-
-Got feedback? Feel free to open an issue or contribute.
+## 📄 License
+This project is open-source under the MIT License. Feel free to fork, hack, and build your own features!
