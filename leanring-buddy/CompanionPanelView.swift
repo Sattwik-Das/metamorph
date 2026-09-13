@@ -10,27 +10,61 @@
 import AVFoundation
 import SwiftUI
 
+enum PanelTab {
+    case home
+    case upgrade
+}
+
 struct CompanionPanelView: View {
     @ObservedObject var companionManager: CompanionManager
     @State private var emailInput: String = ""
+    @State private var selectedTab: PanelTab = .home
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             panelHeader
+            
+            // Custom Tab Bar
+            tabBar
+            
             Divider()
                 .background(DS.Colors.borderSubtle)
                 .padding(.horizontal, 16)
 
+            if selectedTab == .home {
+                homeTabView
+            } else {
+                pricingTabView
+            }
+        }
+        .frame(width: 340)
+        // Dynamic height based on contents
+        .padding(.bottom, 16)
+        .background(panelBackground)
+    }
+    
+    // MARK: - Tab Views
+    
+    private var homeTabView: some View {
+        VStack(alignment: .leading, spacing: 0) {
             permissionsCopySection
                 .padding(.top, 16)
                 .padding(.horizontal, 16)
 
             if companionManager.hasCompletedOnboarding && companionManager.allPermissionsGranted {
                 Spacer()
-                    .frame(height: 12)
-
-                modelPickerRow
+                    .frame(height: 16)
+                    
+                dockCursorToggleRow
                     .padding(.horizontal, 16)
+                    
+                if companionManager.isCursorDocked {
+                    Spacer()
+                        .frame(height: 12)
+                    
+                    dockedCursorInlineUI
+                        .padding(.horizontal, 16)
+                }
             }
 
             if !companionManager.allPermissionsGranted {
@@ -41,20 +75,12 @@ struct CompanionPanelView: View {
                     .padding(.horizontal, 16)
             }
 
-            if !companionManager.hasCompletedOnboarding && companionManager.allPermissionsGranted {
-                Spacer()
-                    .frame(height: 16)
-
-                startButton
-                    .padding(.horizontal, 16)
-            }
-
-            // Show Clicky toggle — hidden for now
+            // Show Clickit toggle — hidden for now
             // if companionManager.hasCompletedOnboarding && companionManager.allPermissionsGranted {
             //     Spacer()
             //         .frame(height: 16)
             //
-            //     showClickyCursorToggleRow
+            //     showClickitCursorToggleRow
             //         .padding(.horizontal, 16)
             // }
 
@@ -67,12 +93,6 @@ struct CompanionPanelView: View {
             }
 
             Spacer()
-                .frame(height: 12)
-
-            Divider()
-                .background(DS.Colors.borderSubtle)
-                .padding(.horizontal, 16)
-
             footerSection
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
@@ -82,29 +102,80 @@ struct CompanionPanelView: View {
     }
 
     // MARK: - Header
+    
+    private var pricingTabView: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Spacer()
+                .frame(height: 16)
+                
+            subscriptionSection
+                .padding(.horizontal, 16)
+        }
+    }
+    
+    private var tabBar: some View {
+        HStack(spacing: 20) {
+            tabButton(title: "Home", icon: "house.fill", tab: .home)
+            tabButton(title: "Upgrade", icon: "arrow.up.circle.fill", tab: .upgrade)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+    }
+    
+    private func tabButton(title: String, icon: String, tab: PanelTab) -> some View {
+        Button(action: {
+            withAnimation(.easeInOut(duration: 0.15)) {
+                selectedTab = tab
+            }
+        }) {
+            HStack(spacing: 6) {
+                Image(systemName: icon)
+                    .font(.system(size: 12))
+                Text(title)
+                    .font(.system(size: 13, weight: .medium))
+            }
+            .foregroundColor(selectedTab == tab ? .white : DS.Colors.textTertiary)
+            .padding(.vertical, 6)
+            .padding(.horizontal, 10)
+            .background(
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(selectedTab == tab ? Color.white.opacity(0.1) : Color.clear)
+            )
+        }
+        .buttonStyle(.plain)
+        .onHover { isHovered in
+            if selectedTab != tab {
+                if isHovered {
+                    NSCursor.pointingHand.push()
+                } else {
+                    NSCursor.pop()
+                }
+            }
+        }
+    }
 
     private var panelHeader: some View {
         HStack {
             HStack(spacing: 8) {
-                // Animated status dot
-                Circle()
-                    .fill(statusDotColor)
-                    .frame(width: 8, height: 8)
-                    .shadow(color: statusDotColor.opacity(0.6), radius: 4)
-
-                Text("Clickit")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(DS.Colors.textPrimary)
+                Image("logo-image")
+                    .renderingMode(.template)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(.white)
+                
+                Image("logotext")
+                    .renderingMode(.template)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 14)
+                    .foregroundColor(.white)
             }
 
             Spacer()
 
-            Text(statusText)
-                .font(.system(size: 12, weight: .medium))
-                .foregroundColor(DS.Colors.textTertiary)
-
             Button(action: {
-                NotificationCenter.default.post(name: .clickyDismissPanel, object: nil)
+                NotificationCenter.default.post(name: .clickitDismissPanel, object: nil)
             }) {
                 Image(systemName: "xmark")
                     .font(.system(size: 10, weight: .semibold))
@@ -179,66 +250,7 @@ struct CompanionPanelView: View {
         }
     }
 
-    // MARK: - Email + Start Button
-
-    @ViewBuilder
-    private var startButton: some View {
-        if !companionManager.hasCompletedOnboarding && companionManager.allPermissionsGranted {
-            if !companionManager.hasSubmittedEmail {
-                VStack(spacing: 8) {
-                    TextField("Enter your email", text: $emailInput)
-                        .textFieldStyle(.plain)
-                        .font(.system(size: 13))
-                        .foregroundColor(DS.Colors.textPrimary)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
-                        .background(
-                            RoundedRectangle(cornerRadius: DS.CornerRadius.medium, style: .continuous)
-                                .fill(Color.white.opacity(0.08))
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: DS.CornerRadius.medium, style: .continuous)
-                                .stroke(DS.Colors.borderSubtle, lineWidth: 0.5)
-                        )
-
-                    Button(action: {
-                        companionManager.submitEmail(emailInput)
-                    }) {
-                        Text("Submit")
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundColor(DS.Colors.textOnAccent)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 10)
-                            .background(
-                                RoundedRectangle(cornerRadius: DS.CornerRadius.large, style: .continuous)
-                                    .fill(emailInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-                                          ? DS.Colors.accent.opacity(0.4)
-                                          : DS.Colors.accent)
-                            )
-                    }
-                    .buttonStyle(.plain)
-                    .pointerCursor()
-                    .disabled(emailInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                }
-            } else {
-                Button(action: {
-                    companionManager.triggerOnboarding()
-                }) {
-                    Text("Start")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(DS.Colors.textOnAccent)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
-                        .background(
-                            RoundedRectangle(cornerRadius: DS.CornerRadius.large, style: .continuous)
-                                .fill(DS.Colors.accent)
-                        )
-                }
-                .buttonStyle(.plain)
-                .pointerCursor()
-            }
-        }
-    }
+    // Removed startButton logic entirely.
 
     // MARK: - Permissions
 
@@ -545,9 +557,9 @@ struct CompanionPanelView: View {
 
 
 
-    // MARK: - Show Clicky Cursor Toggle
+    // MARK: - Show Clickit Cursor Toggle
 
-    private var showClickyCursorToggleRow: some View {
+    private var showClickitCursorToggleRow: some View {
         HStack {
             HStack(spacing: 8) {
                 Image(systemName: "cursorarrow")
@@ -563,8 +575,8 @@ struct CompanionPanelView: View {
             Spacer()
 
             Toggle("", isOn: Binding(
-                get: { companionManager.isClickyCursorEnabled },
-                set: { companionManager.setClickyCursorEnabled($0) }
+                get: { companionManager.isClickitCursorEnabled },
+                set: { companionManager.setClickitCursorEnabled($0) }
             ))
             .toggleStyle(.switch)
             .labelsHidden()
@@ -596,49 +608,239 @@ struct CompanionPanelView: View {
         .padding(.vertical, 4)
     }
 
-    // MARK: - Model Picker
-
-    private var modelPickerRow: some View {
+    // MARK: - Dock Cursor Toggle
+    
+    private var dockCursorToggleRow: some View {
         HStack {
-            Text("Model")
+            Text("Dock Cursor")
                 .font(.system(size: 13, weight: .medium))
                 .foregroundColor(DS.Colors.textSecondary)
-
+                
             Spacer()
-
-            HStack(spacing: 0) {
-                modelOptionButton(label: "Sonnet", modelID: "claude-sonnet-4-6")
-                modelOptionButton(label: "Opus", modelID: "claude-opus-4-6")
-            }
-            .background(
-                RoundedRectangle(cornerRadius: 6, style: .continuous)
-                    .fill(Color.white.opacity(0.06))
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 6, style: .continuous)
-                    .stroke(DS.Colors.borderSubtle, lineWidth: 0.5)
-            )
+            
+            Toggle("", isOn: Binding(
+                get: { companionManager.isCursorDocked },
+                set: { companionManager.setCursorDocked($0) }
+            ))
+            .toggleStyle(.switch)
+            .labelsHidden()
+            .tint(DS.Colors.accent)
+            .scaleEffect(0.8)
         }
         .padding(.vertical, 4)
     }
 
-    private func modelOptionButton(label: String, modelID: String) -> some View {
-        let isSelected = companionManager.selectedModel == modelID
-        return Button(action: {
-            companionManager.setSelectedModel(modelID)
-        }) {
-            Text(label)
-                .font(.system(size: 11, weight: .medium))
-                .foregroundColor(isSelected ? DS.Colors.textPrimary : DS.Colors.textTertiary)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
-                .background(
-                    RoundedRectangle(cornerRadius: 5, style: .continuous)
-                        .fill(isSelected ? Color.white.opacity(0.1) : Color.clear)
-                )
+    // MARK: - Hey Clickit Toggle
+
+    /// Toggle row that enables / disables the Hey Clickit wake-word assistant.
+    private var heyClickitToggleRow: some View {
+        HStack {
+            HStack(spacing: 8) {
+                Image(systemName: "waveform")
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(
+                        companionManager.heyClickitManager.isEnabled
+                            ? DS.Colors.accent
+                            : DS.Colors.textTertiary
+                    )
+                    .frame(width: 16)
+
+                Text("Hey Clickit")
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundColor(DS.Colors.textSecondary)
+            }
+
+            Spacer()
+
+            Toggle("", isOn: Binding(
+                get: { companionManager.heyClickitManager.isEnabled },
+                set: { newValue in
+                    if newValue {
+                        companionManager.heyClickitManager.enable()
+                    } else {
+                        companionManager.heyClickitManager.disable()
+                    }
+                }
+            ))
+            .toggleStyle(.switch)
+            .labelsHidden()
+            .tint(DS.Colors.accent)
+            .scaleEffect(0.8)
         }
-        .buttonStyle(.plain)
-        .pointerCursor()
+        .padding(.vertical, 4)
+    }
+
+    /// Small status pill showing the current Hey Clickit assistant state.
+    private var heyClickitStatusRow: some View {
+        HStack(spacing: 6) {
+            // Animated dot — pulses blue when listening, amber when thinking/executing
+            Circle()
+                .fill(heyClickitStateColor)
+                .frame(width: 5, height: 5)
+                .opacity(heyClickitStatePulses ? 1.0 : 0.4)
+                .animation(
+                    heyClickitStatePulses
+                        ? .easeInOut(duration: 0.8).repeatForever(autoreverses: true)
+                        : .default,
+                    value: companionManager.heyClickitManager.state
+                )
+
+            Text(companionManager.heyClickitManager.state.displayLabel)
+                .font(.system(size: 11, weight: .medium))
+                .foregroundColor(DS.Colors.textTertiary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 4)
+    }
+
+    private var heyClickitStateColor: Color {
+        switch companionManager.heyClickitManager.state {
+        case .idle:                return DS.Colors.textTertiary
+        case .listeningForCommand: return DS.Colors.accent
+        case .thinking:            return Color.yellow
+        case .executing:           return Color.yellow
+        case .speaking:            return Color.green
+        case .error:               return Color.red
+        case .disabled:            return DS.Colors.textTertiary
+        }
+    }
+
+    private var heyClickitStatePulses: Bool {
+        switch companionManager.heyClickitManager.state {
+        case .idle, .listeningForCommand, .thinking, .speaking: return true
+        default: return false
+        }
+    }
+
+
+    // MARK: - Docked Cursor Inline UI
+    
+    @ViewBuilder
+    private var dockedCursorInlineUI: some View {
+        HStack(spacing: 12) {
+            ZStack {
+                // Background circle
+                Circle()
+                    .fill(Color.white.opacity(0.04))
+                    .frame(width: 32, height: 32)
+                
+                if companionManager.voiceState == .idle || companionManager.voiceState == .responding {
+                    // Triangle (Idle or Responding)
+                    Triangle()
+                        .fill(DS.Colors.overlayCursorBlue)
+                        .frame(width: 14, height: 14)
+                        .shadow(color: DS.Colors.overlayCursorBlue, radius: 4, x: 0, y: 0)
+                } else if companionManager.voiceState == .listening {
+                    BlueCursorWaveformView(audioPowerLevel: companionManager.currentAudioPowerLevel)
+                        .scaleEffect(0.8)
+                } else if companionManager.voiceState == .processing {
+                    BlueCursorSpinnerView()
+                }
+            }
+            .frame(width: 32, height: 32)
+            
+            VStack(alignment: .leading, spacing: 2) {
+                Text(companionManager.voiceState == .idle ? "Ready" :
+                     companionManager.voiceState == .listening ? "Listening..." :
+                     companionManager.voiceState == .processing ? "Thinking..." : "Speaking...")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(DS.Colors.textPrimary)
+                
+                Text(companionManager.voiceState == .idle ? "Hold Control+Option to talk" : "Release to send")
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(DS.Colors.textTertiary)
+            }
+            
+            Spacer()
+        }
+        .padding(.vertical, 12)
+        .padding(.horizontal, 12)
+        .background(
+            RoundedRectangle(cornerRadius: DS.CornerRadius.medium, style: .continuous)
+                .fill(Color.white.opacity(0.03))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: DS.CornerRadius.medium, style: .continuous)
+                .stroke(DS.Colors.borderSubtle, lineWidth: 0.5)
+        )
+    }
+
+    // MARK: - Subscription UI
+
+    private var subscriptionSection: some View {
+        VStack(spacing: 12) {
+            // Free Plan (Current)
+            HStack {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Free Plan")
+                        .font(.system(size: 14, weight: .bold))
+                        .foregroundColor(.white)
+                    Text("Basic Sonnet 4.6 • 100 msgs/day")
+                        .font(.system(size: 11))
+                        .foregroundColor(DS.Colors.textTertiary)
+                }
+                Spacer()
+                Text("Current")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundColor(DS.Colors.textTertiary)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(
+                        Capsule().stroke(DS.Colors.borderSubtle, lineWidth: 1)
+                    )
+            }
+            .padding(12)
+            .background(
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .fill(Color.white.opacity(0.04))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .stroke(DS.Colors.borderSubtle, lineWidth: 1)
+            )
+
+            // Pro Plan
+            HStack {
+                VStack(alignment: .leading, spacing: 3) {
+                    HStack(spacing: 6) {
+                        Text("Pro Plan")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.white)
+                        Text("RECOMMENDED")
+                            .font(.system(size: 8, weight: .black, design: .rounded))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 2)
+                            .background(DS.Colors.accent)
+                            .cornerRadius(4)
+                    }
+                    Text("Opus 4.6 • Custom Voice • Pointing")
+                        .font(.system(size: 11))
+                        .foregroundColor(DS.Colors.accent.opacity(0.9))
+                }
+                Spacer()
+                Button(action: {}) {
+                    Text("$20/mo")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .background(DS.Colors.accent)
+                        .cornerRadius(8)
+                }
+                .buttonStyle(.plain)
+                .pointerCursor()
+            }
+            .padding(12)
+            .background(
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .fill(DS.Colors.accent.opacity(0.12))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .stroke(DS.Colors.accent.opacity(0.4), lineWidth: 1)
+            )
+        }
     }
 
     // MARK: - Contact Support Button
@@ -696,23 +898,7 @@ struct CompanionPanelView: View {
             .buttonStyle(.plain)
             .pointerCursor()
 
-            if companionManager.hasCompletedOnboarding {
-                Spacer()
-
-                Button(action: {
-                    companionManager.replayOnboarding()
-                }) {
-                    HStack(spacing: 6) {
-                        Image(systemName: "play.circle")
-                            .font(.system(size: 11, weight: .medium))
-                        Text("Watch Onboarding Again")
-                            .font(.system(size: 12, weight: .medium))
-                    }
-                    .foregroundColor(DS.Colors.textTertiary)
-                }
-                .buttonStyle(.plain)
-                .pointerCursor()
-            }
+            Spacer()
         }
     }
 
@@ -725,37 +911,6 @@ struct CompanionPanelView: View {
             .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 2)
     }
 
-    private var statusDotColor: Color {
-        if !companionManager.isOverlayVisible {
-            return DS.Colors.textTertiary
-        }
-        switch companionManager.voiceState {
-        case .idle:
-            return DS.Colors.success
-        case .listening:
-            return DS.Colors.blue400
-        case .processing, .responding:
-            return DS.Colors.blue400
-        }
-    }
-
-    private var statusText: String {
-        if !companionManager.hasCompletedOnboarding || !companionManager.allPermissionsGranted {
-            return "Setup"
-        }
-        if !companionManager.isOverlayVisible {
-            return "Ready"
-        }
-        switch companionManager.voiceState {
-        case .idle:
-            return "Active"
-        case .listening:
-            return "Listening"
-        case .processing:
-            return "Processing"
-        case .responding:
-            return "Responding"
-        }
-    }
+    // Removed statusText and statusDotColor as they are no longer used
 
 }

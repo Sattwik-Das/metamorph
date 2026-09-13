@@ -79,7 +79,7 @@ function HomePage({ onNavigate }: { onNavigate: (id: string) => void }) {
     <div className="p-8 max-w-3xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div>
         <h1 className="text-3xl font-bold tracking-tight mb-2 text-white">Welcome to Clickit</h1>
-        <p className="text-gray-400">Your AI Copilot for macOS is ready to assist.</p>
+        <p className="text-gray-400">Your AI Copilot for Desktop is ready to assist.</p>
       </div>
       
       <div className="bg-white/5 rounded-xl border border-white/10 p-6 space-y-4 backdrop-blur-md">
@@ -545,10 +545,49 @@ function LoginPage({ onLogin }: { onLogin: (name: string, color: string) => void
 }
 
 // ---------------------------------------------------------
+// Overlay Page (Transparent Window)
+// ---------------------------------------------------------
+
+function OverlayPage() {
+  const [isListening, setIsListening] = useState(false);
+  
+  useEffect(() => {
+    // Listen to IPC events from main process (global shortcut)
+    if ((window as any).electronAPI) {
+      (window as any).electronAPI.onPttStart(() => {
+        setIsListening(true);
+        // We will implement actual recording in the next step
+        setTimeout(() => setIsListening(false), 2000); // Mock reset
+      });
+      return () => (window as any).electronAPI.removePttStart();
+    }
+  }, []);
+
+  return (
+    <div className="w-screen h-screen overflow-hidden pointer-events-none relative">
+      {/* Mocking the blue cursor */}
+      {isListening && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="bg-black/80 backdrop-blur-md px-6 py-4 rounded-3xl border border-white/20 drop-shadow-2xl flex items-center gap-4">
+            <div className="w-4 h-4 rounded-full bg-blue-500 animate-ping"></div>
+            <span className="text-white font-medium">Listening...</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------
 // Main App / Layout
 // ---------------------------------------------------------
 
 export default function App() {
+  // If we are in the transparent overlay window, bypass everything else
+  if (window.location.hash === '#/overlay') {
+    return <OverlayPage />;
+  }
+
   const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('clickit_is_logged_in') === 'true');
   const [profileName, setProfileName] = useState(() => localStorage.getItem('clickit_profile_name') || '');
   const [profileColor, setProfileColor] = useState(() => localStorage.getItem('clickit_profile_color') || 'bg-blue-600');

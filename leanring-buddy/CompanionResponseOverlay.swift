@@ -195,23 +195,66 @@ private struct CompanionResponseOverlayView: View {
 
     var body: some View {
         if viewModel.isShowingResponse {
-            Text(viewModel.streamingResponseText.isEmpty ? "..." : viewModel.streamingResponseText)
-                .font(.system(size: 13, weight: .regular))
-                .foregroundColor(DS.Colors.textPrimary)
-                .lineSpacing(3)
-                .fixedSize(horizontal: false, vertical: true)
-                .frame(maxWidth: 300, alignment: .leading)
-                .padding(.horizontal, 14)
-                .padding(.vertical, 10)
-                .background(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .fill(DS.Colors.surface1.opacity(0.95))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .stroke(DS.Colors.borderSubtle.opacity(0.5), lineWidth: 0.8)
-                        )
-                        .shadow(color: Color.black.opacity(0.35), radius: 16, x: 0, y: 8)
-                )
+            HStack(alignment: .top, spacing: 12) {
+                // Clickit Logo
+                Image("logo-image")
+                    .renderingMode(.template)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 18, height: 18)
+                    .foregroundColor(DS.Colors.accent)
+                    .padding(.top, 1)
+                
+                // Response Text
+                Text(viewModel.streamingResponseText.isEmpty ? "..." : viewModel.streamingResponseText)
+                    .font(.system(size: 13.5, weight: .regular))
+                    .foregroundColor(DS.Colors.textPrimary)
+                    .lineSpacing(4)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: 320, alignment: .leading)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .background(
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .fill(Color(NSColor.windowBackgroundColor).opacity(0.75))
+                    .background(
+                        VisualEffectView(material: .hudWindow, blendingMode: .behindWindow)
+                            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
+                            .stroke(
+                                LinearGradient(
+                                    colors: [Color.white.opacity(0.2), Color.white.opacity(0.02)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                ),
+                                lineWidth: 1
+                            )
+                    )
+                    .shadow(color: Color.black.opacity(0.4), radius: 24, x: 0, y: 12)
+            )
         }
+    }
+}
+
+// MARK: - Visual Effect Helpers
+
+private struct VisualEffectView: NSViewRepresentable {
+    var material: NSVisualEffectView.Material
+    var blendingMode: NSVisualEffectView.BlendingMode
+
+    func makeNSView(context: Context) -> NSVisualEffectView {
+        let view = NSVisualEffectView()
+        view.material = material
+        view.blendingMode = blendingMode
+        view.state = .active
+        return view
+    }
+
+    func updateNSView(_ nsView: NSVisualEffectView, context: Context) {
+        nsView.material = material
+        nsView.blendingMode = blendingMode
     }
 }

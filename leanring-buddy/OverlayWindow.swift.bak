@@ -10,7 +10,6 @@
 import AppKit
 import AVFoundation
 import SwiftUI
-import Combine
 
 class OverlayWindow: NSWindow {
     init(screen: NSScreen) {
@@ -50,10 +49,6 @@ class OverlayWindow: NSWindow {
 
     override var canBecomeMain: Bool {
         return false
-    }
-    
-    func setInteractivity(isEnabled: Bool) {
-        self.ignoresMouseEvents = !isEnabled
     }
 }
 
@@ -149,9 +144,6 @@ struct BlueCursorView: View {
     @State private var navigationBubbleOpacity: Double = 0.0
     @State private var navigationBubbleSize: CGSize = .zero
 
-    /// Trail of recent cursor positions for the laser pointer effect while holding push-to-talk
-    @State private var cursorTrail: [CGPoint] = []
-
     /// The cursor position at the moment navigation started, used to detect
     /// if the user moves the cursor enough to cancel the navigation.
     @State private var cursorPositionWhenNavigationStarted: CGPoint = .zero
@@ -193,24 +185,6 @@ struct BlueCursorView: View {
         ZStack {
             // Nearly transparent background (helps with compositing)
             Color.black.opacity(0.001)
-
-            // Drawing Canvas for Screen Annotations
-            AnnotationCanvasView()
-                .frame(width: screenFrame.width, height: screenFrame.height)
-
-            // Fading cursor trail while listening via shortcut
-            if companionManager.buddyDictationManager.isRecordingFromKeyboardShortcut && !cursorTrail.isEmpty {
-                ForEach(1..<cursorTrail.count, id: \.self) { i in
-                    Path { path in
-                        path.move(to: cursorTrail[i-1])
-                        path.addLine(to: cursorTrail[i])
-                    }
-                    .stroke(
-                        DS.Colors.overlayCursorBlue.opacity(Double(i) / Double(cursorTrail.count)),
-                        style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round)
-                    )
-                }
-            }
 
             // Welcome speech bubble (first launch only)
             if isCursorOnThisScreen && showWelcome && !welcomeText.isEmpty {
@@ -284,9 +258,40 @@ struct BlueCursorView: View {
                     }
             }
 
-            // Professional Side Text Panel and Selection Rectangle
-            if buddyNavigationMode == .pointingAtTarget {
-                pointingView
+            // Navigation pointer bubble — shown when buddy arrives at a detected element.
+            // Pops in with a scale-bounce (0.5x → 1.0x spring) and a bright initial
+            // glow that settles, creating a "materializing" effect.
+            if buddyNavigationMode == .pointingAtTarget && !navigationBubbleText.isEmpty {
+                Text(navigationBubbleText)
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(
+                        RoundedRectangle(cornerRadius: 6, style: .continuous)
+                            .fill(DS.Colors.overlayCursorBlue)
+                            .shadow(
+                                color: DS.Colors.overlayCursorBlue.opacity(0.5 + (1.0 - navigationBubbleScale) * 1.0),
+                                radius: 6 + (1.0 - navigationBubbleScale) * 16,
+                                x: 0, y: 0
+                            )
+                    )
+                    .fixedSize()
+                    .overlay(
+                        GeometryReader { geo in
+                            Color.clear
+                                .preference(key: NavigationBubbleSizePreferenceKey.self, value: geo.size)
+                        }
+                    )
+                    .scaleEffect(navigationBubbleScale)
+                    .opacity(navigationBubbleOpacity)
+                    .position(x: cursorPosition.x + 10 + (navigationBubbleSize.width / 2), y: cursorPosition.y + 18)
+                    .animation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0), value: cursorPosition)
+                    .animation(.spring(response: 0.4, dampingFraction: 0.6), value: navigationBubbleScale)
+                    .animation(.easeOut(duration: 0.5), value: navigationBubbleOpacity)
+                    .onPreferenceChange(NavigationBubbleSizePreferenceKey.self) { newSize in
+                        navigationBubbleSize = newSize
+                    }
             }
 
             // Blue triangle cursor — shown when idle or while TTS is playing (responding).
@@ -316,18 +321,6 @@ struct BlueCursorView: View {
                     buddyNavigationMode == .navigatingToTarget ? nil : .easeInOut(duration: 0.3),
                     value: triangleRotationDegrees
                 )
-
-            // Spotlight ring — drawn when listening
-            Circle()
-                .stroke(DS.Colors.overlayCursorBlue.opacity(0.6), lineWidth: 3)
-                .frame(width: 80, height: 80)
-                .background(Circle().fill(DS.Colors.overlayCursorBlue.opacity(0.1)))
-                .scaleEffect(companionManager.voiceState == .listening ? 1.0 + (companionManager.currentAudioPowerLevel * 0.5) : 0.8)
-                .opacity(buddyIsVisibleOnThisScreen && companionManager.voiceState == .listening ? cursorOpacity : 0)
-                .position(cursorPosition)
-                .animation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0), value: cursorPosition)
-                .animation(.linear(duration: 0.1), value: companionManager.currentAudioPowerLevel)
-                .animation(.easeIn(duration: 0.15), value: companionManager.voiceState)
 
             // Blue waveform — replaces the triangle while listening
             BlueCursorWaveformView(audioPowerLevel: companionManager.currentAudioPowerLevel)
@@ -443,162 +436,11 @@ struct BlueCursorView: View {
 
             // Normal cursor following
             let swiftUIPosition = self.convertScreenPointToSwiftUICoordinates(mouseLocation)
-            
-            // Update fading cursor trail
-            if self.companionManager.buddyDictationManager.isRecordingFromKeyboardShortcut {
-                self.cursorTrail.append(swiftUIPosition)
-                if self.cursorTrail.count > 25 {
-                    self.cursorTrail.removeFirst()
-                }
-            } else if !self.cursorTrail.isEmpty {
-                self.cursorTrail.removeAll()
-            }
-
             let buddyX = swiftUIPosition.x + 35
             let buddyY = swiftUIPosition.y + 25
             self.cursorPosition = CGPoint(x: buddyX, y: buddyY)
         }
     }
-
-    private func convertDisplayFrameToSwiftUIRect(_ displayFrame: CGRect) -> CGRect {
-        let x = displayFrame.minX - screenFrame.minX
-        let y = (screenFrame.maxY) - displayFrame.maxY
-        return CGRect(x: x, y: y, width: displayFrame.width, height: displayFrame.height)
-    }
-    
-    @ViewBuilder
-    private var pointingView: some View {
-        let tourManager = companionManager.cursorTourManager
-        
-        Group {
-            if tourManager.isRunning {
-                // 1. Draw persistent dotted boxes for all visited steps
-                ForEach(tourManager.visitedSteps) { step in
-                    let rect = convertDisplayFrameToSwiftUIRect(step.globalBoundingBox)
-                    Rectangle()
-                        .strokeBorder(style: StrokeStyle(lineWidth: 3, dash: [6, 4]))
-                        .foregroundColor(DS.Colors.overlayCursorBlue)
-                        .background(DS.Colors.overlayCursorBlue.opacity(0.1))
-                        .frame(width: rect.width, height: rect.height)
-                        .position(x: rect.midX, y: rect.midY)
-                        .shadow(color: DS.Colors.overlayCursorBlue.opacity(0.4), radius: 8, x: 0, y: 0)
-                }
-
-                // 2. Draw dashed connector lines between consecutive visited steps
-                if tourManager.visitedSteps.count > 1 {
-                    Path { path in
-                        for i in 0..<(tourManager.visitedSteps.count - 1) {
-                            let fromRect = convertDisplayFrameToSwiftUIRect(tourManager.visitedSteps[i].globalBoundingBox)
-                            let toRect = convertDisplayFrameToSwiftUIRect(tourManager.visitedSteps[i + 1].globalBoundingBox)
-                            path.move(to: CGPoint(x: fromRect.midX, y: fromRect.midY))
-                            path.addLine(to: CGPoint(x: toRect.midX, y: toRect.midY))
-                        }
-                    }
-                    .stroke(style: StrokeStyle(lineWidth: 2, dash: [4, 4]))
-                    .foregroundColor(DS.Colors.overlayCursorBlue.opacity(0.6))
-                }
-                
-                // 3. Draw the current step bubble (anchored near the current step's bounding box)
-                if let currentStep = tourManager.currentStep, !tourManager.currentStepBubbleText.isEmpty {
-                    let rect = convertDisplayFrameToSwiftUIRect(currentStep.globalBoundingBox)
-                    // Try placing it to the right of the box
-                    let bubbleX = rect.maxX + 140
-                    let bubbleY = rect.midY
-                    
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("Clicky")
-                            .font(.system(size: 10, weight: .bold))
-                            .foregroundColor(DS.Colors.overlayCursorBlue)
-                        
-                        Text(tourManager.currentStepBubbleText)
-                            .font(.system(size: 14, weight: .regular))
-                            .foregroundColor(.white)
-                            .lineSpacing(4)
-                    }
-                    .padding(16)
-                    .frame(width: 260, alignment: .leading)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12, style: .continuous)
-                            .fill(Color(white: 0.15))
-                            .shadow(color: Color.black.opacity(0.5), radius: 20, x: 0, y: 10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                    .stroke(DS.Colors.overlayCursorBlue.opacity(0.3), lineWidth: 1)
-                            )
-                    )
-                    .fixedSize(horizontal: true, vertical: true)
-                    .opacity(tourManager.currentStepBubbleOpacity)
-                    .position(x: bubbleX, y: bubbleY)
-                    .animation(.easeOut(duration: 0.3), value: tourManager.currentStepBubbleOpacity)
-                }
-            } else {
-                // Fallback legacy logic for single-point navigation (if tour manager isn't running)
-                let sidePanelWidth: CGFloat = 260
-                let sidePanelX = screenFrame.width - (sidePanelWidth / 2) - 30
-                
-                let displayFrameOpt = companionManager.detectedElementDisplayFrame
-                let rect = displayFrameOpt != nil ? convertDisplayFrameToSwiftUIRect(displayFrameOpt!) : .zero
-                let targetY = displayFrameOpt != nil ? max(100, min(rect.midY, screenFrame.height - 100)) : 150
-                
-                if displayFrameOpt != nil {
-                    // Dotted line from bounding box to side panel
-                    let lineStart = CGPoint(x: rect.maxX + 4, y: rect.midY)
-                    let lineEnd = CGPoint(x: sidePanelX - (sidePanelWidth / 2) - 4, y: targetY)
-                    
-                    Path { path in
-                        path.move(to: lineStart)
-                        path.addLine(to: lineEnd)
-                    }
-                    .stroke(style: StrokeStyle(lineWidth: 2, dash: [4, 4]))
-                    .foregroundColor(DS.Colors.overlayCursorBlue.opacity(0.6))
-                    .opacity(navigationBubbleOpacity)
-                    .animation(.easeOut(duration: 0.3), value: navigationBubbleOpacity)
-                    
-                    // Selection Bounding Box
-                    Rectangle()
-                        .strokeBorder(style: StrokeStyle(lineWidth: 3, dash: [6, 4]))
-                        .foregroundColor(DS.Colors.overlayCursorBlue)
-                        .background(DS.Colors.overlayCursorBlue.opacity(0.1))
-                        .frame(width: rect.width, height: rect.height)
-                        .position(x: rect.midX, y: rect.midY)
-                        .shadow(color: DS.Colors.overlayCursorBlue.opacity(0.4), radius: 8, x: 0, y: 0)
-                        .opacity(navigationBubbleOpacity)
-                        .animation(.easeOut(duration: 0.3), value: navigationBubbleOpacity)
-                }
-                
-                if !navigationBubbleText.isEmpty {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("Clickit")
-                            .font(.system(size: 10, weight: .bold))
-                            .foregroundColor(DS.Colors.overlayCursorBlue)
-                        
-                        Text(navigationBubbleText)
-                            .font(.system(size: 14, weight: .regular))
-                            .foregroundColor(.white)
-                            .lineSpacing(4)
-                    }
-                    .padding(16)
-                    .frame(width: sidePanelWidth, alignment: .leading)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12, style: .continuous)
-                            .fill(Color(white: 0.15))
-                            .shadow(color: Color.black.opacity(0.5), radius: 20, x: 0, y: 10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                    .stroke(DS.Colors.overlayCursorBlue.opacity(0.3), lineWidth: 1)
-                            )
-                    )
-                    .fixedSize(horizontal: true, vertical: true)
-                    .scaleEffect(navigationBubbleScale)
-                    .opacity(navigationBubbleOpacity)
-                    .position(x: sidePanelX, y: targetY)
-                    .animation(.spring(response: 0.4, dampingFraction: 0.6), value: navigationBubbleScale)
-                    .animation(.easeOut(duration: 0.5), value: navigationBubbleOpacity)
-                }
-            }
-        }
-    }
-
 
     /// Converts a macOS screen point (AppKit, bottom-left origin) to SwiftUI
     /// coordinates (top-left origin) relative to this screen's overlay window.
@@ -615,82 +457,113 @@ struct BlueCursorView: View {
         // Don't interrupt welcome animation
         guard !showWelcome || welcomeText.isEmpty else { return }
 
+        // Convert the AppKit screen location to SwiftUI coordinates for this screen
+        let targetInSwiftUI = convertScreenPointToSwiftUICoordinates(screenLocation)
+
+        // Offset the target so the buddy sits beside the element rather than
+        // directly on top of it — 8px to the right, 12px below.
+        let offsetTarget = CGPoint(
+            x: targetInSwiftUI.x + 8,
+            y: targetInSwiftUI.y + 12
+        )
+
+        // Clamp target to screen bounds with padding
+        let clampedTarget = CGPoint(
+            x: max(20, min(offsetTarget.x, screenFrame.width - 20)),
+            y: max(20, min(offsetTarget.y, screenFrame.height - 20))
+        )
+
+        // Record the current cursor position so we can detect if the user
+        // moves the mouse enough to cancel the return flight
+        let mouseLocation = NSEvent.mouseLocation
+        cursorPositionWhenNavigationStarted = convertScreenPointToSwiftUICoordinates(mouseLocation)
+
         // Enter navigation mode — stop cursor following
         buddyNavigationMode = .navigatingToTarget
         isReturningToCursor = false
-        
-        // Cancel any existing flight
+
+        animateBezierFlightArc(to: clampedTarget) {
+            guard self.buddyNavigationMode == .navigatingToTarget else { return }
+            self.startPointingAtElement()
+        }
+    }
+
+    /// Animates the buddy along a quadratic bezier arc from its current position
+    /// to the specified destination. The triangle rotates to face its direction
+    /// of travel (tangent to the curve) each frame, scales up at the midpoint
+    /// for a "swooping" feel, and the glow intensifies during flight.
+    private func animateBezierFlightArc(
+        to destination: CGPoint,
+        onComplete: @escaping () -> Void
+    ) {
         navigationAnimationTimer?.invalidate()
-        
-        let startPoint = self.cursorPosition
-        let endPoint = self.convertScreenPointToSwiftUICoordinates(screenLocation)
-        
-        // Record where the flight started (for cancellation if the mouse moves)
-        cursorPositionWhenNavigationStarted = self.convertScreenPointToSwiftUICoordinates(NSEvent.mouseLocation)
 
-        // Calculate a gentle arc: control point is offset perpendicularly from the midpoint
-        let midPoint = CGPoint(x: (startPoint.x + endPoint.x) / 2, y: (startPoint.y + endPoint.y) / 2)
-        let dx = endPoint.x - startPoint.x
-        let dy = endPoint.y - startPoint.y
-        let distance = hypot(dx, dy)
-        
-        // For very short distances, don't arc
-        let perp = distance > 0 ? CGPoint(x: -dy / distance, y: dx / distance) : .zero
-        let arcHeight = min(distance * 0.3, 300)
-        let controlPoint = CGPoint(x: midPoint.x + perp.x * arcHeight, y: midPoint.y + perp.y * arcHeight)
+        let startPosition = cursorPosition
+        let endPosition = destination
 
-        // Animation state
-        var progress: CGFloat = 0.0
-        let duration: TimeInterval = max(0.4, min(1.0, distance / 1500.0))
-        let fps: TimeInterval = 60.0
-        let step = 1.0 / (duration * fps)
+        let deltaX = endPosition.x - startPosition.x
+        let deltaY = endPosition.y - startPosition.y
+        let distance = hypot(deltaX, deltaY)
 
-        navigationAnimationTimer = Timer.scheduledTimer(withTimeInterval: 1.0 / fps, repeats: true) { timer in
-            progress += step
-            
-            if progress >= 1.0 {
-                timer.invalidate()
-                self.cursorPosition = endPoint
+        // Flight duration scales with distance: short hops are quick, long
+        // flights are more dramatic. Clamped to 0.6s–1.4s.
+        let flightDurationSeconds = min(max(distance / 800.0, 0.6), 1.4)
+        let frameInterval: Double = 1.0 / 60.0
+        let totalFrames = Int(flightDurationSeconds / frameInterval)
+        var currentFrame = 0
+
+        // Control point for the quadratic bezier arc. Offset the midpoint
+        // upward (negative Y in SwiftUI) so the buddy flies in a parabolic arc.
+        let midPoint = CGPoint(
+            x: (startPosition.x + endPosition.x) / 2.0,
+            y: (startPosition.y + endPosition.y) / 2.0
+        )
+        let arcHeight = min(distance * 0.2, 80.0)
+        let controlPoint = CGPoint(x: midPoint.x, y: midPoint.y - arcHeight)
+
+        navigationAnimationTimer = Timer.scheduledTimer(withTimeInterval: frameInterval, repeats: true) { _ in
+            currentFrame += 1
+
+            if currentFrame > totalFrames {
+                self.navigationAnimationTimer?.invalidate()
+                self.navigationAnimationTimer = nil
+                self.cursorPosition = endPosition
                 self.buddyFlightScale = 1.0
-                
-                // If the tour manager is running, notify it that we arrived.
-                // Otherwise, use the legacy pointing logic.
-                if self.companionManager.cursorTourManager.isRunning,
-                   let currentStep = self.companionManager.cursorTourManager.currentStep {
-                    self.buddyNavigationMode = .pointingAtTarget
-                    self.triangleRotationDegrees = -35.0
-                    self.companionManager.cursorTourManager.notifyCursorArrived(atStep: currentStep)
-                } else {
-                    self.startPointingAtElement()
-                }
+                onComplete()
                 return
             }
 
-            // Ease-in-out curve
-            let t = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress
+            // Linear progress 0→1 over the flight duration
+            let linearProgress = Double(currentFrame) / Double(totalFrames)
 
-            // Bezier curve evaluation
-            let invT = 1.0 - t
-            let x = invT * invT * startPoint.x + 2 * invT * t * controlPoint.x + t * t * endPoint.x
-            let y = invT * invT * startPoint.y + 2 * invT * t * controlPoint.y + t * t * endPoint.y
-            
-            // Calculate velocity vector for rotation
-            let dt: CGFloat = 0.01
-            let nextT = min(t + dt, 1.0)
-            let nextInvT = 1.0 - nextT
-            let nextX = nextInvT * nextInvT * startPoint.x + 2 * nextInvT * nextT * controlPoint.x + nextT * nextT * endPoint.x
-            let nextY = nextInvT * nextInvT * startPoint.y + 2 * nextInvT * nextT * controlPoint.y + nextT * nextT * endPoint.y
-            
-            let vX = nextX - x
-            let vY = nextY - y
-            let angle = atan2(vY, vX) * 180 / .pi
-            
-            // Scale peaks at 1.3 in the middle of the flight
-            let scaleOffset = sin(t * .pi) * 0.3
-            
-            self.cursorPosition = CGPoint(x: x, y: y)
-            self.triangleRotationDegrees = Double(angle) + 90.0
-            self.buddyFlightScale = 1.0 + scaleOffset
+            // Smoothstep easeInOut: 3t² - 2t³ (Hermite interpolation)
+            let t = linearProgress * linearProgress * (3.0 - 2.0 * linearProgress)
+
+            // Quadratic bezier: B(t) = (1-t)²·P0 + 2(1-t)t·P1 + t²·P2
+            let oneMinusT = 1.0 - t
+            let bezierX = oneMinusT * oneMinusT * startPosition.x
+                        + 2.0 * oneMinusT * t * controlPoint.x
+                        + t * t * endPosition.x
+            let bezierY = oneMinusT * oneMinusT * startPosition.y
+                        + 2.0 * oneMinusT * t * controlPoint.y
+                        + t * t * endPosition.y
+
+            self.cursorPosition = CGPoint(x: bezierX, y: bezierY)
+
+            // Rotation: face the direction of travel by computing the tangent
+            // to the bezier curve. B'(t) = 2(1-t)(P1-P0) + 2t(P2-P1)
+            let tangentX = 2.0 * oneMinusT * (controlPoint.x - startPosition.x)
+                         + 2.0 * t * (endPosition.x - controlPoint.x)
+            let tangentY = 2.0 * oneMinusT * (controlPoint.y - startPosition.y)
+                         + 2.0 * t * (endPosition.y - controlPoint.y)
+            // +90° offset because the triangle's "tip" points up at 0° rotation,
+            // and atan2 returns 0° for rightward movement
+            self.triangleRotationDegrees = atan2(tangentY, tangentX) * (180.0 / .pi) + 90.0
+
+            // Scale pulse: sin curve peaks at midpoint of the flight.
+            // Buddy grows to ~1.3x at the apex, then shrinks back to 1.0x on landing.
+            let scalePulse = sin(linearProgress * .pi)
+            self.buddyFlightScale = 1.0 + scalePulse * 0.3
         }
     }
 
@@ -721,7 +594,7 @@ struct BlueCursorView: View {
                 self.navigationBubbleOpacity = 0.0
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     guard self.buddyNavigationMode == .pointingAtTarget else { return }
-                    self.finishNavigationAndResumeFollowing()
+                    self.startFlyingBackToCursor()
                 }
             }
         }
@@ -755,6 +628,22 @@ struct BlueCursorView: View {
                 characterIndex: characterIndex + 1,
                 onComplete: onComplete
             )
+        }
+    }
+
+    /// Flies the buddy back to the current cursor position after pointing is done.
+    private func startFlyingBackToCursor() {
+        let mouseLocation = NSEvent.mouseLocation
+        let cursorInSwiftUI = convertScreenPointToSwiftUICoordinates(mouseLocation)
+        let cursorWithTrackingOffset = CGPoint(x: cursorInSwiftUI.x + 35, y: cursorInSwiftUI.y + 25)
+
+        cursorPositionWhenNavigationStarted = cursorInSwiftUI
+
+        buddyNavigationMode = .navigatingToTarget
+        isReturningToCursor = true
+
+        animateBezierFlightArc(to: cursorWithTrackingOffset) {
+            self.finishNavigationAndResumeFollowing()
         }
     }
 
@@ -950,12 +839,6 @@ class OverlayWindowManager {
     func isShowingOverlay() -> Bool {
         return !overlayWindows.isEmpty
     }
-    
-    func setInteractivity(isEnabled: Bool) {
-        for window in overlayWindows {
-            window.setInteractivity(isEnabled: isEnabled)
-        }
-    }
 }
 
 // MARK: - Onboarding Video Player
@@ -996,124 +879,5 @@ private class AVPlayerNSView: NSView {
     override func layout() {
         super.layout()
         playerLayer.frame = bounds
-    }
-}
-
-// MARK: - Screen Annotations
-
-struct AnnotationStroke: Identifiable {
-    let id = UUID()
-    var points: [CGPoint]
-    var color: Color = DS.Colors.overlayCursorBlue
-    var createdAt: Date = Date()
-}
-
-@MainActor
-class AnnotationCanvasViewModel: ObservableObject {
-    @Published var strokes: [AnnotationStroke] = []
-    @Published var currentStroke: AnnotationStroke?
-    
-    private var cleanupTimer: Timer?
-    
-    func startStroke(at point: CGPoint) {
-        currentStroke = AnnotationStroke(points: [point])
-    }
-    
-    func continueStroke(to point: CGPoint) {
-        currentStroke?.points.append(point)
-    }
-    
-    func endStroke() {
-        if var stroke = currentStroke {
-            stroke.createdAt = Date()
-            strokes.append(stroke)
-            scheduleCleanup()
-        }
-        currentStroke = nil
-    }
-    
-    private func scheduleCleanup() {
-        if cleanupTimer == nil {
-            cleanupTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
-                Task { @MainActor [weak self] in
-                    self?.pruneStrokes()
-                }
-            }
-        }
-    }
-    
-    private func pruneStrokes() {
-        let now = Date()
-        strokes.removeAll { now.timeIntervalSince($0.createdAt) > 1.5 }
-        if strokes.isEmpty {
-            cleanupTimer?.invalidate()
-            cleanupTimer = nil
-        }
-    }
-    
-    var hasActiveContent: Bool {
-        return !strokes.isEmpty || currentStroke != nil
-    }
-}
-
-struct AnnotationCanvasView: View {
-    @StateObject private var viewModel = AnnotationCanvasViewModel()
-    
-    var body: some View {
-        Group {
-            if viewModel.hasActiveContent {
-                TimelineView(.animation(minimumInterval: 1.0 / 60.0)) { timeline in
-                    canvasView(now: timeline.date)
-                }
-            } else {
-                canvasView(now: Date())
-            }
-        }
-        .gesture(
-            DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                .onChanged { value in
-                    if viewModel.currentStroke == nil {
-                        viewModel.startStroke(at: value.location)
-                    } else {
-                        viewModel.continueStroke(to: value.location)
-                    }
-                }
-                .onEnded { _ in
-                    viewModel.endStroke()
-                }
-        )
-    }
-    
-    private func canvasView(now: Date) -> some View {
-        Canvas { context, size in
-            for stroke in viewModel.strokes {
-                let age = now.timeIntervalSince(stroke.createdAt)
-                let fadeDuration: TimeInterval = 1.5
-                if age < fadeDuration {
-                    let alpha = max(0, 1.0 - (age / fadeDuration))
-                    drawStroke(stroke, in: &context, alpha: alpha)
-                }
-            }
-            
-            if let current = viewModel.currentStroke {
-                drawStroke(current, in: &context, alpha: 1.0)
-            }
-        }
-    }
-    
-    private func drawStroke(_ stroke: AnnotationStroke, in context: inout GraphicsContext, alpha: Double) {
-        var path = Path()
-        guard let first = stroke.points.first else { return }
-        path.move(to: first)
-        for point in stroke.points.dropFirst() {
-            path.addLine(to: point)
-        }
-        
-        context.addFilter(.shadow(color: stroke.color.opacity(alpha * 0.6), radius: 6, x: 0, y: 0))
-        context.stroke(
-            path,
-            with: .color(stroke.color.opacity(alpha)),
-            style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round)
-        )
     }
 }

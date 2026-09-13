@@ -23,7 +23,14 @@ enum CompanionVoiceState {
 
 @MainActor
 final class CompanionManager: ObservableObject {
-    @Published private(set) var voiceState: CompanionVoiceState = .idle
+    @Published private(set) var voiceState: CompanionVoiceState = .idle {
+        didSet {
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
+                self.overlayWindowManager.setInteractivity(isEnabled: self.voiceState == .listening)
+            }
+        }
+    }
     @Published private(set) var lastTranscript: String?
     @Published private(set) var currentAudioPowerLevel: CGFloat = 0
     @Published private(set) var hasAccessibilityPermission = false
@@ -80,6 +87,20 @@ final class CompanionManager: ObservableObject {
         return ElevenLabsTTSClient(proxyURL: "\(Self.workerBaseURL)/tts")
     }()
 
+    /// Hey Clickit hands-free voice assistant manager.
+    /// Owns a persistent always-on microphone session separate from push-to-talk.
+    let heyClickitManager = HeyClickitManager()
+
+    /// Step-by-step cursor tour manager. Chains through multiple [BOX:] steps
+    /// returned by Claude, animating the cursor to each element in sequence.
+    let cursorTourManager = CursorTourManager()
+
+    /// The macOS cursor position (AppKit global coordinates) captured at the exact
+    /// moment the user pressed the push-to-talk shortcut. This is composited onto
+    /// the screenshot before sending to Claude so the AI knows what the user was
+    /// pointing at when they spoke.
+    private var cursorLocationAtPushToTalkStart: CGPoint? = nil
+
     /// Conversation history so Claude remembers prior exchanges within a session.
     /// Each entry is the user's transcript and Claude's response.
     private var conversationHistory: [(userTranscript: String, assistantResponse: String)] = []
@@ -108,7 +129,7 @@ final class CompanionManager: ObservableObject {
     @Published private(set) var isOverlayVisible: Bool = false
 
     /// The Claude model used for voice responses. Persisted to UserDefaults.
-    @Published var selectedModel: String = UserDefaults.standard.string(forKey: "selectedClaudeModel") ?? "claude-sonnet-4-6"
+    @Published var selectedModel: String = UserDefaults.standard.string(forKey: "selectedClaudeModel") ?? "gemini-1.5-flash"
 
     func setSelectedModel(_ model: String) {
         selectedModel = model
@@ -116,16 +137,16 @@ final class CompanionManager: ObservableObject {
         claudeAPI.model = model
     }
 
-    /// User preference for whether the Clicky cursor should be shown.
+    /// User preference for whether the Clickit cursor should be shown.
     /// When toggled off, the overlay is hidden and push-to-talk is disabled.
     /// Persisted to UserDefaults so the choice survives app restarts.
-    @Published var isClickyCursorEnabled: Bool = UserDefaults.standard.object(forKey: "isClickyCursorEnabled") == nil
+    @Published var isClickitCursorEnabled: Bool = UserDefaults.standard.object(forKey: "isClickitCursorEnabled") == nil
         ? true
-        : UserDefaults.standard.bool(forKey: "isClickyCursorEnabled")
+        : UserDefaults.standard.bool(forKey: "isClickitCursorEnabled")
 
-    func setClickyCursorEnabled(_ enabled: Bool) {
-        isClickyCursorEnabled = enabled
-        UserDefaults.standard.set(enabled, forKey: "isClickyCursorEnabled")
+    func setClickitCursorEnabled(_ enabled: Bool) {
+        isClickitCursorEnabled = enabled
+        UserDefaults.standard.set(enabled, forKey: "isClickitCursorEnabled")
         transientHideTask?.cancel()
         transientHideTask = nil
 
@@ -139,11 +160,30 @@ final class CompanionManager: ObservableObject {
         }
     }
 
+    /// User preference for whether the cursor should be docked in the panel.
+    @Published var isCursorDocked: Bool = UserDefaults.standard.bool(forKey: "isCursorDocked")
+
+    func setCursorDocked(_ docked: Bool) {
+        isCursorDocked = docked
+        UserDefaults.standard.set(docked, forKey: "isCursorDocked")
+        
+        if docked {
+            // Hide the floating overlay since it's now docked in the panel
+            overlayWindowManager.hideOverlay()
+            isOverlayVisible = false
+        } else if isClickitCursorEnabled {
+            // Restore floating overlay if it's enabled
+            overlayWindowManager.hasShownOverlayBefore = true
+            overlayWindowManager.showOverlay(onScreens: NSScreen.screens, companionManager: self)
+            isOverlayVisible = true
+        }
+    }
+
     /// Whether the user has completed onboarding at least once. Persisted
     /// to UserDefaults so the Start button only appears on first launch.
     var hasCompletedOnboarding: Bool {
-        get { UserDefaults.standard.bool(forKey: "hasCompletedOnboarding") }
-        set { UserDefaults.standard.set(newValue, forKey: "hasCompletedOnboarding") }
+        get { true }
+        set { }
     }
 
     /// Whether the user has submitted their email during onboarding.
@@ -174,7 +214,7 @@ final class CompanionManager: ObservableObject {
 
     func start() {
         refreshAllPermissions()
-        print("🔑 Clicky start — accessibility: \(hasAccessibilityPermission), screen: \(hasScreenRecordingPermission), mic: \(hasMicrophonePermission), screenContent: \(hasScreenContentPermission), onboarded: \(hasCompletedOnboarding)")
+        print("🔑 Clickit start — accessibility: \(hasAccessibilityPermission), screen: \(hasScreenRecordingPermission), mic: \(hasMicrophonePermission), screenContent: \(hasScreenContentPermission), onboarded: \(hasCompletedOnboarding)")
         startPermissionPolling()
         bindVoiceStateObservation()
         bindAudioPowerLevel()
@@ -187,11 +227,24 @@ final class CompanionManager: ObservableObject {
         // still granted, show the cursor overlay immediately. If permissions
         // were revoked (e.g. signing change), don't show the cursor — the
         // panel will show the permissions UI instead.
-        if hasCompletedOnboarding && allPermissionsGranted && isClickyCursorEnabled {
+        if hasCompletedOnboarding && allPermissionsGranted && isClickitCursorEnabled {
             overlayWindowManager.hasShownOverlayBefore = true
             overlayWindowManager.showOverlay(onScreens: NSScreen.screens, companionManager: self)
             isOverlayVisible = true
         }
+
+        // Wire up CursorTourManager to our legacy detected element state so the buddy
+        // knows where to fly when the tour advances.
+        cursorTourManager.onNavigateToStep = { [weak self] step in
+            self?.detectedElementScreenLocation = step.globalTargetLocation
+            self?.detectedElementDisplayFrame = step.globalBoundingBox
+        }
+
+        // Wire up Hey Clickit action executor and start if previously enabled
+        // heyClickitManager.onActionReceived = { [weak self] action, parameters in
+        //     Task { @MainActor in self?.executeHeyClickitAction(action, parameters: parameters) }
+        // }
+        // heyClickitManager.startIfPreviouslyEnabled()
     }
 
     /// Called by BlueCursorView after the buddy finishes its pointing
@@ -200,13 +253,13 @@ final class CompanionManager: ObservableObject {
     /// the overlay so the welcome animation and intro video play.
     func triggerOnboarding() {
         // Post notification so the panel manager can dismiss the panel
-        NotificationCenter.default.post(name: .clickyDismissPanel, object: nil)
+        NotificationCenter.default.post(name: .clickitDismissPanel, object: nil)
 
         // Mark onboarding as completed so the Start button won't appear
         // again on future launches — the cursor will auto-show instead
         hasCompletedOnboarding = true
 
-        ClickyAnalytics.trackOnboardingStarted()
+        ClickitAnalytics.trackOnboardingStarted()
 
         // Play Besaid theme at 60% volume, fade out after 1m 30s
         startOnboardingMusic()
@@ -221,14 +274,48 @@ final class CompanionManager: ObservableObject {
     /// footer link. Same flow as triggerOnboarding but the cursor overlay
     /// is already visible so we just restart the welcome animation and video.
     func replayOnboarding() {
-        NotificationCenter.default.post(name: .clickyDismissPanel, object: nil)
-        ClickyAnalytics.trackOnboardingReplayed()
+        NotificationCenter.default.post(name: .clickitDismissPanel, object: nil)
+        ClickitAnalytics.trackOnboardingReplayed()
         startOnboardingMusic()
         // Tear down any existing overlays and recreate with isFirstAppearance = true
         overlayWindowManager.hasShownOverlayBefore = false
         overlayWindowManager.showOverlay(onScreens: NSScreen.screens, companionManager: self)
         isOverlayVisible = true
     }
+
+    // MARK: - Hey Clickit Action Executor
+
+    /// Executes a validated action returned by the Hey Clickit intent resolver.
+    /// Only actions that correspond to real CompanionManager functionality are
+    /// implemented here. Any unknown action is ignored safely.
+    func executeHeyClickitAction(_ action: String, parameters: [String: String]) {
+        print("⚡ Hey Clickit executing action: \(action)")
+
+        switch action {
+        case "show_panel":
+            // Show the Clickit menu bar panel by posting the standard notification
+            NotificationCenter.default.post(name: .clickitShowPanel, object: nil)
+
+        case "hide_panel":
+            // Dismiss the Clickit menu bar panel
+            NotificationCenter.default.post(name: .clickitDismissPanel, object: nil)
+
+        case "toggle_cursor":
+            // Toggle the Clickit blue cursor overlay on/off
+            setClickitCursorEnabled(!isClickitCursorEnabled)
+
+        case "respond", "clarify":
+            // These actions require no UI change — the speech response is handled
+            // by HeyClickitManager. Nothing additional to execute here.
+            break
+
+        default:
+            // Unknown action — safe to ignore; HeyClickitManager's allowlist
+            // already validated this before calling us, so this should never fire.
+            print("⚠️ Hey Clickit: unknown action received: \(action)")
+        }
+    }
+
 
     private func stopOnboardingMusic() {
         onboardingMusicFadeTimer?.invalidate()
@@ -240,7 +327,7 @@ final class CompanionManager: ObservableObject {
     private func startOnboardingMusic() {
         stopOnboardingMusic()
         guard let musicURL = Bundle.main.url(forResource: "ff", withExtension: "mp3") else {
-            print("⚠️ Clicky: ff.mp3 not found in bundle")
+            print("⚠️ Clickit: ff.mp3 not found in bundle")
             return
         }
 
@@ -255,7 +342,7 @@ final class CompanionManager: ObservableObject {
                 self?.fadeOutOnboardingMusic()
             }
         } catch {
-            print("⚠️ Clicky: Failed to play onboarding music: \(error)")
+            print("⚠️ Clickit: Failed to play onboarding music: \(error)")
         }
     }
 
@@ -331,13 +418,13 @@ final class CompanionManager: ObservableObject {
 
         // Track individual permission grants as they happen
         if !previouslyHadAccessibility && hasAccessibilityPermission {
-            ClickyAnalytics.trackPermissionGranted(permission: "accessibility")
+            ClickitAnalytics.trackPermissionGranted(permission: "accessibility")
         }
         if !previouslyHadScreenRecording && hasScreenRecordingPermission {
-            ClickyAnalytics.trackPermissionGranted(permission: "screen_recording")
+            ClickitAnalytics.trackPermissionGranted(permission: "screen_recording")
         }
         if !previouslyHadMicrophone && hasMicrophonePermission {
-            ClickyAnalytics.trackPermissionGranted(permission: "microphone")
+            ClickitAnalytics.trackPermissionGranted(permission: "microphone")
         }
         // Screen content permission is persisted — once the user has approved the
         // SCShareableContent picker, we don't need to re-check it.
@@ -346,7 +433,7 @@ final class CompanionManager: ObservableObject {
         }
 
         if !previouslyHadAll && allPermissionsGranted {
-            ClickyAnalytics.trackAllPermissionsGranted()
+            ClickitAnalytics.trackAllPermissionsGranted()
         }
     }
 
@@ -379,10 +466,10 @@ final class CompanionManager: ObservableObject {
                     guard didCapture else { return }
                     hasScreenContentPermission = true
                     UserDefaults.standard.set(true, forKey: "hasScreenContentPermission")
-                    ClickyAnalytics.trackPermissionGranted(permission: "screen_content")
+                    ClickitAnalytics.trackPermissionGranted(permission: "screen_content")
 
                     // If onboarding was already completed, show the cursor overlay now
-                    if hasCompletedOnboarding && allPermissionsGranted && !isOverlayVisible && isClickyCursorEnabled {
+                    if hasCompletedOnboarding && allPermissionsGranted && !isOverlayVisible && isClickitCursorEnabled {
                         overlayWindowManager.hasShownOverlayBefore = true
                         overlayWindowManager.showOverlay(onScreens: NSScreen.screens, companionManager: self)
                         isOverlayVisible = true
@@ -482,18 +569,24 @@ final class CompanionManager: ObservableObject {
             transientHideTask = nil
 
             // If the cursor is hidden, bring it back transiently for this interaction
-            if !isClickyCursorEnabled && !isOverlayVisible {
+            if !isClickitCursorEnabled && !isOverlayVisible {
                 overlayWindowManager.hasShownOverlayBefore = true
                 overlayWindowManager.showOverlay(onScreens: NSScreen.screens, companionManager: self)
                 isOverlayVisible = true
             }
 
             // Dismiss the menu bar panel so it doesn't cover the screen
-            NotificationCenter.default.post(name: .clickyDismissPanel, object: nil)
+            NotificationCenter.default.post(name: .clickitDismissPanel, object: nil)
 
-            // Cancel any in-progress response and TTS from a previous utterance
+            // Snapshot the cursor position at the moment PTT is activated.
+            // This is composited onto the screenshot before sending to Claude so the
+            // AI knows exactly what element the user was pointing at when they spoke.
+            cursorLocationAtPushToTalkStart = NSEvent.mouseLocation
+
+            // Cancel any in-progress response, TTS, and cursor tour from a previous utterance
             currentResponseTask?.cancel()
             elevenLabsTTSClient.stopPlayback()
+            cursorTourManager.cancelTour(shouldFireCompletionCallback: false)
             clearDetectedElementLocation()
 
             // Dismiss the onboarding prompt if it's showing
@@ -508,7 +601,7 @@ final class CompanionManager: ObservableObject {
             }
     
 
-            ClickyAnalytics.trackPushToTalkStarted()
+            ClickitAnalytics.trackPushToTalkStarted()
 
             pendingKeyboardShortcutStartTask?.cancel()
             pendingKeyboardShortcutStartTask = Task {
@@ -520,7 +613,7 @@ final class CompanionManager: ObservableObject {
                     submitDraftText: { [weak self] finalTranscript in
                         self?.lastTranscript = finalTranscript
                         print("🗣️ Companion received transcript: \(finalTranscript)")
-                        ClickyAnalytics.trackUserMessageSent(transcript: finalTranscript)
+                        ClickitAnalytics.trackUserMessageSent(transcript: finalTranscript)
                         self?.sendTranscriptToClaudeWithScreenshot(transcript: finalTranscript)
                     }
                 )
@@ -530,7 +623,7 @@ final class CompanionManager: ObservableObject {
             // before the async startPushToTalk had a chance to begin recording.
             // Without this, a quick press-and-release drops the release event and
             // leaves the waveform overlay stuck on screen indefinitely.
-            ClickyAnalytics.trackPushToTalkReleased()
+            ClickitAnalytics.trackPushToTalkReleased()
             pendingKeyboardShortcutStartTask?.cancel()
             pendingKeyboardShortcutStartTask = nil
             buddyDictationManager.stopPushToTalkFromKeyboardShortcut()
@@ -558,22 +651,28 @@ final class CompanionManager: ObservableObject {
     - instead, when it fits naturally, end by planting a seed — mention something bigger or more ambitious they could try, a related concept that goes deeper, or a next-level technique that builds on what you just explained. make it something worth coming back for, not a question they'd just nod to. it's okay to not end with anything extra if the answer is complete on its own.
     - if you receive multiple screen images, the one labeled "primary focus" is where the cursor is — prioritize that one but reference others if relevant.
 
-    element pointing:
-    you have a small blue triangle cursor that can fly to and point at things on screen. use it whenever pointing would genuinely help the user — if they're asking how to do something, looking for a menu, trying to find a button, or need help navigating an app, point at the relevant element. err on the side of pointing rather than not pointing, because it makes your help way more useful and concrete.
+    cursor context:
+    the screenshot may contain a small glowing blue crosshair marker — a circle with crosshair lines. this shows exactly where the user's mouse cursor was when they pressed push-to-talk. treat whatever is under that marker as the primary subject of their question, even if they don't explicitly say "this thing" or point it out. if you see the marker, reference the element it's on in your response.
 
-    don't point at things when it would be pointless — like if the user asks a general knowledge question, or the conversation has nothing to do with what's on screen, or you'd just be pointing at something obvious they're already looking at. but if there's a specific UI element, menu, button, or area on screen that's relevant to what you're helping with, point at it.
+    element pointing and step-by-step tours:
+    you have a small blue triangle cursor that can fly to and point at things on screen. use it whenever pointing would genuinely help the user.
 
-    when you point, append a coordinate tag at the very end of your response, AFTER your spoken text. the screenshot images are labeled with their pixel dimensions. use those dimensions as the coordinate space. the origin (0,0) is the top-left corner of the image. x increases rightward, y increases downward.
+    for a single element question: use ONE [BOX:] tag at the end of your response.
 
-    format: [POINT:x,y:label] where x,y are integer pixel coordinates in the screenshot's coordinate space, and label is a short 1-3 word description of the element (like "search bar" or "save button"). if the element is on the cursor's screen you can omit the screen number. if the element is on a DIFFERENT screen, append :screenN where N is the screen number from the image label (e.g. :screen2). this is important — without the screen number, the cursor will point at the wrong place.
+    for step-by-step instructions (e.g. "how do i do X", "walk me through this", "what are the steps"): use MULTIPLE [BOX:] tags — one per step — ALL placed at the very end of your response after your spoken text, in the order the user should follow. the cursor will visit each element in sequence, drawing a glowing dotted rectangle around each one. use multiple boxes whenever the task involves more than one distinct UI action or location.
 
-    if pointing wouldn't help, append [POINT:none].
+    do NOT place [BOX:] tags in the middle of your text — always at the very end.
+
+    format: [BOX:x,y,width,height:label] where x,y are the top-left integer pixel coordinates of the bounding box in the screenshot's coordinate space, width and height are the box dimensions, and label is a short 1-3 word description. if the element is on the cursor's screen omit the screen number. if on a DIFFERENT screen append :screenN (e.g. :screen2).
+
+    if pointing wouldn't help, append [BOX:none].
 
     examples:
-    - user asks how to color grade in final cut: "you'll want to open the color inspector — it's right up in the top right area of the toolbar. click that and you'll get all the color wheels and curves. [POINT:1100,42:color inspector]"
-    - user asks what html is: "html stands for hypertext markup language, it's basically the skeleton of every web page. curious how it connects to the css you're looking at? [POINT:none]"
-    - user asks how to commit in xcode: "see that source control menu up top? click that and hit commit, or you can use command option c as a shortcut. [POINT:285,11:source control]"
-    - element is on screen 2 (not where cursor is): "that's over on your other monitor — see the terminal window? [POINT:400,300:terminal:screen2]"
+    - single element — "you'll want the color inspector — top right toolbar. [BOX:1100,42,80,30:color inspector]"
+    - multi-step commit in xcode — "open source control, then hit commit. [BOX:285,11,50,20:source control menu][BOX:285,55,100,22:commit option]"
+    - multi-step new file in xcode — "go file menu, new file, pick a template, then save. [BOX:60,11,40,20:file menu][BOX:60,35,120,22:new file][BOX:200,300,120,30:template][BOX:380,450,80,28:save]"
+    - nothing to point at — "that's a pure keyboard shortcut — command shift s. [BOX:none]"
+    - on second monitor — "it's over on your other monitor. [BOX:400,300,100,50:terminal:screen2]"
     """
 
     // MARK: - AI Response Pipeline
@@ -593,7 +692,9 @@ final class CompanionManager: ObservableObject {
 
             do {
                 // Capture all connected screens so the AI has full context
-                let screenCaptures = try await CompanionScreenCaptureUtility.captureAllScreensAsJPEG()
+                let screenCaptures = try await CompanionScreenCaptureUtility.captureAllScreensAsJPEG(
+                    cursorLocation: cursorLocationAtPushToTalkStart
+                )
 
                 guard !Task.isCancelled else { return }
 
@@ -622,34 +723,29 @@ final class CompanionManager: ObservableObject {
 
                 guard !Task.isCancelled else { return }
 
-                // Parse the [POINT:...] tag from Claude's response
-                let parseResult = Self.parsePointingCoordinates(from: fullResponseText)
+                // Parse the [BOX:...] tag from Claude's response
+                let parseResult = Self.parseBoundingBoxCoordinates(from: fullResponseText)
                 let spokenText = parseResult.spokenText
 
                 // Handle element pointing if Claude returned coordinates.
-                // Switch to idle BEFORE setting the location so the triangle
-                // becomes visible and can fly to the target. Without this, the
-                // spinner hides the triangle and the flight animation is invisible.
-                let hasPointCoordinate = parseResult.coordinate != nil
-                if hasPointCoordinate {
-                    voiceState = .idle
-                }
-
-                // Pick the screen capture matching Claude's screen number,
-                // falling back to the cursor screen if not specified.
-                let targetScreenCapture: CompanionScreenCapture? = {
-                    if let screenNumber = parseResult.screenNumber,
-                       screenNumber >= 1 && screenNumber <= screenCaptures.count {
-                        return screenCaptures[screenNumber - 1]
-                    }
-                    return screenCaptures.first(where: { $0.isCursorScreen })
-                }()
-
-                if let pointCoordinate = parseResult.coordinate,
-                   let targetScreenCapture {
-                    // Claude's coordinates are in the screenshot's pixel space
-                    // (top-left origin, e.g. 1280x831). Scale to the display's
-                    // point space (e.g. 1512x982), then convert to AppKit global coords.
+                var tourSteps: [CursorTourStep] = []
+                
+                // Filter out the 'none' boxes and build valid steps
+                let validBoxes = parseResult.boxes.filter { $0.box != nil && $0.coordinate != nil }
+                
+                for (index, boxData) in validBoxes.enumerated() {
+                    let targetScreenCapture: CompanionScreenCapture? = {
+                        if let screenNumber = boxData.screenNumber,
+                           screenNumber >= 1 && screenNumber <= screenCaptures.count {
+                            return screenCaptures[screenNumber - 1]
+                        }
+                        return screenCaptures.first(where: { $0.isCursorScreen })
+                    }()
+                    
+                    guard let pointCoordinate = boxData.coordinate,
+                          let boxCoordinate = boxData.box,
+                          let targetScreenCapture else { continue }
+                    
                     let screenshotWidth = CGFloat(targetScreenCapture.screenshotWidthInPixels)
                     let screenshotHeight = CGFloat(targetScreenCapture.screenshotHeightInPixels)
                     let displayWidth = CGFloat(targetScreenCapture.displayWidthInPoints)
@@ -672,13 +768,42 @@ final class CompanionManager: ObservableObject {
                         x: displayLocalX + displayFrame.origin.x,
                         y: appKitY + displayFrame.origin.y
                     )
+                    
+                    // Do the same for the box dimensions
+                    let displayBoxX = boxCoordinate.origin.x * (displayWidth / screenshotWidth)
+                    let displayBoxY = boxCoordinate.origin.y * (displayHeight / screenshotHeight)
+                    let displayBoxW = boxCoordinate.width * (displayWidth / screenshotWidth)
+                    let displayBoxH = boxCoordinate.height * (displayHeight / screenshotHeight)
+                    
+                    let appKitBoxY = displayHeight - displayBoxY - displayBoxH
+                    let globalBoxFrame = CGRect(
+                        x: displayBoxX + displayFrame.origin.x,
+                        y: appKitBoxY + displayFrame.origin.y,
+                        width: displayBoxW,
+                        height: displayBoxH
+                    )
+                    
+                    let step = CursorTourStep(
+                        stepNumber: index + 1,
+                        totalSteps: validBoxes.count,
+                        globalTargetLocation: globalLocation,
+                        globalBoundingBox: globalBoxFrame,
+                        targetScreenFrame: displayFrame,
+                        label: boxData.elementLabel ?? ""
+                    )
+                    tourSteps.append(step)
+                }
 
-                    detectedElementScreenLocation = globalLocation
-                    detectedElementDisplayFrame = displayFrame
-                    ClickyAnalytics.trackElementPointed(elementLabel: parseResult.elementLabel)
-                    print("🎯 Element pointing: (\(Int(pointCoordinate.x)), \(Int(pointCoordinate.y))) → \"\(parseResult.elementLabel ?? "element")\"")
+                if !tourSteps.isEmpty {
+                    // Switch to idle BEFORE setting the location so the triangle
+                    // becomes visible and can fly to the target. Without this, the
+                    // spinner hides the triangle and the flight animation is invisible.
+                    voiceState = .idle
+                    ClickitAnalytics.trackElementPointed(elementLabel: "multi-step tour (\(tourSteps.count) steps)")
+                    print("🎯 Cursor tour: generated \(tourSteps.count) step(s)")
+                    cursorTourManager.startTour(steps: tourSteps)
                 } else {
-                    print("🎯 Element pointing: \(parseResult.elementLabel ?? "no element")")
+                    print("🎯 Cursor pointing: no valid boxes found")
                 }
 
                 // Save this exchange to conversation history (with the point tag
@@ -695,7 +820,7 @@ final class CompanionManager: ObservableObject {
 
                 print("🧠 Conversation history: \(conversationHistory.count) exchanges")
 
-                ClickyAnalytics.trackAIResponseReceived(response: spokenText)
+                ClickitAnalytics.trackAIResponseReceived(response: spokenText)
 
                 // Play the response via TTS. Keep the spinner (processing state)
                 // until the audio actually starts playing, then switch to responding.
@@ -705,7 +830,7 @@ final class CompanionManager: ObservableObject {
                         // speakText returns after player.play() — audio is now playing
                         voiceState = .responding
                     } catch {
-                        ClickyAnalytics.trackTTSError(error: error.localizedDescription)
+                        ClickitAnalytics.trackTTSError(error: error.localizedDescription)
                         print("⚠️ ElevenLabs TTS error: \(error)")
                         speakCreditsErrorFallback()
                     }
@@ -713,7 +838,7 @@ final class CompanionManager: ObservableObject {
             } catch is CancellationError {
                 // User spoke again — response was interrupted
             } catch {
-                ClickyAnalytics.trackResponseError(error: error.localizedDescription)
+                ClickitAnalytics.trackResponseError(error: error.localizedDescription)
                 print("⚠️ Companion response error: \(error)")
                 speakCreditsErrorFallback()
             }
@@ -725,12 +850,12 @@ final class CompanionManager: ObservableObject {
         }
     }
 
-    /// If the cursor is in transient mode (user toggled "Show Clicky" off),
+    /// If the cursor is in transient mode (user toggled "Show Clickit" off),
     /// waits for TTS playback and any pointing animation to finish, then
     /// fades out the overlay after a 1-second pause. Cancelled automatically
     /// if the user starts another push-to-talk interaction.
     private func scheduleTransientHideIfNeeded() {
-        guard !isClickyCursorEnabled && isOverlayVisible else { return }
+        guard !isClickitCursorEnabled && isOverlayVisible else { return }
 
         transientHideTask?.cancel()
         transientHideTask = Task {
@@ -767,58 +892,80 @@ final class CompanionManager: ObservableObject {
 
     // MARK: - Point Tag Parsing
 
-    /// Result of parsing a [POINT:...] tag from Claude's response.
-    struct PointingParseResult {
-        /// The response text with the [POINT:...] tag removed — this is what gets spoken.
-        let spokenText: String
-        /// The parsed pixel coordinate, or nil if Claude said "none" or no tag was found.
+    /// Data parsed from a single [BOX:...] tag.
+    struct BoxParseData {
+        let box: CGRect?
         let coordinate: CGPoint?
-        /// Short label describing the element (e.g. "run button"), or "none".
         let elementLabel: String?
-        /// Which screen the coordinate refers to (1-based), or nil to default to cursor screen.
         let screenNumber: Int?
     }
 
-    /// Parses a [POINT:x,y:label:screenN] or [POINT:none] tag from the end of Claude's response.
-    /// Returns the spoken text (tag removed) and the optional coordinate + label + screen number.
-    static func parsePointingCoordinates(from responseText: String) -> PointingParseResult {
-        // Match [POINT:none] or [POINT:123,456:label] or [POINT:123,456:label:screen2]
-        let pattern = #"\[POINT:(?:none|(\d+)\s*,\s*(\d+)(?::([^\]:\s][^\]:]*?))?(?::screen(\d+))?)\]\s*$"#
+    /// Result of parsing one or more [BOX:...] tags from Claude's response.
+    struct BoxParseResult {
+        /// The response text with ALL [BOX:...] tags removed — this is what gets spoken.
+        let spokenText: String
+        /// The ordered list of parsed boxes, one for each step.
+        let boxes: [BoxParseData]
+    }
 
-        guard let regex = try? NSRegularExpression(pattern: pattern, options: []),
-              let match = regex.firstMatch(in: responseText, range: NSRange(responseText.startIndex..., in: responseText)) else {
-            // No tag found at all
-            return PointingParseResult(spokenText: responseText, coordinate: nil, elementLabel: nil, screenNumber: nil)
+    /// Parses all [BOX:x,y,w,h:label:screenN] or [BOX:none] tags from the end of Claude's response.
+    /// Returns the spoken text (tags removed) and the list of boxes.
+    static func parseBoundingBoxCoordinates(from responseText: String) -> BoxParseResult {
+        // Match [BOX:none] or [BOX:123,456,100,50:label] or [BOX:123,456,100,50:label:screen2]
+        let pattern = #"(?i)\[BOX:(none|\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*\d+(?::[^\]:\s][^\]:]*?)?(?::screen\d+)?)\]"#
+        
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
+            return BoxParseResult(spokenText: responseText, boxes: [])
         }
 
-        // Remove the tag from the spoken text
-        let tagRange = Range(match.range, in: responseText)!
-        let spokenText = String(responseText[..<tagRange.lowerBound]).trimmingCharacters(in: .whitespacesAndNewlines)
+        let matches = regex.matches(in: responseText, range: NSRange(responseText.startIndex..., in: responseText))
+        var boxes: [BoxParseData] = []
+        var spokenText = responseText
 
-        // Check if it's [POINT:none]
-        guard match.numberOfRanges >= 3,
-              let xRange = Range(match.range(at: 1), in: responseText),
-              let yRange = Range(match.range(at: 2), in: responseText),
-              let x = Double(responseText[xRange]),
-              let y = Double(responseText[yRange]) else {
-            return PointingParseResult(spokenText: spokenText, coordinate: nil, elementLabel: "none", screenNumber: nil)
+        // Process matches in reverse order so we can safely remove them from the string without invalidating ranges
+        for match in matches.reversed() {
+            guard let matchRange = Range(match.range, in: spokenText),
+                  let contentRange = Range(match.range(at: 1), in: spokenText) else { continue }
+            
+            let content = String(spokenText[contentRange])
+            
+            // Remove the tag from the spoken text
+            spokenText.removeSubrange(matchRange)
+            
+            if content.lowercased() == "none" {
+                boxes.insert(BoxParseData(box: nil, coordinate: nil, elementLabel: "none", screenNumber: nil), at: 0)
+                continue
+            }
+            
+            let components = content.split(separator: ":", omittingEmptySubsequences: false).map { String($0) }
+            let coords = components[0].split(separator: ",").compactMap { Double($0.trimmingCharacters(in: .whitespaces)) }
+            
+            if coords.count == 4 {
+                let box = CGRect(x: coords[0], y: coords[1], width: coords[2], height: coords[3])
+                let center = CGPoint(x: box.midX, y: box.midY)
+                
+                var label: String? = nil
+                var screenNumber: Int? = nil
+                
+                if components.count > 1 {
+                    if let last = components.last, last.hasPrefix("screen"), let num = Int(last.dropFirst(6)) {
+                        screenNumber = num
+                        if components.count > 2 {
+                            label = components[1...components.count-2].joined(separator: ":").trimmingCharacters(in: .whitespaces)
+                        }
+                    } else {
+                        label = components[1...].joined(separator: ":").trimmingCharacters(in: .whitespaces)
+                    }
+                    if let l = label, l.isEmpty { label = nil }
+                }
+                
+                boxes.insert(BoxParseData(box: box, coordinate: center, elementLabel: label, screenNumber: screenNumber), at: 0)
+            }
         }
 
-        var elementLabel: String? = nil
-        if match.numberOfRanges >= 4, let labelRange = Range(match.range(at: 3), in: responseText) {
-            elementLabel = String(responseText[labelRange]).trimmingCharacters(in: .whitespaces)
-        }
-
-        var screenNumber: Int? = nil
-        if match.numberOfRanges >= 5, let screenRange = Range(match.range(at: 4), in: responseText) {
-            screenNumber = Int(responseText[screenRange])
-        }
-
-        return PointingParseResult(
-            spokenText: spokenText,
-            coordinate: CGPoint(x: x, y: y),
-            elementLabel: elementLabel,
-            screenNumber: screenNumber
+        return BoxParseResult(
+            spokenText: spokenText.trimmingCharacters(in: .whitespacesAndNewlines),
+            boxes: boxes
         )
     }
 
@@ -849,13 +996,13 @@ final class CompanionManager: ObservableObject {
         }
 
         // At 40 seconds into the video, trigger the onboarding demo where
-        // Clicky flies to something interesting on screen and comments on it
+        // Clickit flies to something interesting on screen and comments on it
         let demoTriggerTime = CMTime(seconds: 40, preferredTimescale: 600)
         onboardingDemoTimeObserver = player.addBoundaryTimeObserver(
             forTimes: [NSValue(time: demoTriggerTime)],
             queue: .main
         ) { [weak self] in
-            ClickyAnalytics.trackOnboardingDemoTriggered()
+            ClickitAnalytics.trackOnboardingDemoTriggered()
             self?.performOnboardingDemoInteraction()
         }
 
@@ -866,7 +1013,7 @@ final class CompanionManager: ObservableObject {
             queue: .main
         ) { [weak self] _ in
             guard let self else { return }
-            ClickyAnalytics.trackOnboardingVideoCompleted()
+            ClickitAnalytics.trackOnboardingVideoCompleted()
             self.onboardingVideoOpacity = 0.0
             // Wait for the 2s fade-out animation to complete before tearing down
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -956,7 +1103,7 @@ final class CompanionManager: ObservableObject {
 
     respond with ONLY your short comment followed by the coordinate tag. nothing else. all lowercase.
 
-    format: your comment [POINT:x,y:label]
+    format: your comment [BOX:x,y,width,height:label]
 
     the screenshot images are labeled with their pixel dimensions. use those dimensions as the coordinate space. origin (0,0) is top-left. x increases rightward, y increases downward.
     """
@@ -989,9 +1136,9 @@ final class CompanionManager: ObservableObject {
                     onTextChunk: { _ in }
                 )
 
-                let parseResult = Self.parsePointingCoordinates(from: fullResponseText)
+                let parseResult = Self.parseBoundingBoxCoordinates(from: fullResponseText)
 
-                guard let pointCoordinate = parseResult.coordinate else {
+                guard let firstBox = parseResult.boxes.first, let pointCoordinate = firstBox.coordinate, let boxCoordinate = firstBox.box else {
                     print("🎯 Onboarding demo: no element to point at")
                     return
                 }
@@ -1011,13 +1158,27 @@ final class CompanionManager: ObservableObject {
                     x: displayLocalX + displayFrame.origin.x,
                     y: appKitY + displayFrame.origin.y
                 )
+                
+                // Do the same for the box dimensions
+                let displayBoxX = boxCoordinate.origin.x * (displayWidth / screenshotWidth)
+                let displayBoxY = boxCoordinate.origin.y * (displayHeight / screenshotHeight)
+                let displayBoxW = boxCoordinate.width * (displayWidth / screenshotWidth)
+                let displayBoxH = boxCoordinate.height * (displayHeight / screenshotHeight)
+                
+                let appKitBoxY = displayHeight - displayBoxY - displayBoxH
+                let globalBoxFrame = CGRect(
+                    x: displayBoxX + displayFrame.origin.x,
+                    y: appKitBoxY + displayFrame.origin.y,
+                    width: displayBoxW,
+                    height: displayBoxH
+                )
 
                 // Set custom bubble text so the pointing animation uses Claude's
                 // comment instead of a random phrase
                 detectedElementBubbleText = parseResult.spokenText
                 detectedElementScreenLocation = globalLocation
-                detectedElementDisplayFrame = displayFrame
-                print("🎯 Onboarding demo: pointing at \"\(parseResult.elementLabel ?? "element")\" — \"\(parseResult.spokenText)\"")
+                detectedElementDisplayFrame = globalBoxFrame
+                print("🎯 Onboarding demo: pointing at \"\(firstBox.elementLabel ?? "element")\" — \"\(parseResult.spokenText)\"")
             } catch {
                 print("⚠️ Onboarding demo error: \(error)")
             }
