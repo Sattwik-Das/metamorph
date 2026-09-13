@@ -1,5 +1,4 @@
-
-
+import { Link } from 'react-router-dom';
 export function Header() {
   return (
     <>
@@ -56,22 +55,22 @@ export function Header() {
 
           <div className="pointer-events-auto mx-1 flex items-center justify-self-end">
             <div className="pointer-events-auto flex items-center gap-1 rounded-full border border-transparent p-1 transition-colors duration-200 ease-out">
-              <a
+              <Link
                 className="relative inline-flex cursor-pointer select-none items-center justify-center gap-x-1 rounded-full border border-transparent transition-all disabled:cursor-default h-10 px-4 md:h-12 md:px-6 md:py-4 font-medium text-body-medium text-secondary hover:bg-transparent hover:text-primary"
                 type="button"
                 data-testid="topnav-logged-out-sign-in-btn"
-                href="/login"
+                to="/login"
               >
                 <div className="contents">Log in</div>
-              </a>
-              <a
+              </Link>
+              <Link
                 className="relative inline-flex cursor-pointer select-none items-center justify-center gap-x-1 rounded-full border border-transparent transition-all disabled:cursor-default bg-button-primary text-inverted hover:bg-hover-primary disabled:bg-elevation disabled:text-tertiary disabled:hover:bg-elevation h-10 px-4 md:h-12 md:px-6 md:py-4 font-medium text-body-medium whitespace-nowrap"
                 type="button"
                 data-testid="topnav-logged-out-sign-up-btn"
-                href="/start"
+                to="/signup"
               >
                 <div className="contents">Sign up</div>
-              </a>
+              </Link>
             </div>
           </div>
         </header>

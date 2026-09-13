@@ -12,8 +12,8 @@ const apps = [
   { src: '/images/apps2/spotify.svg', cls: 'top-[45%] right-[10%] w-[80px]', rot: 18, speed: 0.1, op: 0.8, scale: 0.85 },
   { src: '/images/apps2/gmail.svg', cls: 'bottom-[10%] left-[30%] w-[70px]', rot: 10, speed: -0.12, op: 0.85, scale: 0.8 },
   { src: '/images/apps2/applemusic.svg', cls: 'bottom-[35%] right-[8%] w-[75px]', rot: -12, speed: 0.05, op: 0.9, scale: 0.9 },
-  { src: '/images/apps2/notion.png', cls: 'top-[25%] left-[30%] w-[60px]', rot: -8, speed: -0.15, op: 0.65, scale: 0.7 },
-  { src: '/images/apps2/reddit.svg', cls: 'top-[30%] right-[28%] w-[50px]', rot: 22, speed: 0.14, op: 0.55, scale: 0.6 },
+  { src: '/images/apps2/photoshop.svg', cls: 'top-[25%] left-[30%] w-[70px]', rot: -8, speed: -0.15, op: 0.9, scale: 0.8 },
+  { src: '/images/apps2/framer.svg', cls: 'top-[30%] right-[28%] w-[60px]', rot: 22, speed: 0.14, op: 0.8, scale: 0.7 },
   { src: '/images/apps2/safari.svg', cls: 'bottom-[40%] left-[25%] w-[55px]', rot: 5, speed: -0.05, op: 0.7, scale: 0.65 },
   { src: '/images/apps2/maps.svg', cls: 'bottom-[15%] right-[35%] w-[65px]', rot: -18, speed: 0.11, op: 0.8, scale: 0.75 }
 ];
